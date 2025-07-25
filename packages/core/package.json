@@ -89,7 +89,7 @@
 	},
 	"devDependencies": {
 		"@carbon/layout": "^11.37.0",
-		"@carbon/styles": "^1.86.0",
+		"@carbon/styles": "^1.86.1",
 		"@carbon/themes": "^11.56.0",
 		"@playwright/test": "^1.54.1",
 		"@rollup/plugin-replace": "^6.0.2",
@@ -105,7 +105,7 @@
 		"resize-observer-polyfill": "^1.5.1",
 		"sass": "^1.89.2",
 		"typescript": "^5.8.3",
-		"vite": "^7.0.5",
+		"vite": "^7.0.6",
 		"vite-plugin-dts": "^4.5.4",
 		"vitest": "^3.2.4"
 	},

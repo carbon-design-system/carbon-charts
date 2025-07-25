@@ -22,14 +22,14 @@
 		"@carbon/charts": "workspace:*",
 		"@carbon/charts-react": "workspace:*",
 		"@carbon/icons-react": "^11.63.0",
-		"@carbon/react": "^1.87.0",
+		"@carbon/react": "^1.87.1",
 		"@stackblitz/sdk": "^1.11.0",
 		"fuse.js": "^7.1.0",
 		"highlight.js": "^11.11.1",
 		"react": "^19.1.0",
 		"react-dom": "^19.1.0",
 		"react-is": "^19.1.0",
-		"react-router-dom": "^7.7.0",
+		"react-router-dom": "^7.7.1",
 		"styled-components": "^6.1.19"
 	},
 	"devDependencies": {
@@ -43,7 +43,7 @@
 		"sass": "^1.89.2",
 		"typedoc": "^0.28.7",
 		"typescript": "^5.8.3",
-		"vite": "^7.0.5"
+		"vite": "^7.0.6"
 	},
 	"publishConfig": {
 		"access": "restricted"
