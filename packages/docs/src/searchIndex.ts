@@ -468,7 +468,13 @@ export default [
 		path: 'radar',
 		title: 'Radar Charts',
 		text: 'Radar Charts, also known as spider or Kiviat charts, are graphical representations of multivariate data on a two-dimensional plane. They feature a circular shape with multiple spokes extending from a central point, each representing a different variable or category. Data points are plotted along these spokes and connected to form a polygon, allowing for the comparison of multiple variables across different categories simultaneously. Radar charts are particularly useful for visualizing patterns, trends, and relationships in data with multiple dimensions. They are commonly employed in fields such as performance evaluation, market analysis, and sports analytics to assess strengths and weaknesses across various attributes or criteria. Radar charts offer a holistic view of complex data sets, enabling users to identify patterns and make informed decisions based on the relationships between different variables. Details on Radar Chart options can be found here.',
-		charts: ['Radar', 'Radar (centered)', 'Radar - Missing datapoints', 'Radar - Dense']
+		charts: [
+			'Radar',
+			'Radar (centered)',
+			'Radar - Missing datapoints',
+			'Radar - Dense',
+			'Radar - Display all labels'
+		]
 	},
 	{
 		path: 'scatter',
