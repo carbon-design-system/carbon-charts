@@ -121,6 +121,7 @@ export class Legend extends Component {
 				.merge(additionalItems as any)
 				.classed('legend-item', true)
 				.classed('additional', true)
+				.attr('role', 'img')
 				.attr('aria-labelledby', (_: any, i: number) =>
 					this.services.domUtils.generateElementIDString(
 						`legend-datagroup-${allCheckboxes.size() + i}-title`
