@@ -8,7 +8,7 @@ import { LollipopChart as LollipopChartCore, type LollipopChartOptions } from '@
  * Most functions just call their equivalent from the chart library.
  */
 @Component({
-	selector: 'ibm-lollipop-chart',
+	selector: 'ibm-lollipop-chart, cc-lollipop',
 	template: ``
 })
 export class LollipopChartComponent extends BaseChartComponent implements AfterViewInit {

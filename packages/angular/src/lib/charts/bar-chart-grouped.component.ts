@@ -8,7 +8,7 @@ import { GroupedBarChart as GroupedBarChartCore, type BarChartOptions } from '@c
  * Most functions just call their equivalent from the chart library.
  */
 @Component({
-	selector: 'ibm-grouped-bar-chart',
+	selector: 'ibm-grouped-bar-chart, cc-bar-grouped',
 	template: ``
 })
 export class GroupedBarChartComponent extends BaseChartComponent implements AfterViewInit {

@@ -8,7 +8,7 @@ import { RadarChart as RadarChartCore, type RadarChartOptions } from '@carbon/ch
  * Most functions just call their equivalent from the chart library.
  */
 @Component({
-	selector: 'ibm-radar-chart',
+	selector: 'ibm-radar-chart, cc-radar',
 	template: ``
 })
 export class RadarChartComponent extends BaseChartComponent implements AfterViewInit {

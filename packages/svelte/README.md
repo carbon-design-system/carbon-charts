@@ -44,7 +44,7 @@ The required styles should be imported from `@carbon/charts-svelte/styles.css`.
 
 ## Breaking Change
 
-This release is for Svelte 5.20+ ONLY as it uses runes mode and passing of callback functions as
+This release is for Svelte 5.33+ ONLY as it uses runes mode and passing of callback functions as
 properties in place of event handlers. If you need support for Svelte 3 or 4, please use the
 `latest`.
 

@@ -15,7 +15,7 @@ export const chartTypes: ChartTypes = {
 	vanilla,
 	svelte: vanilla,
 	react: vanilla,
-	angular: 'ibm-line-chart',
+	angular: ['LineChartComponent', 'ibm-line-chart'],
 	vue: `Ccv${vanilla}`
 }
 

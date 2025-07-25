@@ -7,7 +7,7 @@ export const chartTypes: ChartTypes = {
 	vanilla,
 	svelte: vanilla,
 	react: vanilla,
-	angular: 'ibm-heatmap-chart',
+	angular: ['HeatmapChartComponent', 'ibm-heatmap-chart'],
 	vue: `Ccv${vanilla}`
 }
 
