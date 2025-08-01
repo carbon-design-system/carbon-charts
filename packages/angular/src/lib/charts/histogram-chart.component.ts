@@ -8,7 +8,7 @@ import { HistogramChart as HistogramChartCore, type HistogramChartOptions } from
  * Most functions just call their equivalent from the chart library.
  */
 @Component({
-	selector: 'ibm-histogram-chart',
+	selector: 'ibm-histogram-chart, cc-histogram',
 	template: ``
 })
 export class HistogramChartComponent extends BaseChartComponent implements AfterViewInit {

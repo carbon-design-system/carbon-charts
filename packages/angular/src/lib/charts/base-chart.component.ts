@@ -7,7 +7,7 @@ import type { BaseChartOptions, ChartTabularData, Charts } from '@carbon/charts'
  * Most functions just call their equivalent from the chart library.
  */
 @Component({
-	selector: 'ibm-base-chart',
+	selector: 'ibm-base-chart, cc-base',
 	template: ``
 })
 export class BaseChartComponent implements AfterViewInit, OnInit {

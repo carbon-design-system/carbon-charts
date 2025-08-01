@@ -33,19 +33,20 @@ export function getSvelteProject(
 	}
 
 	const appSvelte = `<script lang="ts">
-import { ${chartComponent} } from '@carbon/charts-svelte'
-import '@carbon/charts-svelte/styles.css'
-import options from './options'
-import data from './data'
+  import { ${chartComponent} } from '@carbon/charts-svelte'
+  import '@carbon/charts-svelte/styles.css'
+  import options from './options'
+  import data from './data'
 </script>
 
 <${chartComponent} {data} {options} style="padding:2rem;" />
 `
 
-	const mainTs = `import App from './App.svelte'
+	const mainTs = `import { mount } from 'svelte'
+import App from './App.svelte'
 
-const app = new App({
-  target: document.getElementById('app')
+const app = mount(App, {
+  target: document.getElementById('app')!,
 })
 
 export default app
@@ -54,8 +55,6 @@ export default app
 	const viteEnvDts = `/// <reference types="svelte" />
 /// <reference types="vite/client" />
 `
-
-	const stackBlitzRc = `{ "installDependencies": true, "startCommand": "yarn dev" }`
 
 	const indexHtml = `<!DOCTYPE html>
 <html lang="en">
@@ -77,9 +76,10 @@ export default app
 		version: '0.0.0',
 		type: 'module',
 		scripts: {
-			dev: 'vite dev',
+			dev: 'vite',
 			build: 'vite build',
 			preview: 'vite preview',
+			prepare: "svelte-kit sync || echo ''",
 			check: 'svelte-check --tsconfig ./tsconfig.json'
 		},
 		devDependencies
@@ -134,7 +134,6 @@ export default defineConfig({
 			'src/main.ts': mainTs,
 			'src/options.ts': objectToString(options),
 			'src/vite-env.d.ts': viteEnvDts,
-			'.stackblitzrc': stackBlitzRc,
 			'index.html': indexHtml,
 			'package.json': JSON.stringify(packageJson, null, 2),
 			'svelte.config.js': svelteConfigJs,

@@ -1,68 +1,36 @@
-import { Component, Type } from '@angular/core'
-import {
-	AlluvialChartComponent,
-	AreaChartComponent,
-	BoxplotChartComponent,
-	BubbleChartComponent,
-	BulletChartComponent,
-	CirclePackChartComponent,
-	ComboChartComponent,
-	DonutChartComponent,
-	ChoroplethChartComponent,
-	GaugeChartComponent,
-	GroupedBarChartComponent,
-	HeatmapChartComponent,
-	HistogramChartComponent,
-	LineChartComponent,
-	LollipopChartComponent,
-	MeterChartComponent,
-	PieChartComponent,
-	RadarChartComponent,
-	ScatterChartComponent,
-	SimpleBarChartComponent,
-	StackedAreaChartComponent,
-	StackedBarChartComponent,
-	TreeChartComponent,
-	TreemapChartComponent,
-	WordCloudChartComponent
-} from '../../../src/lib/charts'
-import charts from '../../../../docs/src/charts'
-import { CommonModule } from '@angular/common'
+import { Component, Type } from '@angular/core';
+import { NgComponentOutlet } from '@angular/common';
+import chartsDoc from '../../../../docs/src/charts';
+import * as ChartBarrel from '../../../src/lib/charts';
 
+/* ---------- helper ---------------------------------------------------- */
+/** Returns true when the object is an Angular component (has Ivy metadata). */
+function isComponent(v: unknown): v is Type<unknown> & { ɵcmp: unknown } {
+  return typeof v === 'function' && !!(v as { ɵcmp?: unknown }).ɵcmp;
+}
+
+/* ---------- build maps ------------------------------------------------ */
+const CHART_COMPONENTS: Type<unknown>[] = [];
+const CLASS_MAP: Record<string, Type<unknown>> = {};
+
+for (const [exportName, value] of Object.entries(ChartBarrel)) {
+  if (isComponent(value)) {
+    CHART_COMPONENTS.push(value);
+    CLASS_MAP[exportName] = value;
+  }
+}
+
+/* ---------- root component ------------------------------------------- */
 @Component({
-	// eslint-disable-next-line @angular-eslint/component-selector
-	selector: 'app-root',
-	templateUrl: './app.component.html',
-	styleUrls: ['./app.component.scss'],
-	imports: [CommonModule]
+  selector: 'ibm-app-root',
+  standalone: true,
+  imports: [NgComponentOutlet, ...CHART_COMPONENTS],
+  styleUrls: ['./app.component.scss'],
+  templateUrl: './app.component.html',
 })
-export class AppComponent {
-	charts = charts
-	selectorMap: Record<string, Type<unknown>> = {
-		'ibm-alluvial-chart': AlluvialChartComponent,
-		'ibm-area-chart': AreaChartComponent,
-		'ibm-boxplot-chart': BoxplotChartComponent,
-		'ibm-bubble-chart': BubbleChartComponent,
-		'ibm-bullet-chart': BulletChartComponent,
-		'ibm-circle-pack-chart': CirclePackChartComponent,
-		'ibm-combo-chart': ComboChartComponent,
-		'ibm-donut-chart': DonutChartComponent,
-		'ibm-experimental-choropleth-chart': ChoroplethChartComponent,
-		'ibm-gauge-chart': GaugeChartComponent,
-		'ibm-grouped-bar-chart': GroupedBarChartComponent,
-		'ibm-heatmap-chart': HeatmapChartComponent,
-		'ibm-histogram-chart': HistogramChartComponent,
-		'ibm-line-chart': LineChartComponent,
-		'ibm-lollipop-chart': LollipopChartComponent,
-		'ibm-meter-chart': MeterChartComponent,
-		'ibm-pie-chart': PieChartComponent,
-		'ibm-radar-chart': RadarChartComponent,
-		'ibm-scatter-chart': ScatterChartComponent,
-		'ibm-simple-bar-chart': SimpleBarChartComponent,
-		'ibm-stacked-area-chart': StackedAreaChartComponent,
-		'ibm-stacked-bar-chart': StackedBarChartComponent,
-		'ibm-tree-chart': TreeChartComponent,
-		'ibm-treemap-chart': TreemapChartComponent,
-		'ibm-wordcloud-chart': WordCloudChartComponent
-	}
+export class App {
+  charts = chartsDoc.map(c => ({
+    ...c,
+    component: CLASS_MAP[c.types.angular[0]],
+  }));
 }

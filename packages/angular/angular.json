@@ -8,10 +8,10 @@
 			"root": ".",
 			"sourceRoot": "src",
 			"schematics": {},
-			"prefix": "ibm",
+			"prefix": "cc",
 			"architect": {
 				"build": {
-					"builder": "@angular-devkit/build-angular:ng-packagr",
+					"builder": "@angular/build:ng-packagr",
 					"options": {
 						"project": "ng-package.json"
 					},
@@ -46,7 +46,7 @@
 			"prefix": "app",
 			"architect": {
 				"build": {
-					"builder": "@angular-devkit/build-angular:application",
+					"builder": "@angular/build:application",
 					"options": {
 						"outputPath": {
 							"base": "../../pages",
@@ -86,7 +86,7 @@
 					"defaultConfiguration": "production"
 				},
 				"serve": {
-					"builder": "@angular-devkit/build-angular:dev-server",
+					"builder": "@angular/build:dev-server",
 					"configurations": {
 						"production": {
 							"buildTarget": "charts-angular-test:build:production"
@@ -98,7 +98,7 @@
 					"defaultConfiguration": "development"
 				},
 				"extract-i18n": {
-					"builder": "@angular-devkit/build-angular:extract-i18n"
+					"builder": "@angular/build:extract-i18n"
 				},
 				"lint": {
 					"builder": "@angular-eslint/builder:lint",

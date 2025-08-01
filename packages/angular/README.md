@@ -4,7 +4,7 @@
 	</a>
 	<h3 align="center">Carbon Charts Angular</h3>
 	<p align="center">
-		A component library of 26 charts for Angular 18.
+		A component library of 26 charts for Angular 20.
 		<br /><br />
 		<a href="https://www.npmjs.com/package/@carbon/charts">
 			<img src="https://img.shields.io/npm/v/@carbon/charts.svg" />
@@ -21,6 +21,9 @@ If you need support for older versions of Angular (or encounter problems with th
 revert to `@carbon/charts-angular@latest`. Distribution tags have been added for previous Angular
 versions such as: `@carbon/charts-angular@angular12`, `@carbon/charts-angular@angular16`,
 `@carbon/charts-angular@angular17`, etc.
+
+Please direct all questions regarding support and bug fixes for the `@carbon/charts-angular` library to
+[@nstuyvesant](https://github.com/nstuyvesant).
 
 ## [Documentation with StackBlitz examples](https://charts.carbondesignsystem.com/)
 

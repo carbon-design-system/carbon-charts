@@ -7,7 +7,7 @@ export const chartTypes: ChartTypes = {
 	vanilla,
 	svelte: vanilla,
 	react: vanilla,
-	angular: 'ibm-gauge-chart',
+	angular: ['GaugeChartComponent', 'ibm-gauge-chart'],
 	vue: `Ccv${vanilla}`
 }
 

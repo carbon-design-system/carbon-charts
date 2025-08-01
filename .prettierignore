@@ -10,9 +10,7 @@ yarn.lock
 **/.DS_Store
 **/.svelte-kit
 **/dist
-**/build
 **/node_modules
 **/LICENSE.md
-**/demo
 **/playwright-report
 **/test-results

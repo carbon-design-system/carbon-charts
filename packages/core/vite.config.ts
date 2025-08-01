@@ -43,5 +43,22 @@ export default defineConfig({
 			entryRoot: 'src',
 			logLevel: 'silent' // Suppress package.json errors as they don't need d.ts files
 		}) as unknown as PluginOption
-	]
+	],
+	css: {
+		preprocessorOptions: {
+			scss: {
+				quietDeps: true, // suppress deprecations from node_modules
+				logger: {
+					warn(text) {
+						const suppressed = ['import', 'mixed-decls', 'global-builtin', 'color-functions']
+						if (suppressed.some(keyword => text.includes(keyword))) {
+							return // silence this warning
+						}
+						console.warn('[sass]', text) // show others
+					},
+					debug() {} // suppress debug messages
+				}
+			}
+		}
+	}
 })
