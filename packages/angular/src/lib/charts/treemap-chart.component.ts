@@ -8,7 +8,7 @@ import { TreemapChart as TreemapChartCore, type TreemapChartOptions } from '@car
  * Most functions just call their equivalent from the chart library.
  */
 @Component({
-	selector: 'ibm-treemap-chart',
+	selector: 'ibm-treemap-chart, cc-treemap',
 	template: ``
 })
 export class TreemapChartComponent extends BaseChartComponent implements AfterViewInit {

@@ -7,7 +7,7 @@ export const chartTypes: ChartTypes = {
 	vanilla,
 	svelte: vanilla,
 	react: vanilla,
-	angular: 'ibm-meter-chart',
+	angular: ['MeterChartComponent', 'ibm-meter-chart'],
 	vue: `Ccv${vanilla}`
 }
 

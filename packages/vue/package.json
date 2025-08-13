@@ -32,22 +32,22 @@
 		"format": "prettier . --write --ignore-path ../../.prettierignore"
 	},
 	"peerDependencies": {
-		"vue": "^3.4.0"
+		"vue": "^3.5.16"
 	},
 	"dependencies": {
 		"@carbon/charts": "workspace:*",
 		"@ibm/telemetry-js": "^1.9.1"
 	},
 	"devDependencies": {
-		"@playwright/test": "^1.52.0",
-		"@vitejs/plugin-vue": "^5.2.4",
-		"eslint": "^9.27.0",
-		"prettier": "^3.5.3",
-		"typescript": "^5.8.3",
-		"vite": "^6.3.5",
+		"@playwright/test": "^1.54.2",
+		"@vitejs/plugin-vue": "^6.0.1",
+		"eslint": "^9.32.0",
+		"prettier": "^3.6.2",
+		"typescript": "^5.9.2",
+		"vite": "^7.0.6",
 		"vite-plugin-dts": "^4.5.4",
-		"vue": "^3.5.15",
-		"vue-tsc": "^2.2.10"
+		"vue": "^3.5.18",
+		"vue-tsc": "^3.0.4"
 	},
 	"publishConfig": {
 		"access": "public",

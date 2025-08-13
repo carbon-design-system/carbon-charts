@@ -8,7 +8,7 @@ export const chartTypes: ChartTypes = {
 	vanilla,
 	svelte: vanilla,
 	react: vanilla,
-	angular: 'ibm-choropleth-chart',
+	angular: ['ChoroplethChartComponent', 'ibm-choropleth-chart'],
 	vue: `CcvChoroplethChart`
 }
 

@@ -8,7 +8,7 @@ import { DonutChart as DonutChartCore, type DonutChartOptions } from '@carbon/ch
  * Most functions just call their equivalent from the chart library.
  */
 @Component({
-	selector: 'ibm-donut-chart',
+	selector: 'ibm-donut-chart, cc-donut',
 	template: ``
 })
 export class DonutChartComponent extends BaseChartComponent implements AfterViewInit {
