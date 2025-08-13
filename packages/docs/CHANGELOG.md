@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.23.17 (2025-08-13)
+
+### Bug Fixes
+
+- **a11y:** add `role` attr for svg.zoom-container
+  ([#2019](https://github.com/carbon-design-system/carbon-charts/issues/2019))
+  ([2cbdd84](https://github.com/carbon-design-system/carbon-charts/commit/2cbdd847ce17ace1fa2078f3a892c930e53716f4))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.23.16 (2025-08-13)
 
 **Note:** Version bump only for package @carbon/charts-docs
