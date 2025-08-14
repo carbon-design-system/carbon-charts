@@ -62,6 +62,21 @@ const radarDenseOptions: RadarChartOptions = {
 	height: '400px'
 }
 
+const radarShowAllLabelsOptions: RadarChartOptions = {
+	title: 'Radar - Display all labels',
+	radar: {
+		axes: {
+			angle: 'category',
+			value: 'value'
+		},
+		showAllLabels: true
+	},
+	data: {
+		groupMapsTo: 'group'
+	},
+	height: '400px'
+}
+
 const radarData: ChartTabularData = [
 	{ product: 'Product 1', feature: 'Price', score: 60 },
 	{ product: 'Product 1', feature: 'Usability', score: 92 },
@@ -135,6 +150,25 @@ const radarDenseData: ChartTabularData = [
 	{ month: 'May', activity: 'Swimming', hoursAvg: 1 }
 ]
 
+const radarShowAllLabelsData: ChartTabularData = [
+	{ group: 'Group 1', category: 'Mathematics', value: 4 },
+	{ group: 'Group 1', category: 'Reading', value: 5 },
+	{ group: 'Group 1', category: 'Writing', value: 3 },
+	{ group: 'Group 1', category: 'Science', value: 4 },
+	{ group: 'Group 1', category: 'Critical Thinking', value: 3 },
+	{ group: 'Group 1', category: 'Creativity', value: 4 },
+	{ group: 'Group 1', category: 'Teamwork', value: 5 },
+	{ group: 'Group 1', category: 'Communication', value: 4 },
+	{ group: 'Group 2', category: 'Mathematics', value: 3 },
+	{ group: 'Group 2', category: 'Reading', value: 4 },
+	{ group: 'Group 2', category: 'Writing', value: 4 },
+	{ group: 'Group 2', category: 'Science', value: 2 },
+	{ group: 'Group 2', category: 'Critical Thinking', value: 4 },
+	{ group: 'Group 2', category: 'Creativity', value: 3 },
+	{ group: 'Group 2', category: 'Teamwork', value: 3 },
+	{ group: 'Group 2', category: 'Communication', value: 4 }
+]
+
 export const examples: Example[] = [
 	{
 		data: radarData,
@@ -154,6 +188,11 @@ export const examples: Example[] = [
 	{
 		data: radarDenseData,
 		options: radarDenseOptions,
+		tags: ['test']
+	},
+	{
+		data: radarShowAllLabelsData,
+		options: radarShowAllLabelsOptions,
 		tags: ['test']
 	}
 ]
