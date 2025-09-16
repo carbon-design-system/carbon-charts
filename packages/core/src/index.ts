@@ -148,6 +148,7 @@ export {
 	LayoutAlignItems,
 	LayoutDirection,
 	LayoutGrowth,
+	LegendEvent,
 	LegendItemType,
 	LegendOrientations,
 	LegendPositions,
@@ -158,6 +159,7 @@ export {
 	Projection,
 	RadarEvent,
 	RenderTypes,
+	Roles,
 	ScaleTypes,
 	ScatterEvent,
 	Skeletons,
@@ -331,3 +333,24 @@ export {
 	Transitions,
 	Zoom
 } from './services'
+
+export {
+	debounceWithD3MousePosition,
+	mergeDefaultChartOptions,
+	getDimensions,
+	getTranslationValues,
+	getTransformOffsets,
+	formatWidthHeightValues,
+	capitalizeFirstLetter,
+	convertValueToPercentage,
+	truncateLabel,
+	updateLegendAdditionalItems,
+	arrayDifferences,
+	getDuplicateValues,
+	moveToFront,
+	flipDomainAndRangeBasedOnOrientation,
+	getProperty,
+	flipSVGCoordinatesBasedOnOrientation,
+	generateSVGPathString,
+	compareNumeric
+} from './tools'
