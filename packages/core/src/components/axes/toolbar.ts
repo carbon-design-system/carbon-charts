@@ -39,8 +39,7 @@ export class Toolbar extends Component {
 	render(animate = true) {
 		const container = this.getComponentContainer({
 			ariaLabel: 'toolbar'
-		})
-			.attr('role', 'toolbar')
+		}).attr('role', 'group')
 
 		const isDataLoading = getProperty(this.getOptions(), 'data', 'loading')
 
@@ -90,6 +89,7 @@ export class Toolbar extends Component {
 				.html((d: any) => {
 					return `
 			<button
+	 			type="button"
 				class="cds--overflow-menu__trigger cds--overflow-menu__trigger"
 				aria-haspopup="true" aria-expanded="false" id="${this.services.domUtils.generateElementIDString(
 					`control-${sanitizeText(d.id)}`
@@ -168,6 +168,7 @@ export class Toolbar extends Component {
 
 		enteringOverflowMenuControls
 			.append('button')
+			.attr('type', 'button')
 			.attr('class', 'cds--overflow-menu-options__btn cds--overflow-menu-options__btn')
 
 		enteringOverflowMenuControls

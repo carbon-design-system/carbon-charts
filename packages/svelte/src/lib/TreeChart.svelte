@@ -1,24 +1,29 @@
 <script lang="ts">
-	import {
-		TreeChart as TreeChartCore,
-		type TreeChartOptions,
-		type ChartTabularData
-	} from '@carbon/charts'
+	import { TreeChart as TreeChartCore, type TreeChartOptions } from '@carbon/charts'
+	import type { ChartProps } from '$lib/interfaces'
 	import BaseChart from './BaseChart.svelte'
 
-	export let options: TreeChartOptions
-	export let data: ChartTabularData
-	export let chart: TreeChartCore | undefined = undefined
-	export let ref: HTMLDivElement | undefined = undefined
+	let {
+		data,
+		options,
+		ref = $bindable(),
+		chart = $bindable(),
+		onload,
+		onupdate,
+		ondestroy,
+		...rest
+	}: ChartProps<TreeChartCore, TreeChartOptions> = $props()
 </script>
 
+<!-- @component Tree chart component. -->
+
 <BaseChart
-	{...$$restProps}
 	Chart={TreeChartCore}
 	{options}
 	{data}
 	bind:ref
 	bind:chart
-	on:load
-	on:update
-	on:destroy />
+	{onload}
+	{onupdate}
+	{ondestroy}
+	{...rest} />

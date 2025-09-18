@@ -15,11 +15,7 @@ const CardNodeSubtitle: React.FC<CardNodeSubtitleProps & React.HTMLAttributes<HT
 		...(rest.className ? { [rest.className]: true } : {})
 	})
 
-	return (
-		<div className={classes} {...rest}>
-			{children}
-		</div>
-	)
+	return React.createElement('div', { className: classes, ...rest }, children)
 }
 
 export { CardNodeSubtitle }

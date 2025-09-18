@@ -15,11 +15,7 @@ const CardNodeTitle: React.FC<CardNodeTitleProps & React.HTMLAttributes<HTMLDivE
 		...(rest.className ? { [rest.className]: true } : {})
 	})
 
-	return (
-		<div className={classes} {...rest}>
-			{children}
-		</div>
-	)
+	return React.createElement('div', { className: classes, ...rest }, children)
 }
 
 export { CardNodeTitle }

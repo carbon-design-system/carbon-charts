@@ -19,10 +19,10 @@ export default function ConfigExample({ tag }: ConfigExampleProps) {
 				return (
 					<div key={chartIndex}>
 						{chart.examples.map((example, exampleIndex) => (
-							<p key={exampleIndex} className="chart">
+							<div key={exampleIndex} className="chart">
 								<ChartComponent data={example.data} options={example.options} />
 								<StackBlitzLauncher example={example} chartTypes={chart.types} />
-							</p>
+							</div>
 						))}
 					</div>
 				)

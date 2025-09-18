@@ -1,6 +1,6 @@
 {
 	"name": "@carbon/charts-react",
-	"version": "1.21.4",
+	"version": "1.23.17",
 	"description": "Carbon Charts component library for React",
 	"type": "module",
 	"module": "./dist/index.mjs",
@@ -39,28 +39,28 @@
 	},
 	"dependencies": {
 		"@carbon/charts": "workspace:*",
-		"@carbon/icons-react": "^11.49.0",
-		"@ibm/telemetry-js": "^1.6.1"
+		"@carbon/icons-react": "^11.64.0",
+		"@ibm/telemetry-js": "^1.9.1"
 	},
 	"peerDependencies": {
-		"react": "^16.8.6 || ^17.0.1 || ^18.2.0",
-		"react-dom": "^16.8.6 || ^17.0.1 || ^18.2.0"
+		"react": "^16.8.6 || ^17.0.1 || ^18.2.0 || ^19.0.0",
+		"react-dom": "^16.8.6 || ^17.0.1 || ^18.2.0 || ^19.0.0"
 	},
 	"devDependencies": {
-		"@playwright/test": "^1.47.1",
-		"@types/react": "^18.3.5",
-		"@types/react-dom": "^18.3.0",
-		"@vitejs/plugin-react-swc": "^3.7.0",
+		"@playwright/test": "^1.54.2",
+		"@types/react": "^19.1.9",
+		"@types/react-dom": "^19.1.7",
+		"@vitejs/plugin-react-swc": "^3.11.0",
 		"classnames": "^2.5.1",
-		"concurrently": "^9.0.1",
+		"concurrently": "^9.2.0",
 		"downlevel-dts": "^0.11.0",
-		"eslint": "^9.10.0",
-		"prettier": "^3.3.3",
-		"react": "^18.3.1",
-		"react-dom": "^18.3.1",
-		"typescript": "^5.6.2",
-		"vite": "^5.4.5",
-		"vite-plugin-dts": "^4.2.1"
+		"eslint": "^9.32.0",
+		"prettier": "^3.6.2",
+		"react": "^19.1.1",
+		"react-dom": "^19.1.1",
+		"typescript": "^5.9.2",
+		"vite": "^7.0.6",
+		"vite-plugin-dts": "^4.5.4"
 	},
 	"publishConfig": {
 		"access": "public"

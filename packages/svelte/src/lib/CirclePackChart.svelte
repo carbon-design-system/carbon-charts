@@ -1,24 +1,32 @@
 <script lang="ts">
 	import {
 		CirclePackChart as CirclePackChartCore,
-		type CirclePackChartOptions,
-		type ChartTabularData
+		type CirclePackChartOptions
 	} from '@carbon/charts'
+	import type { ChartProps } from '$lib/interfaces'
 	import BaseChart from './BaseChart.svelte'
 
-	export let options: CirclePackChartOptions
-	export let data: ChartTabularData
-	export let chart: CirclePackChartCore | undefined = undefined
-	export let ref: HTMLDivElement | undefined = undefined
+	let {
+		data,
+		options,
+		ref = $bindable(),
+		chart = $bindable(),
+		onload,
+		onupdate,
+		ondestroy,
+		...rest
+	}: ChartProps<CirclePackChartCore, CirclePackChartOptions> = $props()
 </script>
 
+<!-- @component Circle pack chart component. -->
+
 <BaseChart
-	{...$$restProps}
 	Chart={CirclePackChartCore}
 	{options}
 	{data}
 	bind:ref
 	bind:chart
-	on:load
-	on:update
-	on:destroy />
+	{onload}
+	{onupdate}
+	{ondestroy}
+	{...rest} />

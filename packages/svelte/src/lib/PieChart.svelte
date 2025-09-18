@@ -1,24 +1,29 @@
 <script lang="ts">
-	import {
-		PieChart as PieChartCore,
-		type PieChartOptions,
-		type ChartTabularData
-	} from '@carbon/charts'
+	import { PieChart as PieChartCore, type PieChartOptions } from '@carbon/charts'
+	import type { ChartProps } from '$lib/interfaces'
 	import BaseChart from './BaseChart.svelte'
 
-	export let options: PieChartOptions
-	export let data: ChartTabularData
-	export let chart: PieChartCore | undefined = undefined
-	export let ref: HTMLDivElement | undefined = undefined
+	let {
+		data,
+		options,
+		ref = $bindable(),
+		chart = $bindable(),
+		onload,
+		onupdate,
+		ondestroy,
+		...rest
+	}: ChartProps<PieChartCore, PieChartOptions> = $props()
 </script>
 
+<!-- @component Pie chart component. -->
+
 <BaseChart
-	{...$$restProps}
 	Chart={PieChartCore}
 	{options}
 	{data}
 	bind:ref
 	bind:chart
-	on:load
-	on:update
-	on:destroy />
+	{onload}
+	{onupdate}
+	{ondestroy}
+	{...rest} />

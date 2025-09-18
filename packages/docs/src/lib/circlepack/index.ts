@@ -7,7 +7,7 @@ export const chartTypes: ChartTypes = {
 	vanilla,
 	svelte: vanilla,
 	react: vanilla,
-	angular: 'ibm-circle-pack-chart',
+	angular: ['CirclePackChartComponent', 'ibm-circle-pack-chart'],
 	vue: `Ccv${vanilla}`
 }
 

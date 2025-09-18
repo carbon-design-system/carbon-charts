@@ -26,7 +26,7 @@ export default function Bubble() {
 
 			<p>
 				Details on Bubble chart options can be found{' '}
-				<a href="/api/interfaces/interfaces.BubbleChartOptions.html" target="_blank">
+				<a href="/api/interfaces/BubbleChartOptions.html" target="_blank">
 					here
 				</a>
 				.
@@ -37,10 +37,10 @@ export default function Bubble() {
 			<h2>Examples</h2>
 
 			{examples.map((example, index) => (
-				<p key={index} className="chart">
+				<div key={index} className="chart">
 					<BubbleChart data={example.data} options={example.options} />
 					<StackBlitzLauncher example={example} chartTypes={chartTypes} />
-				</p>
+				</div>
 			))}
 		</>
 	)

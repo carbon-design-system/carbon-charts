@@ -40,8 +40,6 @@ export interface BaseChartOptions {
 	accessibility?: {
 		// aria-label for the SVG element
 		svgAriaLabel?: string
-		// aria-label for the <div role="toolbar" /> element
-		toolbarAriaLabel?: string
 	}
 	/**
 	 * Optionally specify a title for the chart

@@ -3,7 +3,7 @@ name: Release
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   build:
@@ -27,19 +27,22 @@ jobs:
           git config --global user.email "carbon@us.ibm.com"
           git config --global user.name "carbon-bot"
 
-      - name: Use Node.js 20.x LTS
+      - name: Use Node.js 22.x LTS
         uses: actions/setup-node@v4
         with:
-          node-version: '20.x'
+          node-version: '22.x'
           cache: 'yarn'
 
       - name: Install dependencies 🔧
         run: yarn install --immutable --check-cache
 
       - name: Generate search index for docs website
-        run: lerna run build:search --scope @carbon/charts-docs # committed by lerna version
+        run: npx lerna run build:search --scope @carbon/charts-docs
 
-      - name: Create version and change logs and commit to master
+      - name: Stage generated search index
+        run: git add packages/docs/src/searchIndex.ts
+
+      - name: Create version and change logs and commit to main
         run: npx lerna version --yes --force-publish --conventional-commits --create-release github
 
       - name: Build latest version's packages (including angular/dist) 🔧

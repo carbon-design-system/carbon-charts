@@ -11,6 +11,7 @@ import {
 	Data,
 	Options,
 	Api,
+	AnalyticsInstrumentation,
 	Themes,
 	Axes,
 	Palettes,
@@ -25,6 +26,7 @@ import {
 	CirclePack,
 	Combo,
 	Donut,
+	EventListeners,
 	Gauge,
 	Heatmap,
 	Histogram,
@@ -44,7 +46,8 @@ import {
 	Highlights,
 	Thresholds,
 	Locales,
-	Legends
+	Legends,
+	Tooltips
 } from './routes'
 
 import './index.scss'
@@ -66,10 +69,13 @@ const App: React.FC = () => (
 				<Route path="toolbar" element={<Toolbar />} />
 				<Route path="truncation" element={<Truncation />} />
 				<Route path="zoombar" element={<Zoombar />} />
-				<Route path="api" element={<Api />} />
+				<Route path="apidocs" element={<Api />} />
+				<Route path="analytics-instrumentation" element={<AnalyticsInstrumentation />} />
+				<Route path="event-listeners" element={<EventListeners />} />
 				<Route path="themes" element={<Themes />} />
 				<Route path="axes" element={<Axes />} />
 				<Route path="legends" element={<Legends />} />
+				<Route path="tooltips" element={<Tooltips />} />
 				<Route path="palettes" element={<Palettes />} />
 				<Route path="dashboards" element={<Dashboards />} />
 				<Route path="alluvial" element={<Alluvial />} />

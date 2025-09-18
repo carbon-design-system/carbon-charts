@@ -1,24 +1,29 @@
 <script lang="ts">
-	import {
-		AlluvialChart as AlluvialChartCore,
-		type AlluvialChartOptions,
-		type ChartTabularData
-	} from '@carbon/charts'
-	import BaseChart from './BaseChart.svelte'
+	import { AlluvialChart as AlluvialChartCore, type AlluvialChartOptions } from '@carbon/charts'
+	import type { ChartProps } from '$lib/interfaces'
+	import BaseChart from '$lib/BaseChart.svelte'
 
-	export let options: AlluvialChartOptions
-	export let data: ChartTabularData
-	export let chart: AlluvialChartCore | undefined = undefined
-	export let ref: HTMLDivElement | undefined = undefined
+	let {
+		data,
+		options,
+		ref = $bindable(),
+		chart = $bindable(),
+		onload,
+		onupdate,
+		ondestroy,
+		...rest
+	}: ChartProps<AlluvialChartCore, AlluvialChartOptions> = $props()
 </script>
 
+<!-- @component Alluvial chart component. -->
+
 <BaseChart
-	{...$$restProps}
 	Chart={AlluvialChartCore}
 	{options}
 	{data}
 	bind:ref
 	bind:chart
-	on:load
-	on:update
-	on:destroy />
+	{onload}
+	{onupdate}
+	{ondestroy}
+	{...rest} />

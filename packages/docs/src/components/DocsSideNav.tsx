@@ -28,11 +28,20 @@ const DocsSideNav: React.FC<Props> = ({ isSideNavExpanded }) => (
 			</SideNavMenu>
 			<SideNavDivider />
 			<SideNavMenu title="Data & configuration" defaultExpanded={true}>
+				<SideNavMenuItem as={NavLink} to="/apidocs">
+					API
+				</SideNavMenuItem>
+				<SideNavMenuItem as={NavLink} to="/analytics-instrumentation">
+					Analytics Instrumentation
+				</SideNavMenuItem>
 				<SideNavMenuItem as={NavLink} to="/data">
 					Chart data
 				</SideNavMenuItem>
 				<SideNavMenuItem as={NavLink} to="/options">
 					Chart display options
+				</SideNavMenuItem>
+				<SideNavMenuItem as={NavLink} to="/event-listeners">
+					Event Listeners
 				</SideNavMenuItem>
 				<SideNavMenuItem as={NavLink} to="/highlights">
 					Highlights
@@ -52,9 +61,6 @@ const DocsSideNav: React.FC<Props> = ({ isSideNavExpanded }) => (
 				<SideNavMenuItem as={NavLink} to="/zoombar">
 					Zoombar
 				</SideNavMenuItem>
-				<SideNavMenuItem as={NavLink} to="/api">
-					API
-				</SideNavMenuItem>
 			</SideNavMenu>
 			<SideNavDivider />
 			<SideNavMenu title="Design" defaultExpanded={true}>
@@ -72,6 +78,9 @@ const DocsSideNav: React.FC<Props> = ({ isSideNavExpanded }) => (
 				</SideNavMenuItem>
 				<SideNavMenuItem as={NavLink} to="/legends">
 					Legends
+				</SideNavMenuItem>
+				<SideNavMenuItem as={NavLink} to="/tooltips">
+					Tooltips
 				</SideNavMenuItem>
 			</SideNavMenu>
 			<SideNavDivider />

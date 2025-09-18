@@ -129,3 +129,7 @@ p {
 .hide-at-sm {
 	@include hide-at-breakpoint.hide-at-sm();
 }
+
+.chart {
+	margin-bottom: 2rem;
+}

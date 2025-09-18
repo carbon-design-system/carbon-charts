@@ -70,7 +70,10 @@ export class SkeletonLines extends Skeleton {
 	updateBackdropStyle() {
 		const svg = this.parent
 
-		this.backdrop = DOMUtils.appendOrSelect(svg, 'svg.chart-skeleton.DAII')
+		this.backdrop = DOMUtils.appendOrSelect(svg, 'svg.chart-skeleton.DAII').attr(
+			'role',
+			'presentation'
+		)
 		const backdropRect = DOMUtils.appendOrSelect(this.backdrop, 'rect.chart-skeleton-backdrop')
 
 		backdropRect

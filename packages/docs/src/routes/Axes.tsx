@@ -78,7 +78,7 @@ const options = <LineChartOptions>{
 			<p>
 				Axis charts have a{' '}
 				<a
-					href="https://charts.carbondesignsystem.com/api/interfaces/interfaces.AxisOptions.html#scaleType"
+					href="https://charts.carbondesignsystem.com/api/interfaces/AxisOptions.html#scaleType"
 					target="_blank">
 					scaleType
 				</a>{' '}

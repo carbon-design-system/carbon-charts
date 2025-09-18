@@ -23,7 +23,7 @@ export default function Donut() {
 
 			<p>
 				Details on Donut chart options can be found{' '}
-				<a href="/api/interfaces/interfaces.DonutChartOptions.html" target="_blank">
+				<a href="/api/interfaces/DonutChartOptions.html" target="_blank">
 					here
 				</a>
 				.
@@ -34,10 +34,10 @@ export default function Donut() {
 			<h2>Examples</h2>
 
 			{examples.map((example, index) => (
-				<p key={index} className="chart">
+				<div key={index} className="chart">
 					<DonutChart data={example.data} options={example.options} />
 					<StackBlitzLauncher example={example} chartTypes={chartTypes} />
-				</p>
+				</div>
 			))}
 		</>
 	)

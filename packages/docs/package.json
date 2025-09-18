@@ -1,14 +1,14 @@
 {
 	"name": "@carbon/charts-docs",
 	"private": true,
-	"version": "1.21.4",
+	"version": "1.23.17",
 	"description": "Carbon Charts Documentation",
 	"type": "module",
 	"files": [
 		"src/*"
 	],
 	"scripts": {
-		"build:api:docs": "typedoc --tsconfig ../core/tsconfig.json ../core/src/index.ts --out ../../pages/api",
+		"build:api:docs": "./typedoc.buildScript.sh",
 		"build:docs": "vite build --emptyOutDir --outDir ../../pages",
 		"build:search": "node generateSearchIndex.mjs",
 		"build:netlify-dp": "vite build --emptyOutDir --outDir dist && typedoc --tsconfig ../core/tsconfig.json ../core/src/index.ts --out dist/api",
@@ -21,28 +21,29 @@
 	"dependencies": {
 		"@carbon/charts": "workspace:*",
 		"@carbon/charts-react": "workspace:*",
-		"@carbon/icons-react": "^11.49.0",
-		"@carbon/react": "^1.66.0",
+		"@carbon/icons-react": "^11.64.0",
+		"@carbon/react": "^1.88.0",
 		"@stackblitz/sdk": "^1.11.0",
-		"fuse.js": "^7.0.0",
-		"highlight.js": "^11.10.0",
-		"react": "^18.3.1",
-		"react-dom": "^18.3.1",
-		"react-router-dom": "^6.26.2",
-		"styled-components": "^6.1.13"
+		"fuse.js": "^7.1.0",
+		"highlight.js": "^11.11.1",
+		"react": "^19.1.1",
+		"react-dom": "^19.1.1",
+		"react-is": "^19.1.1",
+		"react-router-dom": "^7.7.1",
+		"styled-components": "^6.1.19"
 	},
 	"devDependencies": {
-		"@types/react": "^18.3.5",
-		"@types/react-dom": "^18.3.0",
+		"@types/react": "^19.1.9",
+		"@types/react-dom": "^19.1.7",
 		"@types/topojson-specification": "^1.0.5",
-		"@vitejs/plugin-react-swc": "^3.7.0",
-		"eslint": "^9.10.0",
-		"jsdom": "^25.0.0",
-		"prettier": "^3.3.3",
-		"sass": "^1.78.0",
-		"typedoc": "^0.26.7",
-		"typescript": "^5.6.2",
-		"vite": "^5.4.5"
+		"@vitejs/plugin-react-swc": "^3.11.0",
+		"eslint": "^9.32.0",
+		"jsdom": "^26.1.0",
+		"prettier": "^3.6.2",
+		"sass": "^1.89.2",
+		"typedoc": "^0.28.8",
+		"typescript": "^5.9.2",
+		"vite": "^7.0.6"
 	},
 	"publishConfig": {
 		"access": "restricted"

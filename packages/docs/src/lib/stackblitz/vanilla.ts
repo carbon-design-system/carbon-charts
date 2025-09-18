@@ -16,17 +16,8 @@ export function getVanillaProject(
 <head>
   <title>Carbon Charts Vanilla JavaScript Example</title>
   <meta charset="UTF-8" />
-  <link
-    rel="preconnect"
-    crossorigin="anonymous"
-    href="https://fonts.googleapis.com"
-  />
-  <!-- IBM Plex Sans and Plex Sans Condensed are default fonts (can be changed) -->
-  <link
-    href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed:300,400|IBM+Plex+Sans:400,600&display=swap"
-    rel="stylesheet"
-    crossorigin="anonymous"
-  />
+  <link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/plex/sans.css" />
+  <link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/plex/sans-condensed.css" />
   <style>
     .p-1 {
       padding: 2rem;

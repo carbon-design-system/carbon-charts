@@ -27,7 +27,7 @@ export default function Choropleth() {
 
 			<p>
 				Details on Choropleth chart options can be found{' '}
-				<a href="/api/interfaces/interfaces.ChoroplethChartOptions.html" target="_blank">
+				<a href="/api/interfaces/ChoroplethChartOptions.html" target="_blank">
 					here
 				</a>
 				.
@@ -38,13 +38,13 @@ export default function Choropleth() {
 			<h2>Examples</h2>
 
 			{examples.map((example, index) => (
-				<p key={index} className="chart">
+				<div key={index} className="chart">
 					<ChoroplethChart
 						data={example.data}
 						options={example.options as ChoroplethChartOptions}
 					/>
 					<StackBlitzLauncher example={example} chartTypes={chartTypes} />
-				</p>
+				</div>
 			))}
 		</>
 	)

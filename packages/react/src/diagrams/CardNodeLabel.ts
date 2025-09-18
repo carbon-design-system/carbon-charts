@@ -15,11 +15,7 @@ const CardNodeLabel: React.FC<CardNodeLabelProps & React.HTMLAttributes<HTMLLabe
 		...(rest.className ? { [rest.className]: true } : {})
 	})
 
-	return (
-		<label className={classes} {...rest}>
-			{children}
-		</label>
-	)
+	return React.createElement('label', { className: classes, ...rest }, children)
 }
 
 export { CardNodeLabel }

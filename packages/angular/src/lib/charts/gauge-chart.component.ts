@@ -8,7 +8,7 @@ import { GaugeChart as GaugeChartCore, type GaugeChartOptions } from '@carbon/ch
  * Most functions just call their equivalent from the chart library.
  */
 @Component({
-	selector: 'ibm-gauge-chart',
+	selector: 'ibm-gauge-chart, cc-gauge',
 	template: ``
 })
 export class GaugeChartComponent extends BaseChartComponent implements AfterViewInit {

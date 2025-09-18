@@ -7,7 +7,7 @@ export const chartTypes: ChartTypes = {
 	vanilla,
 	svelte: 'BarChartSimple',
 	react: vanilla,
-	angular: 'ibm-bar-chart',
+	angular: ['SimpleBarChartComponent', 'ibm-simple-bar-chart'],
 	vue: `Ccv${vanilla}`
 }
 
@@ -24,7 +24,7 @@ const simpleBarOptions: BarChartOptions = {
 	},
 	height: '400px',
 	accessibility: {
-		svgAriaLabel: 'Simple bar chart',
+		svgAriaLabel: 'Simple bar chart'
 	}
 }
 
@@ -360,7 +360,7 @@ const simpleBarTimeSeriesDenseOptions: BarChartOptions = {
 			ticks: {
 				formatter: (tick: number | Date) => {
 					if (typeof tick === 'number') {
-						return tick.toLocaleString('tr-TR')
+						return tick?.toLocaleString?.('tr-TR')
 					}
 					return tick.toString() // Fallback for Date type
 				}
@@ -383,7 +383,8 @@ const simpleBarTimeSeriesDenseOptions: BarChartOptions = {
 		valueFormatter: (value: number | Date, category: string) => {
 			if (category == 'x-value' && value instanceof Date)
 				return value.toLocaleDateString('tr-TR', { month: 'long', day: 'numeric' })
-			if (category == 'y-value' && typeof value === 'number') return value.toLocaleString('tr-TR')
+			if (category == 'y-value' && typeof value === 'number')
+				return value?.toLocaleString?.('tr-TR')
 			return value.toString()
 		}
 	},

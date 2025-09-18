@@ -95,6 +95,7 @@ export class Skeleton extends Component {
 		})
 
 		this.backdrop = DOMUtils.appendOrSelect(svg, 'svg.chart-skeleton.DAII')
+			.attr('role', 'presentation')
 			.attr('width', width)
 			.attr('height', height)
 
@@ -183,6 +184,7 @@ export class Skeleton extends Component {
 		const container = DOMUtils.appendOrSelect(svg, 'svg.chart-skeleton')
 			.attr('width', width)
 			.attr('height', height)
+			.attr('role', 'presentation')
 
 		const optionName = innerRadius === 0 ? 'pie' : 'donut'
 

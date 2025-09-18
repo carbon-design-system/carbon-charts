@@ -1,24 +1,29 @@
 <script lang="ts">
-	import {
-		LineChart as LineChartCore,
-		type LineChartOptions,
-		type ChartTabularData
-	} from '@carbon/charts'
+	import { LineChart as LineChartCore, type LineChartOptions } from '@carbon/charts'
+	import type { ChartProps } from '$lib/interfaces'
 	import BaseChart from './BaseChart.svelte'
 
-	export let options: LineChartOptions
-	export let data: ChartTabularData
-	export let chart: LineChartCore | undefined = undefined
-	export let ref: HTMLDivElement | undefined = undefined
+	let {
+		data,
+		options,
+		ref = $bindable(),
+		chart = $bindable(),
+		onload,
+		onupdate,
+		ondestroy,
+		...rest
+	}: ChartProps<LineChartCore, LineChartOptions> = $props()
 </script>
 
+<!-- @component Line chart component. -->
+
 <BaseChart
-	{...$$restProps}
 	Chart={LineChartCore}
 	{options}
 	{data}
 	bind:ref
 	bind:chart
-	on:load
-	on:update
-	on:destroy />
+	{onload}
+	{onupdate}
+	{ondestroy}
+	{...rest} />

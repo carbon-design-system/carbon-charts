@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react'
 import { AreaChart, StackedAreaChart } from '@carbon/charts-react'
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@carbon/react'
 import PageHeader from '../components/PageHeader'
@@ -9,14 +8,6 @@ import { chartTypesStacked, examplesStacked } from '../lib/area/examplesStacked'
 import '@carbon/charts-react/styles.css'
 
 export default function Area() {
-	const [selectedIndex, setSelectedIndex] = useState(0)
-
-	const handleTabChange = (evt: { selectedIndex: number }) => {
-		setSelectedIndex(evt.selectedIndex)
-	}
-
-	useEffect(() => {}, [selectedIndex])
-
 	return (
 		<>
 			<PageHeader title="Area Charts" />
@@ -51,7 +42,7 @@ export default function Area() {
 
 			<p>
 				Details on Area chart options can be found{' '}
-				<a href="/api/interfaces/interfaces.AreaChartOptions.html" target="_blank">
+				<a href="/api/interfaces/AreaChartOptions.html" target="_blank">
 					here
 				</a>
 				.
@@ -59,7 +50,7 @@ export default function Area() {
 
 			<StackBlitzLauncherExplanation />
 
-			<Tabs selectedIndex={selectedIndex} onChange={handleTabChange}>
+			<Tabs>
 				<TabList aria-label="List of area chart types">
 					<Tab>Standard</Tab>
 					<Tab>Stacked</Tab>
@@ -68,10 +59,10 @@ export default function Area() {
 				<TabPanels>
 					<TabPanel>
 						{examples.map((example, index) => (
-							<p key={index} className="chart">
+							<div key={index} className="chart">
 								<AreaChart data={example.data} options={example.options} />
 								<StackBlitzLauncher example={example} chartTypes={chartTypes} />
-							</p>
+							</div>
 						))}
 					</TabPanel>
 					<TabPanel>
@@ -81,10 +72,10 @@ export default function Area() {
 						</p>
 
 						{examplesStacked.map((example, index) => (
-							<p key={index} className="chart">
+							<div key={index} className="chart">
 								<StackedAreaChart data={example.data} options={example.options} />
 								<StackBlitzLauncher example={example} chartTypes={chartTypesStacked} />
-							</p>
+							</div>
 						))}
 					</TabPanel>
 				</TabPanels>

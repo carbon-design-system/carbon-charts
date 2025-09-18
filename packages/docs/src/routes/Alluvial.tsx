@@ -37,7 +37,7 @@ export default function Alluvial() {
 
 			<p>
 				Details on Alluvial chart options can be found{' '}
-				<a href="/api/interfaces/interfaces.AlluvialChartOptions.html" target="_blank">
+				<a href="/api/interfaces/AlluvialChartOptions.html" target="_blank">
 					here
 				</a>
 				.
@@ -48,10 +48,10 @@ export default function Alluvial() {
 			<h2>Examples</h2>
 
 			{examples.map((example, index) => (
-				<p key={index}>
+				<div key={index} className="chart">
 					<AlluvialChart data={example.data} options={example.options as AlluvialChartOptions} />
 					<StackBlitzLauncher example={example} chartTypes={chartTypes} />
-				</p>
+				</div>
 			))}
 		</>
 	)

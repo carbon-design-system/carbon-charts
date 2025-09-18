@@ -1,6 +1,6 @@
 {
 	"name": "@carbon/charts-angular",
-	"version": "1.21.4",
+	"version": "1.23.17",
 	"description": "Carbon Charts component library for Angular",
 	"exports": {
 		"./styles.min.css": "./styles.min.css",
@@ -23,33 +23,33 @@
 		"format": "prettier . --write --ignore-path ../../.prettierignore"
 	},
 	"peerDependencies": {
-		"@angular/common": "^18.0.0",
-		"@angular/core": "^18.0.0"
+		"@angular/common": "^20.0.0",
+		"@angular/core": "^20.0.0"
 	},
 	"dependencies": {
 		"@carbon/charts": "workspace:*",
-		"@ibm/telemetry-js": "^1.6.1",
-		"tslib": "^2.7.0"
+		"@ibm/telemetry-js": "^1.9.1",
+		"tslib": "^2.8.1"
 	},
 	"devDependencies": {
-		"@angular-devkit/build-angular": "^18.2.4",
-		"@angular/cli": "^18.2.4",
-		"@angular/common": "^18.2.4",
-		"@angular/compiler": "^18.2.4",
-		"@angular/compiler-cli": "^18.2.4",
-		"@angular/core": "^18.2.4",
-		"@angular/platform-browser": "^18.2.4",
-		"@angular/platform-browser-dynamic": "^18.2.4",
-		"@carbon/icons": "^11.49.0",
-		"@playwright/test": "^1.47.1",
-		"angular-eslint": "^18.3.1",
-		"concurrently": "^9.0.1",
-		"eslint": "^9.10.0",
-		"ng-packagr": "^18.2.1",
-		"prettier": "^3.3.3",
-		"typescript": "<5.6.0",
-		"typescript-eslint": "^8.5.0",
-		"zone.js": "~0.15.0"
+		"@angular/build": "^20.1.4",
+		"@angular/cli": "^20.1.4",
+		"@angular/common": "^20.1.4",
+		"@angular/compiler": "^20.1.4",
+		"@angular/compiler-cli": "^20.1.4",
+		"@angular/core": "^20.1.4",
+		"@angular/platform-browser": "^20.1.4",
+		"@angular/platform-browser-dynamic": "^20.1.4",
+		"@carbon/icons": "^11.64.0",
+		"@playwright/test": "^1.54.2",
+		"angular-eslint": "^20.1.1",
+		"concurrently": "^9.2.0",
+		"eslint": "^9.32.0",
+		"ng-packagr": "^20.1.0",
+		"prettier": "^3.6.2",
+		"typescript": ">=5.8.0 <5.9.0",
+		"typescript-eslint": "^8.38.0",
+		"zone.js": "~0.15.1"
 	},
 	"publishConfig": {
 		"tag": "next",

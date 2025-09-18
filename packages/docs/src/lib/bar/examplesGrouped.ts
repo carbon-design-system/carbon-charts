@@ -6,7 +6,7 @@ export const chartTypesGrouped: ChartTypes = {
 	vanilla,
 	svelte: 'BarChartGrouped',
 	react: vanilla,
-	angular: 'ibm-grouped-bar-chart',
+	angular: ['GroupedBarChartComponent', 'ibm-grouped-bar-chart'],
 	vue: `Ccv${vanilla}`
 }
 

@@ -18,11 +18,7 @@ const CardNodeColumn: React.FC<CardNodeColumnProps & React.HTMLAttributes<HTMLDi
 		...(rest.className ? { [rest.className]: true } : {})
 	})
 
-	return (
-		<div className={classes} {...rest}>
-			{children}
-		</div>
-	)
+	return React.createElement('div', { className: classes, ...rest }, children)
 }
 
 export { CardNodeColumn }

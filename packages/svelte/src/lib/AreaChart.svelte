@@ -1,24 +1,29 @@
 <script lang="ts">
-	import {
-		AreaChart as AreaChartCore,
-		type AreaChartOptions,
-		type ChartTabularData
-	} from '@carbon/charts'
+	import { AreaChart as AreaChartCore, type AreaChartOptions } from '@carbon/charts'
+	import type { ChartProps } from '$lib/interfaces'
 	import BaseChart from './BaseChart.svelte'
 
-	export let options: AreaChartOptions
-	export let data: ChartTabularData
-	export let chart: AreaChartCore | undefined = undefined
-	export let ref: HTMLDivElement | undefined = undefined
+	let {
+		data,
+		options,
+		ref = $bindable(),
+		chart = $bindable(),
+		onload,
+		onupdate,
+		ondestroy,
+		...rest
+	}: ChartProps<AreaChartCore, AreaChartOptions> = $props()
 </script>
 
+<!-- @component Area chart component. -->
+
 <BaseChart
-	{...$$restProps}
 	Chart={AreaChartCore}
 	{options}
 	{data}
 	bind:ref
 	bind:chart
-	on:load
-	on:update
-	on:destroy />
+	{onload}
+	{onupdate}
+	{ondestroy}
+	{...rest} />

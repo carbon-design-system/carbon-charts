@@ -1,24 +1,29 @@
 <script lang="ts">
-	import {
-		LollipopChart as LollipopChartCore,
-		type LollipopChartOptions,
-		type ChartTabularData
-	} from '@carbon/charts'
+	import { LollipopChart as LollipopChartCore, type LollipopChartOptions } from '@carbon/charts'
+	import type { ChartProps } from '$lib/interfaces'
 	import BaseChart from './BaseChart.svelte'
 
-	export let options: LollipopChartOptions
-	export let data: ChartTabularData
-	export let chart: LollipopChartCore | undefined = undefined
-	export let ref: HTMLDivElement | undefined = undefined
+	let {
+		data,
+		options,
+		ref = $bindable(),
+		chart = $bindable(),
+		onload,
+		onupdate,
+		ondestroy,
+		...rest
+	}: ChartProps<LollipopChartCore, LollipopChartOptions> = $props()
 </script>
 
+<!-- @component Lollipop chart component. -->
+
 <BaseChart
-	{...$$restProps}
 	Chart={LollipopChartCore}
 	{options}
 	{data}
 	bind:ref
 	bind:chart
-	on:load
-	on:update
-	on:destroy />
+	{onload}
+	{onupdate}
+	{ondestroy}
+	{...rest} />

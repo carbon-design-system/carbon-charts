@@ -4,7 +4,7 @@
 	</a>
 	<h3 align="center">Carbon Charts Angular</h3>
 	<p align="center">
-		A component library of 26 charts for Angular 18.
+		A component library of 26 charts for Angular 20.
 		<br /><br />
 		<a href="https://www.npmjs.com/package/@carbon/charts">
 			<img src="https://img.shields.io/npm/v/@carbon/charts.svg" />
@@ -21,6 +21,9 @@ If you need support for older versions of Angular (or encounter problems with th
 revert to `@carbon/charts-angular@latest`. Distribution tags have been added for previous Angular
 versions such as: `@carbon/charts-angular@angular12`, `@carbon/charts-angular@angular16`,
 `@carbon/charts-angular@angular17`, etc.
+
+Please direct all questions regarding support and bug fixes for the `@carbon/charts-angular` library to
+[@nstuyvesant](https://github.com/nstuyvesant).
 
 ## [Documentation with StackBlitz examples](https://charts.carbondesignsystem.com/)
 
@@ -43,8 +46,9 @@ The required styles should be imported from `@carbon/charts-angular/dist/styles.
 
 ## <picture><source height="20" width="20" media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/ibm-telemetry/telemetry-js/main/docs/images/ibm-telemetry-dark.svg"><source height="20" width="20" media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/ibm-telemetry/telemetry-js/main/docs/images/ibm-telemetry-light.svg"><img height="20" width="20" alt="IBM Telemetry" src="https://raw.githubusercontent.com/ibm-telemetry/telemetry-js/main/docs/images/ibm-telemetry-light.svg"></picture> IBM Telemetry
 
-This package uses IBM Telemetry to collect metrics data. By installing this package as a dependency,
-you are agreeing to telemetry collection. To opt out, see
+This package uses IBM Telemetry to collect de-identified and anonymized metrics
+data. By installing this package as a dependency you are agreeing to telemetry
+collection. To opt out, see
 [Opting out of IBM Telemetry data collection](https://github.com/ibm-telemetry/telemetry-js/tree/main#opting-out-of-ibm-telemetry-data-collection).
 
 For more information on the data being collected, please see the

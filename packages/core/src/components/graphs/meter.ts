@@ -153,8 +153,8 @@ export class Meter extends Component {
 		if (peakValue !== null) {
 			if (peakValue > domainMax) {
 				peakData = domainMax
-			} else if (peakValue < data[0].value) {
-				peakData = data[0].value > domainMax ? domainMax : data[0].value
+			} else if (peakValue < 0) {
+				peakData = 0
 			}
 		}
 

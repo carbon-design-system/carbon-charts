@@ -1,24 +1,29 @@
 <script lang="ts">
-	import {
-		DonutChart as DonutChartCore,
-		type DonutChartOptions,
-		type ChartTabularData
-	} from '@carbon/charts'
+	import { DonutChart as DonutChartCore, type DonutChartOptions } from '@carbon/charts'
+	import type { ChartProps } from '$lib/interfaces'
 	import BaseChart from './BaseChart.svelte'
 
-	export let options: DonutChartOptions
-	export let data: ChartTabularData
-	export let chart: DonutChartCore | undefined = undefined
-	export let ref: HTMLDivElement | undefined = undefined
+	let {
+		data,
+		options,
+		ref = $bindable(),
+		chart = $bindable(),
+		onload,
+		onupdate,
+		ondestroy,
+		...rest
+	}: ChartProps<DonutChartCore, DonutChartOptions> = $props()
 </script>
 
+<!-- @component Donut chart component. -->
+
 <BaseChart
-	{...$$restProps}
 	Chart={DonutChartCore}
 	{options}
 	{data}
 	bind:ref
 	bind:chart
-	on:load
-	on:update
-	on:destroy />
+	{onload}
+	{onupdate}
+	{ondestroy}
+	{...rest} />

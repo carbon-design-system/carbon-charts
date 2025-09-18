@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import hljs from 'highlight.js/lib/core'
 import javascript from 'highlight.js/lib/languages/javascript'
-import { CodeSnippet } from '@carbon/react/es'
+import { CodeSnippet, ListItem, UnorderedList } from '@carbon/react/es'
 import PageHeader from '../components/PageHeader'
 import styled from 'styled-components'
 
@@ -68,15 +68,38 @@ console.log(myChart)
 			<p>
 				Event dispatching for chart elements allows applications to trigger custom UI actions and
 				states when users interact with the charts. More information on events can be found{' '}
-				<a href="/api/classes/Events.html" target="_blank">
+				<a href="/api/modules/interfaces.events" target="_blank">
 					here
 				</a>
 				.
 			</p>
 
-			<h2>Full Documentation</h2>
+			<h3>Event Listener Code Examples</h3>
+			<UnorderedList>
+				<ListItem>
+					<a
+						href="https://stackblitz.com/edit/751z9aet?file=index.js%3AL17"
+						target="_blank"
+						rel="nofollow">
+						vanilla
+					</a>
+				</ListItem>
+				<ListItem>
+					<a
+						href="https://stackblitz.com/edit/react-uwtozmsz?file=src%2Findex.js%3AL17"
+						target="_blank"
+						rel="nofollow">
+						React
+					</a>
+				</ListItem>
+			</UnorderedList>
 
-			<ApiContainer title="API Documentation" src="/api" />
+			<h2>Full Documentation</h2>
+			<div style={{ marginBottom: '60px' }}>
+				<a href="/api" target="_blank" rel="noopener noreferrer">
+					Open API documentation site
+				</a>
+			</div>
 		</>
 	)
 }

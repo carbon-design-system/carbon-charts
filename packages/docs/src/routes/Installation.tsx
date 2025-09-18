@@ -206,9 +206,9 @@ export default function Installation() {
 
 						<p>
 							The HTML example above loads the UMD bundle and styles in the head of the document
-							from https://unpkg.com (cdnjs is also available). The fonts are loaded from Google's
-							CDN. JavaScript executes once the DOM has loaded. It gets the HTML id of the div that
-							will contain the chart. It then passes the data and options to it.
+							from https://unpkg.com (cdnjs is also available). JavaScript executes once the DOM has
+							loaded. It gets the HTML id of the div that will contain the chart. It then passes the
+							data and options to it.
 						</p>
 					</TabPanel>
 
@@ -321,27 +321,31 @@ export default defineConfig({
 			<h3>Fonts</h3>
 
 			<p>
-				By default, Carbon Charts uses{' '}
-				<a href="https://fonts.google.com/specimen/IBM+Plex+Sans" target="_blank">
+				By default, Carbon Charts use{' '}
+				<a
+					href="https://github.com/IBM/plex?tab=readme-ov-file#ibm-plex-typeface-packages"
+					target="_blank">
 					IBM Plex Sans
 				</a>
 				&nbsp; and&nbsp;
-				<a href="https://fonts.google.com/specimen/IBM+Plex+Sans+Condensed" target="_blank">
+				<a
+					href="https://github.com/IBM/plex?tab=readme-ov-file#ibm-plex-typeface-packages"
+					target="_blank">
 					IBM Plex Sans Condensed
 				</a>
-				&nbsp; which can be loaded in your HTML template from Google's Content Distribution Network
-				(CDN):
-				<CodeSnippet className="language-html">{`<link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed:300,400|IBM+Plex+Sans:400,600&display=swap" rel="stylesheet" crossorigin="anonymous" />`}</CodeSnippet>
+				:
 			</p>
+			<CodeSnippet className="language-html">{`<link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/plex/sans.css" />
+<link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/plex/sans-condensed.css" />`}</CodeSnippet>
 
 			<p>
 				To use different fonts, override two custom CSS properties for the CSS class that is
 				automatically associated with the chart container like this...
-				<CodeSnippet className="language-css" type="multi">{`.cds--cc--chart-wrapper {
+			</p>
+			<CodeSnippet className="language-css" type="multi">{`.cds--cc--chart-wrapper {
   --cds-charts-font-family: Roboto;
   --cds-charts-font-family-condensed: 'Roboto Condensed';
 }`}</CodeSnippet>
-			</p>
 		</>
 	)
 }

@@ -1,24 +1,29 @@
 <script lang="ts">
-	import {
-		ComboChart as ComboChartCore,
-		type ComboChartOptions,
-		type ChartTabularData
-	} from '@carbon/charts'
+	import { ComboChart as ComboChartCore, type ComboChartOptions } from '@carbon/charts'
+	import type { ChartProps } from '$lib/interfaces'
 	import BaseChart from './BaseChart.svelte'
 
-	export let options: ComboChartOptions
-	export let data: ChartTabularData
-	export let chart: ComboChartCore | undefined = undefined
-	export let ref: HTMLDivElement | undefined = undefined
+	let {
+		data,
+		options,
+		ref = $bindable(),
+		chart = $bindable(),
+		onload,
+		onupdate,
+		ondestroy,
+		...rest
+	}: ChartProps<ComboChartCore, ComboChartOptions> = $props()
 </script>
 
+<!-- @component Combo chart component - supports mixing types such as bar and line charts. -->
+
 <BaseChart
-	{...$$restProps}
 	Chart={ComboChartCore}
 	{options}
 	{data}
 	bind:ref
 	bind:chart
-	on:load
-	on:update
-	on:destroy />
+	{onload}
+	{onupdate}
+	{ondestroy}
+	{...rest} />

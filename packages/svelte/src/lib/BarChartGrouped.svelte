@@ -1,24 +1,29 @@
 <script lang="ts">
-	import {
-		GroupedBarChart as GroupedBarChartCore,
-		type BarChartOptions,
-		type ChartTabularData
-	} from '@carbon/charts'
+	import { GroupedBarChart as GroupedBarChartCore, type BarChartOptions } from '@carbon/charts'
+	import type { ChartProps } from '$lib/interfaces'
 	import BaseChart from './BaseChart.svelte'
 
-	export let options: BarChartOptions
-	export let data: ChartTabularData
-	export let chart: GroupedBarChartCore | undefined = undefined
-	export let ref: HTMLDivElement | undefined = undefined
+	let {
+		data,
+		options,
+		ref = $bindable(),
+		chart = $bindable(),
+		onload,
+		onupdate,
+		ondestroy,
+		...rest
+	}: ChartProps<GroupedBarChartCore, BarChartOptions> = $props()
 </script>
 
+<!-- @component Grouped bar chart component. -->
+
 <BaseChart
-	{...$$restProps}
 	Chart={GroupedBarChartCore}
 	{options}
 	{data}
 	bind:ref
 	bind:chart
-	on:load
-	on:update
-	on:destroy />
+	{onload}
+	{onupdate}
+	{ondestroy}
+	{...rest} />

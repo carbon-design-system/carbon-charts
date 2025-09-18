@@ -8,7 +8,7 @@ export const chartTypes: ChartTypes = {
 	vanilla,
 	svelte: vanilla,
 	react: vanilla,
-	angular: 'ibm-choropleth-chart',
+	angular: ['ChoroplethChartComponent', 'ibm-choropleth-chart'],
 	vue: `CcvChoroplethChart`
 }
 
@@ -19,6 +19,16 @@ const options: ChoroplethChartOptions = {
 
 export const missingDataOptions: ChoroplethChartOptions = {
 	title: 'Missing data',
+	geoData: worldTopoJson
+}
+
+export const customColorsOptions: ChoroplethChartOptions = {
+	title: 'Custom colors',
+	color: {
+		gradient: {
+			colors: ['#0f62fe', '#ffc2c5', '#8d8d8d']
+		}
+	},
 	geoData: worldTopoJson
 }
 
@@ -1702,6 +1712,11 @@ export const examples: Example[] = [
 	{
 		options: missingDataOptions,
 		data: missingData,
+		tags: ['test']
+	},
+	{
+		options: customColorsOptions,
+		data,
 		tags: ['test']
 	}
 ]

@@ -1,24 +1,29 @@
 <script lang="ts">
-	import {
-		SimpleBarChart as SimpleBarChartCore,
-		type BarChartOptions,
-		type ChartTabularData
-	} from '@carbon/charts'
+	import { SimpleBarChart as SimpleBarChartCore, type BarChartOptions } from '@carbon/charts'
+	import type { ChartProps } from '$lib/interfaces'
 	import BaseChart from './BaseChart.svelte'
 
-	export let options: BarChartOptions
-	export let data: ChartTabularData
-	export let chart: SimpleBarChartCore | undefined = undefined
-	export let ref: HTMLDivElement | undefined = undefined
+	let {
+		data,
+		options,
+		ref = $bindable(),
+		chart = $bindable(),
+		onload,
+		onupdate,
+		ondestroy,
+		...rest
+	}: ChartProps<SimpleBarChartCore, BarChartOptions> = $props()
 </script>
 
+<!-- @component Bar chart component. -->
+
 <BaseChart
-	{...$$restProps}
 	Chart={SimpleBarChartCore}
 	{options}
 	{data}
 	bind:ref
 	bind:chart
-	on:load
-	on:update
-	on:destroy />
+	{onload}
+	{onupdate}
+	{ondestroy}
+	{...rest} />

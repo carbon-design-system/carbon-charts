@@ -127,7 +127,7 @@ yarn dev
 2. **Create a new topic branch** (off the original remote branch) to contain your code changes:
 
    ```bash
-   git checkout -b <topic-branch-name> upstream/master
+   git checkout -b <topic-branch-name> upstream/main
    ```
 
 3. **Commit your changes in small logical chunks.** Refer to these
@@ -136,16 +136,16 @@ yarn dev
 
    **To commit changes, please use `yarn run commit` rather than `git commit`**
 
-4. If time passes between development, **locally merge (or rebase) the upstream master branch** into
+4. If time passes between development, **locally merge (or rebase) the upstream main branch** into
    your topic branch to avoid conflicts in your pull request. We recommend using Git's
    [interactive rebase](https://help.github.com/articles/interactive-rebase) feature to tidy up a
    messy commit history.
 
    ```bash
    # Fetch and merge commits history
-   git pull upstream master
+   git pull upstream main
    # Reapply one commit at a time
-   git rebase --interactive upstream/master
+   git rebase --interactive upstream/main
    ```
 
 5. Complete step 5 first, before **pushing your topic branch** up to your fork:
@@ -160,7 +160,7 @@ yarn dev
    - See
      [Creating a pull request from a fork](https://help.github.com/articles/creating-a-pull-request-from-a-fork/)
      for step-by-step instructions.
-   - Ensure the base branch is assigned to `master`.
+   - Ensure the base branch is assigned to `main`.
 
 ## Code guidelines
 

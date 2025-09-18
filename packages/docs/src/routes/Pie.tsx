@@ -24,7 +24,7 @@ export default function Pie() {
 
 			<p>
 				Details on Pie Chart options can be found{' '}
-				<a href="/api/interfaces/interfaces.PieChartOptions.html" target="_blank">
+				<a href="/api/interfaces/PieChartOptions.html" target="_blank">
 					here
 				</a>
 				.
@@ -35,10 +35,10 @@ export default function Pie() {
 			<h2>Examples</h2>
 
 			{examples.map((example, index) => (
-				<p key={index} className="chart">
+				<div key={index} className="chart">
 					<PieChart data={example.data} options={example.options} />
 					<StackBlitzLauncher example={example} chartTypes={chartTypes} />
-				</p>
+				</div>
 			))}
 		</>
 	)

@@ -1,24 +1,29 @@
 <script lang="ts">
-	import {
-		GaugeChart as GaugeChartCore,
-		type GaugeChartOptions,
-		type ChartTabularData
-	} from '@carbon/charts'
+	import { GaugeChart as GaugeChartCore, type GaugeChartOptions } from '@carbon/charts'
+	import type { ChartProps } from '$lib/interfaces'
 	import BaseChart from './BaseChart.svelte'
 
-	export let options: GaugeChartOptions
-	export let data: ChartTabularData
-	export let chart: GaugeChartCore | undefined = undefined
-	export let ref: HTMLDivElement | undefined = undefined
+	let {
+		data,
+		options,
+		ref = $bindable(),
+		chart = $bindable(),
+		onload,
+		onupdate,
+		ondestroy,
+		...rest
+	}: ChartProps<GaugeChartCore, GaugeChartOptions> = $props()
 </script>
 
+<!-- @component Guage chart component. -->
+
 <BaseChart
-	{...$$restProps}
 	Chart={GaugeChartCore}
 	{options}
 	{data}
 	bind:ref
 	bind:chart
-	on:load
-	on:update
-	on:destroy />
+	{onload}
+	{onupdate}
+	{ondestroy}
+	{...rest} />

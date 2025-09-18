@@ -30,7 +30,7 @@ export default function Treemap() {
 
 			<p>
 				Details on Treemap Chart options can be found{' '}
-				<a href="/api/interfaces/interfaces.TreemapChartOptions.html" target="_blank">
+				<a href="/api/interfaces/TreemapChartOptions.html" target="_blank">
 					here
 				</a>
 				.
@@ -41,10 +41,10 @@ export default function Treemap() {
 			<h2>Examples</h2>
 
 			{examples.map((example, index) => (
-				<p key={index} className="chart">
+				<div key={index} className="chart">
 					<TreemapChart data={example.data} options={example.options} />
 					<StackBlitzLauncher example={example} chartTypes={chartTypes} />
-				</p>
+				</div>
 			))}
 		</>
 	)

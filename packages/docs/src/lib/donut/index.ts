@@ -8,13 +8,19 @@ export const chartTypes: ChartTypes = {
 	vanilla,
 	svelte: vanilla,
 	react: vanilla,
-	angular: 'ibm-donut-chart',
+	angular: ['DonutChartComponent', 'ibm-donut-chart'],
 	vue: `Ccv${vanilla}`
 }
 
 const donutOptions: DonutChartOptions = {
 	title: 'Donut',
 	resizable: true,
+	legend: {
+		position: 'left',
+		truncation: {
+			type: 'none'
+		}
+	},
 	donut: {
 		center: {
 			label: 'Browsers'
@@ -27,7 +33,10 @@ const donutCenteredOptions: DonutChartOptions = {
 	title: 'Donut (centered)',
 	resizable: true,
 	legend: {
-		alignment: Alignments.CENTER
+		position: 'right',
+		truncation: {
+			type: 'none'
+		}
 	},
 	donut: {
 		center: {

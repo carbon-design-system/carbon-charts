@@ -1,23 +1,29 @@
 <script lang="ts">
-	import {
-		StackedBarChart as StackedBarChartCore,
-		type BarChartOptions,
-		type ChartTabularData
-	} from '@carbon/charts'
+	import { StackedBarChart as StackedBarChartCore, type BarChartOptions } from '@carbon/charts'
+	import type { ChartProps } from '$lib/interfaces'
 	import BaseChart from './BaseChart.svelte'
-	export let options: BarChartOptions
-	export let data: ChartTabularData
-	export let chart: StackedBarChartCore | undefined = undefined
-	export let ref: HTMLDivElement | undefined = undefined
+
+	let {
+		data,
+		options,
+		ref = $bindable(),
+		chart = $bindable(),
+		onload,
+		onupdate,
+		ondestroy,
+		...rest
+	}: ChartProps<StackedBarChartCore, BarChartOptions> = $props()
 </script>
 
+<!-- @component Stacked bar chart component. -->
+
 <BaseChart
-	{...$$restProps}
 	Chart={StackedBarChartCore}
 	{options}
 	{data}
 	bind:ref
 	bind:chart
-	on:load
-	on:update
-	on:destroy />
+	{onload}
+	{onupdate}
+	{ondestroy}
+	{...rest} />

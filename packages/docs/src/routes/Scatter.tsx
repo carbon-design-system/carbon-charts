@@ -26,7 +26,7 @@ export default function Scatter() {
 
 			<p>
 				Details on Scatter Chart options can be found{' '}
-				<a href="/api/interfaces/interfaces.ScatterChartOptions.html" target="_blank">
+				<a href="/api/interfaces/ScatterChartOptions.html" target="_blank">
 					here
 				</a>
 				.
@@ -37,10 +37,10 @@ export default function Scatter() {
 			<h2>Examples</h2>
 
 			{examples.map((example, index) => (
-				<p key={index} className="chart">
+				<div key={index} className="chart">
 					<ScatterChart data={example.data} options={example.options} />
 					<StackBlitzLauncher example={example} chartTypes={chartTypes} />
-				</p>
+				</div>
 			))}
 		</>
 	)

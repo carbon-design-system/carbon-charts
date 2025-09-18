@@ -1,24 +1,29 @@
 <script lang="ts">
-	import {
-		BoxplotChart as BoxplotChartCore,
-		type BoxplotChartOptions,
-		type ChartTabularData
-	} from '@carbon/charts'
+	import { BoxplotChart as BoxplotChartCore, type BoxplotChartOptions } from '@carbon/charts'
+	import type { ChartProps } from '$lib/interfaces'
 	import BaseChart from './BaseChart.svelte'
 
-	export let options: BoxplotChartOptions
-	export let data: ChartTabularData
-	export let chart: BoxplotChartCore | undefined = undefined
-	export let ref: HTMLDivElement | undefined = undefined
+	let {
+		data,
+		options,
+		ref = $bindable(),
+		chart = $bindable(),
+		onload,
+		onupdate,
+		ondestroy,
+		...rest
+	}: ChartProps<BoxplotChartCore, BoxplotChartOptions> = $props()
 </script>
 
+<!-- @component Boxplot chart component. -->
+
 <BaseChart
-	{...$$restProps}
 	Chart={BoxplotChartCore}
 	{options}
 	{data}
 	bind:ref
 	bind:chart
-	on:load
-	on:update
-	on:destroy />
+	{onload}
+	{onupdate}
+	{ondestroy}
+	{...rest} />

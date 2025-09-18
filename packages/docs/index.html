@@ -5,11 +5,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
 		<title>Carbon Charts</title>
 		<link rel="icon" href="/images/favicon.svg" type="image/svg+xml" />
-		<link rel="preconnect" crossorigin="anonymous" href="https://fonts.googleapis.com" />
-		<link
-			href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed:400|IBM+Plex+Sans:300,400,600&display=swap"
-			rel="stylesheet"
-			crossorigin="anonymous" />
+		<link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/plex/sans.css" />
+		<link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/plex/sans-condensed.css" />
 		<meta property="og:title" content="Carbon Charts Documentation" />
 		<meta
 			property="og:description"
@@ -17,6 +14,60 @@
 		<meta property="og:image" content="https://charts.carbondesignsystem.com/images/hero.png" />
 		<meta property="og:url" content="https://charts.carbondesignsystem.com" />
 		<meta property="og:type" content="website" />
+
+		<!-- Tealium/GA Set up -->
+		<script type="text/javascript">
+			window._ibmAnalytics = {
+				settings: {
+					name: 'CarbonChartsDocsV1',
+					isSpa: true,
+					tealiumProfileName: 'ibm-web-app'
+				},
+				onLoad: [['ibmStats.pageview', []]]
+			}
+			digitalData = {
+				page: {
+					pageInfo: {
+						ibm: {
+							siteId: 'IBM_' + _ibmAnalytics.settings.name
+						}
+					},
+					category: {
+						primaryCategory: 'PC100'
+					}
+				}
+			}
+		</script>
+		<script
+			src="//1.www.s81c.com/common/stats/ibm-common.js"
+			type="text/javascript"
+			async="async"></script>
+
+		<!-- IBM footer -->
+		<footer><dds-footer-container key="footer" disable-locale-button="true" size="micro" /></footer>
+		<script
+			key="8"
+			type="module"
+			src="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/tag/v1/latest/footer.min.js"></script>
+
+		<style>
+			body > footer {
+				position: fixed;
+				bottom: 0;
+				width: 100%;
+				z-index: 99999;
+
+				&:before {
+					content: '';
+					position: absolute;
+					top: 0;
+					left: 0;
+					width: 100%;
+					height: 1px;
+					background-color: #525252;
+				}
+			}
+		</style>
 	</head>
 
 	<body>

@@ -1,24 +1,29 @@
 <script lang="ts">
-	import {
-		MeterChart as MeterChartCore,
-		type MeterChartOptions,
-		type ChartTabularData
-	} from '@carbon/charts'
+	import { MeterChart as MeterChartCore, type MeterChartOptions } from '@carbon/charts'
+	import type { ChartProps } from '$lib/interfaces'
 	import BaseChart from './BaseChart.svelte'
 
-	export let options: MeterChartOptions
-	export let data: ChartTabularData
-	export let chart: MeterChartCore | undefined = undefined
-	export let ref: HTMLDivElement | undefined = undefined
+	let {
+		data,
+		options,
+		ref = $bindable(),
+		chart = $bindable(),
+		onload,
+		onupdate,
+		ondestroy,
+		...rest
+	}: ChartProps<MeterChartCore, MeterChartOptions> = $props()
 </script>
 
+<!-- @component Meter chart component. -->
+
 <BaseChart
-	{...$$restProps}
 	Chart={MeterChartCore}
 	{options}
 	{data}
 	bind:ref
 	bind:chart
-	on:load
-	on:update
-	on:destroy />
+	{onload}
+	{onupdate}
+	{ondestroy}
+	{...rest} />

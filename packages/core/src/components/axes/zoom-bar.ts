@@ -81,6 +81,7 @@ export class ZoomBar extends Component {
 			.attr('width', '100%')
 			.attr('height', zoombarHeight)
 			.attr('opacity', 1)
+			.attr('role', 'presentation')
 
 		DOMUtils.appendOrSelect(svg, 'rect.zoom-spacer')
 			.attr('x', 0)

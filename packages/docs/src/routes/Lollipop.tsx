@@ -21,7 +21,7 @@ export default function Lollipop() {
 
 			<p>
 				Details on Lollipop Chart options can be found{' '}
-				<a href="/api/interfaces/interfaces.LollipopChartOptions.html" target="_blank">
+				<a href="/api/interfaces/LollipopChartOptions.html" target="_blank">
 					here
 				</a>
 				.
@@ -32,10 +32,10 @@ export default function Lollipop() {
 			<h2>Examples</h2>
 
 			{examples.map((example, index) => (
-				<p key={index} className="chart">
+				<div key={index} className="chart">
 					<LollipopChart data={example.data} options={example.options} />
 					<StackBlitzLauncher example={example} chartTypes={chartTypes} />
-				</p>
+				</div>
 			))}
 		</>
 	)

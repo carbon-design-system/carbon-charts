@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core'
 import { arrowLeft, arrowRight, circle, diamond, square, tee } from '@carbon/charts'
 import { carbonPrefix } from '../../config'
+import { CommonModule } from '@angular/common'
 
 const template = `
 <svg:marker
@@ -18,6 +19,8 @@ const template = `
 
 @Component({
 	selector: 'ibm-graph-marker,[ibm-graph-marker]',
+	standalone: true,
+	imports: [CommonModule],
 	template
 })
 export class MarkerComponent {
@@ -58,6 +61,7 @@ export class MarkerComponent {
 
 @Component({
 	selector: 'ibm-graph-marker-arrow-left,[ibm-graph-marker-arrow-left]',
+	imports: [CommonModule],
 	template
 })
 export class MarkerArrowLeftComponent extends MarkerComponent implements OnInit {
@@ -67,6 +71,7 @@ export class MarkerArrowLeftComponent extends MarkerComponent implements OnInit 
 }
 @Component({
 	selector: 'ibm-graph-marker-arrow-right,[ibm-graph-marker-arrow-right]',
+	imports: [CommonModule],
 	template
 })
 export class MarkerArrowRightComponent extends MarkerComponent implements OnInit {
@@ -76,6 +81,7 @@ export class MarkerArrowRightComponent extends MarkerComponent implements OnInit
 }
 @Component({
 	selector: 'ibm-graph-marker-circle,[ibm-graph-marker-circle]',
+	imports: [CommonModule],
 	template
 })
 export class MarkerShapeNodeComponent extends MarkerComponent implements OnInit {
@@ -85,6 +91,7 @@ export class MarkerShapeNodeComponent extends MarkerComponent implements OnInit 
 }
 @Component({
 	selector: 'ibm-graph-marker-diamond,[ibm-graph-marker-diamond]',
+	imports: [CommonModule],
 	template
 })
 export class MarkerDiamondComponent extends MarkerComponent implements OnInit {
@@ -94,6 +101,7 @@ export class MarkerDiamondComponent extends MarkerComponent implements OnInit {
 }
 @Component({
 	selector: 'ibm-graph-marker-square,[ibm-graph-marker-square]',
+	imports: [CommonModule],
 	template
 })
 export class MarkerSquareComponent extends MarkerComponent implements OnInit {
@@ -103,6 +111,7 @@ export class MarkerSquareComponent extends MarkerComponent implements OnInit {
 }
 @Component({
 	selector: 'ibm-graph-marker-tee,[ibm-graph-marker-tee]',
+	imports: [CommonModule],
 	template
 })
 export class MarkerTeeComponent extends MarkerComponent implements OnInit {

@@ -46,27 +46,32 @@ const ShapeNode: React.FC<
 		[className as string]: className
 	})
 
-	const titleElement = title ? <div className={`${namespace}__title`}>{title}</div> : null
-	const subtitleElement = subtitle ? (
-		<div className={`${namespace}__subtitle`}>{subtitle}</div>
-	) : null
-	const descriptionElement = description ? (
-		<div className={`${namespace}__description`}>{description}</div>
-	) : null
+	const titleElement = title
+		? React.createElement('div', { className: `${namespace}__title` }, title)
+		: null
+	const subtitleElement = subtitle
+		? React.createElement('div', { className: `${namespace}__subtitle` }, subtitle)
+		: null
+	const descriptionElement = description
+		? React.createElement('div', { className: `${namespace}__description` }, description)
+		: null
 
-	return (
-		<Component
-			className={circleClasses}
-			style={{ height: size, width: size, position }}
-			tabIndex={0}
-			{...rest}>
-			<div className={`${namespace}__icon`}>{renderIcon}</div>
-			<div className={`${namespace}__body`} style={{ position: bodyPosition }}>
-				{titleElement}
-				{subtitleElement}
-				{descriptionElement}
-			</div>
-		</Component>
+	return React.createElement(
+		Component,
+		{
+			className: circleClasses,
+			style: { height: size, width: size, position },
+			tabIndex: 0,
+			...rest
+		},
+		React.createElement('div', { className: `${namespace}__icon` }, renderIcon),
+		React.createElement(
+			'div',
+			{ className: `${namespace}__body`, style: { position: bodyPosition } },
+			titleElement,
+			subtitleElement,
+			descriptionElement
+		)
 	)
 }
 

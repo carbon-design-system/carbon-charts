@@ -3,6 +3,446 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.23.17 (2025-08-13)
+
+### Bug Fixes
+
+- **a11y:** add `role` attr for svg.zoom-container
+  ([#2019](https://github.com/carbon-design-system/carbon-charts/issues/2019))
+  ([2cbdd84](https://github.com/carbon-design-system/carbon-charts/commit/2cbdd847ce17ace1fa2078f3a892c930e53716f4))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.23.16 (2025-08-13)
+
+**Note:** Version bump only for package @carbon/charts-angular
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.23.15 (2025-07-25)
+
+### Bug Fixes
+
+- **Legend:** add `img` role to additional items
+  ([#2017](https://github.com/carbon-design-system/carbon-charts/issues/2017))
+  ([f5b898f](https://github.com/carbon-design-system/carbon-charts/commit/f5b898f3f61e5600d25e60f19ccdf803a5543e62))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.23.14 (2025-07-22)
+
+### Bug Fixes
+
+- **Toolbar:** add `type=button` to buttons
+  ([#2016](https://github.com/carbon-design-system/carbon-charts/issues/2016))
+  ([1e0e7fe](https://github.com/carbon-design-system/carbon-charts/commit/1e0e7fe89b14236b0dbaf8061d07ff78d816cfb1))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.23.13 (2025-06-20)
+
+### Bug Fixes
+
+- add field name in aria label for pie and donut chart
+  ([#1993](https://github.com/carbon-design-system/carbon-charts/issues/1993))
+  ([418fbe9](https://github.com/carbon-design-system/carbon-charts/commit/418fbe9132b86864833a0e146d34acce2901ac56))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.23.12 (2025-06-17)
+
+### Bug Fixes
+
+- **Legend:** handling of longer labels in vertical orientation
+  ([#2005](https://github.com/carbon-design-system/carbon-charts/issues/2005))
+  ([9a5c567](https://github.com/carbon-design-system/carbon-charts/commit/9a5c567ee0b5f8cd8b3c8812d3d2e7882731a518))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.23.11 (2025-06-16)
+
+### Bug Fixes
+
+- **Line graph:** zoom issues in firefox
+  ([#2004](https://github.com/carbon-design-system/carbon-charts/issues/2004))
+  ([17d6f13](https://github.com/carbon-design-system/carbon-charts/commit/17d6f1307a88c94d08a2bb2fa720c7b15451a0f1))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.23.10 (2025-05-26)
+
+**Note:** Version bump only for package @carbon/charts-angular
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.23.9 (2025-05-22)
+
+**Note:** Version bump only for package @carbon/charts-angular
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.23.8 (2025-05-20)
+
+**Note:** Version bump only for package @carbon/charts-angular
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.23.7 (2025-05-08)
+
+### Bug Fixes
+
+- add presentation role for pie n donut chart skeleton
+  ([#1986](https://github.com/carbon-design-system/carbon-charts/issues/1986))
+  ([ad144ec](https://github.com/carbon-design-system/carbon-charts/commit/ad144ecdb3d35fb91f223fef9ad45305431fd119))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.23.6 (2025-04-22)
+
+**Note:** Version bump only for package @carbon/charts-angular
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.23.5 (2025-04-15)
+
+### Bug Fixes
+
+- **Tooltip:** formatter not called when value is falsey
+  ([#1980](https://github.com/carbon-design-system/carbon-charts/issues/1980))
+  ([2734886](https://github.com/carbon-design-system/carbon-charts/commit/27348863ede9f15f82ba4a1517e6b2c5aee439b4))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.23.4 (2025-04-15)
+
+### Bug Fixes
+
+- **Skeleton:** add role=presentation
+  ([#1979](https://github.com/carbon-design-system/carbon-charts/issues/1979))
+  ([d9b0aa5](https://github.com/carbon-design-system/carbon-charts/commit/d9b0aa510e1587be03c459e8c5e02bb8d8273c88))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.23.3 (2025-04-15)
+
+**Note:** Version bump only for package @carbon/charts-angular
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.23.2 (2025-04-06)
+
+**Note:** Version bump only for package @carbon/charts-angular
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.23.1 (2025-04-04)
+
+**Note:** Version bump only for package @carbon/charts-angular
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# 1.23.0 (2025-03-05)
+
+### Features
+
+- **docs:** add analytics instrumentation doc
+  ([#1966](https://github.com/carbon-design-system/carbon-charts/issues/1966))
+  ([f0da6ae](https://github.com/carbon-design-system/carbon-charts/commit/f0da6aef3d6d51b49235069c863d92bbd5b9e310))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.22.21 (2025-03-05)
+
+### Bug Fixes
+
+- **Choropleth:** issues with custom color usage
+  ([#1965](https://github.com/carbon-design-system/carbon-charts/issues/1965))
+  ([290e6eb](https://github.com/carbon-design-system/carbon-charts/commit/290e6eb84951dd7d658334c9bcf7c75560405b72))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.22.20 (2025-03-05)
+
+**Note:** Version bump only for package @carbon/charts-angular
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.22.19 (2025-02-27)
+
+**Note:** Version bump only for package @carbon/charts-angular
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.22.18 (2025-02-18)
+
+**Note:** Version bump only for package @carbon/charts-angular
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.22.17 (2025-02-12)
+
+### Bug Fixes
+
+- **stackblitz:** react examples
+  ([#1957](https://github.com/carbon-design-system/carbon-charts/issues/1957))
+  ([1427786](https://github.com/carbon-design-system/carbon-charts/commit/14277866a0933eb99b1097818d4611cc140b9da2))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.22.16 (2025-02-10)
+
+**Note:** Version bump only for package @carbon/charts-angular
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.22.15 (2025-01-16)
+
+**Note:** Version bump only for package @carbon/charts-angular
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.22.14 (2025-01-14)
+
+**Note:** Version bump only for package @carbon/charts-angular
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.22.13 (2025-01-13)
+
+**Note:** Version bump only for package @carbon/charts-angular
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.22.12 (2025-01-13)
+
+### Bug Fixes
+
+- **vite-react:** externalize ['react', 'react-dom', 'react/jsx-runtime']
+  ([#1943](https://github.com/carbon-design-system/carbon-charts/issues/1943))
+  ([feb0092](https://github.com/carbon-design-system/carbon-charts/commit/feb0092f68410f8e97f9da1af22690f3bea086b7))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.22.11 (2025-01-07)
+
+### Bug Fixes
+
+- **vite:** remove all react externals
+  ([#1940](https://github.com/carbon-design-system/carbon-charts/issues/1940))
+  ([c75f93f](https://github.com/carbon-design-system/carbon-charts/commit/c75f93fab78eb4d14a13e32e759ecb3b2e4aa2ad))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.22.10 (2025-01-07)
+
+### Bug Fixes
+
+- **vite:** only externalize jsx-runtime
+  ([#1937](https://github.com/carbon-design-system/carbon-charts/issues/1937))
+  ([5edea11](https://github.com/carbon-design-system/carbon-charts/commit/5edea11945a9ef744839fa84cb0be4966e3c5471))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.22.9 (2025-01-07)
+
+### Bug Fixes
+
+- exclude jsx-runtime from bundle
+  ([#1928](https://github.com/carbon-design-system/carbon-charts/issues/1928))
+  ([89a1966](https://github.com/carbon-design-system/carbon-charts/commit/89a19665189f6a292dad415787e86853a27814a2))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.22.8 (2024-12-20)
+
+**Note:** Version bump only for package @carbon/charts-angular
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.22.7 (2024-12-04)
+
+### Bug Fixes
+
+- **meter:** incorrect peak value showing
+  ([#1926](https://github.com/carbon-design-system/carbon-charts/issues/1926))
+  ([bd44d25](https://github.com/carbon-design-system/carbon-charts/commit/bd44d25075eef6b9c07e970ef42428e7a2a1aa18))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.22.6 (2024-12-04)
+
+**Note:** Version bump only for package @carbon/charts-angular
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.22.5 (2024-12-02)
+
+**Note:** Version bump only for package @carbon/charts-angular
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.22.4 (2024-11-21)
+
+**Note:** Version bump only for package @carbon/charts-angular
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.22.3 (2024-11-18)
+
+**Note:** Version bump only for package @carbon/charts-angular
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.22.2 (2024-11-07)
+
+### Bug Fixes
+
+- **yarn:** bundle because CI lacks corepack
+  ([#1911](https://github.com/carbon-design-system/carbon-charts/issues/1911))
+  ([513e779](https://github.com/carbon-design-system/carbon-charts/commit/513e7798007f807d1463a25efe7d140d5b038b8e))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.22.1 (2024-09-27)
+
+### Bug Fixes
+
+- **docs:** switch fonts to s81c cdn
+  ([#1898](https://github.com/carbon-design-system/carbon-charts/issues/1898))
+  ([cdfc980](https://github.com/carbon-design-system/carbon-charts/commit/cdfc980596365c90f08e35e91e49cbc2f491fd09))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# 1.22.0 (2024-09-16)
+
+### Features
+
+- **a11y:** add aria-label to <svg> elements
+  ([#1892](https://github.com/carbon-design-system/carbon-charts/issues/1892))
+  ([65d40e5](https://github.com/carbon-design-system/carbon-charts/commit/65d40e5397336bc9f42f6f008017eebe7bc36c00))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.21.4 (2024-09-16)
 
 **Note:** Version bump only for package @carbon/charts-angular
