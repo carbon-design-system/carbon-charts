@@ -156,9 +156,18 @@ export class Histogram extends Component {
 		const options = this.model.getOptions()
 		const { groupMapsTo } = options.data
 		const { code: localeCode, number: numberFormatter } = getProperty(options, 'locale')
+		const alwaysShowRulerTooltip = getProperty(options, 'tooltip', 'alwaysShowRulerTooltip')
+		
+		const bars = this.parent.selectAll('path.bar')
+		
+		// If alwaysShowRulerTooltip is enabled, disable pointer events so the backdrop can receive them
+		// but keep event listeners active for programmatic events from ruler
+		if (alwaysShowRulerTooltip) {
+			bars.style('pointer-events', 'none')
+		}
+		
 		const self = this
-		this.parent
-			.selectAll('path.bar')
+		bars
 			.on('mouseover', function (event: MouseEvent, datum: any) {
 				const hoveredElement = select(this)
 
@@ -170,18 +179,20 @@ export class Histogram extends Component {
 				const rangeAxisPosition = self.services.cartesianScales.getRangeAxisPosition()
 				const rangeScaleLabel = self.services.cartesianScales.getScaleLabel(rangeAxisPosition)
 
-				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
-					event,
-					hoveredElement,
-					items: [
-						{
-							label: get(options, 'bins.rangeLabel') || 'Range',
-							value: `${x0} – ${x1}`
-						},
-						{
-							label: options.tooltip.groupLabel || 'Group',
-							value: datum[groupMapsTo],
-							class: self.model.getColorClassName({
+				// Show tooltip only if alwaysShowRulerTooltip is not enabled
+				if (!alwaysShowRulerTooltip) {
+					self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+						event,
+						hoveredElement,
+						items: [
+							{
+								label: get(options, 'bins.rangeLabel') || 'Range',
+								value: `${x0} – ${x1}`
+							},
+							{
+								label: options.tooltip.groupLabel || 'Group',
+								value: datum[groupMapsTo],
+								class: self.model.getColorClassName({
 								classNameTypes: [ColorClassNameTypes.TOOLTIP],
 								dataGroupName: datum[groupMapsTo]
 							})
@@ -191,7 +202,8 @@ export class Histogram extends Component {
 							value: get(datum, `data.${datum[groupMapsTo]}`)
 						}
 					]
-				})
+					})
+				}
 			})
 			.on('mousemove', function (event: MouseEvent) {
 				// Show tooltip

@@ -49,6 +49,47 @@ const comboSimpleOptions: ComboChartOptions = {
 	height: '400px'
 }
 
+const comboAlwaysRulerTooltipOptions: ComboChartOptions = {
+	title: 'Combo (tooltip.alwaysShowRulerTooltip=true)',
+	axes: {
+		left: {
+			mapsTo: 'value',
+			scaleType: ScaleTypes.LINEAR,
+			title: 'USA Summer School Attendance'
+		},
+		right: {
+			mapsTo: 'temp',
+			scaleType: ScaleTypes.LINEAR,
+			title: 'Temperature (°F)',
+			correspondingDatasets: ['Temperature']
+		},
+		bottom: {
+			title: 'Day of the Week',
+			mapsTo: 'date',
+			scaleType: ScaleTypes.LABELS
+		}
+	},
+	comboChartTypes: [
+		{
+			type: 'simple-bar',
+			correspondingDatasets: ['School A']
+		},
+		{
+			type: 'line',
+			options: {
+				points: {
+					radius: 5
+				}
+			},
+			correspondingDatasets: ['Temperature']
+		}
+	],
+	tooltip: {
+		alwaysShowRulerTooltip: true
+	},
+	height: '400px'
+}
+
 const comboSimpleFloatingOptions: ComboChartOptions = {
 	title: 'Combo (Line + Floating bar)',
 	axes: {
@@ -619,6 +660,11 @@ const comboHorizontalData = comboSimpleData
 export const examples: Example[] = [
 	{
 		options: comboSimpleOptions,
+		data: comboSimpleData,
+		tags: ['test']
+	},
+	{
+		options: comboAlwaysRulerTooltipOptions,
 		data: comboSimpleData,
 		tags: ['test']
 	},
