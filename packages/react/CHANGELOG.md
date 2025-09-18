@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.25.1 (2025-09-18)
+
+### Bug Fixes
+
+- **Layout:** elements sticking out of wrappers
+  ([#2036](https://github.com/carbon-design-system/carbon-charts/issues/2036))
+  ([55cbbbf](https://github.com/carbon-design-system/carbon-charts/commit/55cbbbfc61bd54733b01bfde1b729877a240380d))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # 1.25.0 (2025-09-18)
 
 ### Features
