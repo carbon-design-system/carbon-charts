@@ -42,6 +42,7 @@ import Highlights from './Highlights.tsx'
 import Thresholds from './Thresholds.tsx'
 import Locales from './Locales.tsx'
 import Legends from './Legends.tsx'
+import Tooltips from './Tooltips.tsx'
 
 export {
 	Root,
@@ -87,5 +88,6 @@ export {
 	Highlights,
 	Thresholds,
 	Locales,
-	Legends
+	Legends,
+	Tooltips
 }

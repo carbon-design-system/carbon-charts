@@ -46,7 +46,8 @@ import {
 	Highlights,
 	Thresholds,
 	Locales,
-	Legends
+	Legends,
+	Tooltips
 } from './routes'
 
 import './index.scss'
@@ -74,6 +75,7 @@ const App: React.FC = () => (
 				<Route path="themes" element={<Themes />} />
 				<Route path="axes" element={<Axes />} />
 				<Route path="legends" element={<Legends />} />
+				<Route path="tooltips" element={<Tooltips />} />
 				<Route path="palettes" element={<Palettes />} />
 				<Route path="dashboards" element={<Dashboards />} />
 				<Route path="alluvial" element={<Alluvial />} />

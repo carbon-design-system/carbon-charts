@@ -314,10 +314,21 @@ export class Scatter extends Component {
 	addEventListeners() {
 		const self = this
 		const { groupMapsTo } = self.getOptions().data
+		const alwaysShowRulerTooltip = getProperty(this.getOptions(), 'tooltip', 'alwaysShowRulerTooltip')
 
 		if (!this.parent) throw new Error('Parent not defined')
-		this.parent
-			.selectAll('circle')
+		
+		const circles = this.parent.selectAll('circle')
+		
+		// If alwaysShowRulerTooltip is enabled, disable pointer events so the backdrop can receive them
+		// but keep event listeners active for programmatic events from ruler
+		if (alwaysShowRulerTooltip) {
+			circles.style('pointer-events', 'none')
+		} else {
+			circles.style('pointer-events', null)
+		}
+		
+		circles
 			.on('mouseover', function (event: MouseEvent, datum: any) {
 				const hoveredElement = select(this)
 
@@ -336,13 +347,15 @@ export class Scatter extends Component {
 					})
 					.classed('unfilled', false)
 
-				// Show tooltip
-				self.services.events?.dispatchEvent(Events.Tooltip.SHOW, {
-					event,
-					hoveredElement,
-					data: [datum],
-					additionalItems: self.getTooltipAdditionalItems(datum)
-				})
+				// Show tooltip only if alwaysShowRulerTooltip is not enabled
+				if (!alwaysShowRulerTooltip) {
+					self.services.events?.dispatchEvent(Events.Tooltip.SHOW, {
+						event,
+						hoveredElement,
+						data: [datum],
+						additionalItems: self.getTooltipAdditionalItems(datum)
+					})
+				}
 
 				// Dispatch mouse event
 				self.services.events?.dispatchEvent(Events.Scatter.SCATTER_MOUSEOVER, {

@@ -193,9 +193,19 @@ export class GroupedBar extends Bar {
 
 	addEventListeners() {
 		const self = this
+		const alwaysShowRulerTooltip = getProperty(this.getOptions(), 'tooltip', 'alwaysShowRulerTooltip')
+		
+		const bars = this.parent.selectAll('path.bar')
+		
+		// If alwaysShowRulerTooltip is enabled, disable pointer events so the backdrop can receive them
+		// but keep event listeners active for programmatic events from ruler
+		if (alwaysShowRulerTooltip) {
+			bars.style('pointer-events', 'none')
+		} else {
+			bars.style('pointer-events', null)
+		}
 
-		this.parent
-			.selectAll('path.bar')
+		bars
 			.on('mouseover', function (event: MouseEvent, datum: any) {
 				const hoveredElement = select(this)
 				hoveredElement.classed('hovered', true)
@@ -207,12 +217,14 @@ export class GroupedBar extends Bar {
 					datum
 				})
 
-				// Show tooltip
-				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
-					event,
-					hoveredElement,
-					data: [datum]
-				})
+				// Show tooltip only if alwaysShowRulerTooltip is not enabled
+				if (!alwaysShowRulerTooltip) {
+					self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+						event,
+						hoveredElement,
+						data: [datum]
+					})
+				}
 			})
 			.on('mousemove', function (event: MouseEvent, datum: any) {
 				const hoveredElement = select(this)

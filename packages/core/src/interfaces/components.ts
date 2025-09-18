@@ -175,6 +175,10 @@ export interface TooltipOptions {
 	 * customizes the `Total` label shown inside tooltips
 	 */
 	totalLabel?: string
+	/**
+	 * when true, always shows ruler tooltip instead of individual point tooltips
+	 */
+	alwaysShowRulerTooltip?: boolean
 	truncation?: TruncationOptions
 }
 
