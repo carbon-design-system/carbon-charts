@@ -24,8 +24,6 @@ export class TwoDimensionalAxes extends Component {
 	}
 
 	render(animate = false) {
-		// Pre-calculate required margins BEFORE any rendering
-
 		const axes: any = {}
 		const axisPositions = Object.keys(AxisPositions)
 		const axesOptions = getProperty(this.getOptions(), 'axes')
