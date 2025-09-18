@@ -317,6 +317,21 @@ export class ZoomBar extends Component {
 				event.sourceEvent.type === 'touchmove' ||
 				event.sourceEvent.type === 'touchend')
 		) {
+			// Determine zoom type for manual zoom bar operations
+			let zoomType: 'in' | 'out' | 'reset' | 'manual' = 'manual'
+			if (zoomDomain && zoomDomain[0] && zoomDomain[1]) {
+				// Check if it's a reset to full range
+				const defaultDomain = this.services.zoom.getDefaultZoomBarDomain()
+				if (
+					newDomain[0].valueOf() === defaultDomain[0].valueOf() &&
+					newDomain[1].valueOf() === defaultDomain[1].valueOf()
+				) {
+					zoomType = 'reset'
+				} else {
+					zoomType = 'manual'
+				}
+			}
+
 			// only if zoomDomain is never set or needs update
 			if (
 				zoomDomain === undefined ||
@@ -326,7 +341,8 @@ export class ZoomBar extends Component {
 				// don't dispatch event for all event types
 				// let the following code to dispatch necessary events
 				this.services.zoom.handleDomainChange(newDomain, {
-					dispatchEvent: false
+					dispatchEvent: false,
+					type: zoomType
 				})
 			}
 
@@ -340,7 +356,8 @@ export class ZoomBar extends Component {
 				zoomBarEventType = Events.ZoomBar.SELECTION_END
 				// only dispatch zoom domain change event for triggering api call when event type equals to end
 				this.services.events.dispatchEvent(Events.ZoomDomain.CHANGE, {
-					newDomain
+					newDomain,
+					type: zoomType
 				})
 			}
 			this.services.events.dispatchEvent(zoomBarEventType, {
