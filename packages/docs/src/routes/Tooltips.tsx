@@ -3,7 +3,7 @@ import {
 	LineChart,
 	AreaChart,
 	BubbleChart,
-	BarChart,
+	StackedBarChart,
 	ComboChart,
 	HistogramChart
 } from '@carbon/charts-react'
@@ -44,7 +44,7 @@ export default function Tooltips() {
 			example: bubbleExamples.find(ex => ex.options.title?.includes('alwaysShowRulerTooltip=true'))
 		},
 		{
-			chart: BarChart,
+			chart: StackedBarChart,
 			chartTypes: barChartTypes,
 			example: barStackedExamples.find(ex =>
 				ex.options.title?.includes('alwaysShowRulerTooltip=true')
