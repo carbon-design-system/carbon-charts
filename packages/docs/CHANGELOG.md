@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.25.0 (2025-09-18)
+
+### Features
+
+- **Events-ZoomDomain.CHANGE:** add type ('in' | 'out' | 'reset' | 'manual')
+  ([#2035](https://github.com/carbon-design-system/carbon-charts/issues/2035))
+  ([304fbf6](https://github.com/carbon-design-system/carbon-charts/commit/304fbf6508a4598432c3d6a1e3c7c0e1ed80e3d4))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # 1.24.0 (2025-09-18)
 
 ### Features
