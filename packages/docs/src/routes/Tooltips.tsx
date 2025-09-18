@@ -79,7 +79,7 @@ export default function Tooltips() {
 
 			<p>
 				Details on Tooltip options can be found{' '}
-				<a href="/api/interfaces/interfaces.TooltipOptions.html" target="_blank">
+				<a href="/api/interfaces/tooltipoptions" target="_blank">
 					here
 				</a>
 				.
