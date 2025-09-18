@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.24.0 (2025-09-18)
+
+### Features
+
+- **Tooltip:** add alwaysShowRulerTooltip flag
+  ([3cf35e3](https://github.com/carbon-design-system/carbon-charts/commit/3cf35e3eb04cedba883147b7b35f4031b0e50cef))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.23.17 (2025-08-13)
 
 ### Bug Fixes
