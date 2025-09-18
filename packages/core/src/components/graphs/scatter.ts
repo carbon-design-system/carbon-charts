@@ -324,6 +324,8 @@ export class Scatter extends Component {
 		// but keep event listeners active for programmatic events from ruler
 		if (alwaysShowRulerTooltip) {
 			circles.style('pointer-events', 'none')
+		} else {
+			circles.style('pointer-events', null)
 		}
 		
 		circles

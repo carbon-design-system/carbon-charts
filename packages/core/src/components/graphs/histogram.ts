@@ -164,6 +164,8 @@ export class Histogram extends Component {
 		// but keep event listeners active for programmatic events from ruler
 		if (alwaysShowRulerTooltip) {
 			bars.style('pointer-events', 'none')
+		} else {
+			bars.style('pointer-events', null)
 		}
 		
 		const self = this
