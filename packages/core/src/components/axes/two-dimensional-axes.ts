@@ -1,4 +1,5 @@
 import { getProperty } from '@/tools'
+import { AXIS_TITLE_POSITIONING_OFFSET } from '@/configuration'
 import { Axis } from './axis'
 import { HoverAxis } from './hover-axis'
 import { Component } from '@/components/component'
@@ -23,6 +24,9 @@ export class TwoDimensionalAxes extends Component {
 	}
 
 	render(animate = false) {
+		// Pre-calculate required margins BEFORE any rendering
+		this.preCalculateMargins()
+
 		const axes: any = {}
 		const axisPositions = Object.keys(AxisPositions)
 		const axesOptions = getProperty(this.getOptions(), 'axes')
@@ -71,38 +75,41 @@ export class TwoDimensionalAxes extends Component {
 			const child = this.children[childKey]
 			const axisPosition = child.configs.position
 
-			// Grab the invisibly rendered axis' width & height, and set margins
-			// Based off of that
-			// We draw the invisible axis because of the async nature of d3 transitions
-			// To be able to tell the final width & height of the axis when initiaing the transition
-			// The invisible axis is updated instantly and without a transition
+			// Grab the invisible axis dimensions for base measurements
 			const invisibleAxisRef = child.getInvisibleAxisRef()
-			const { width, height } = DOMUtils.getSVGElementSize(invisibleAxisRef, { useBBox: true })
+			const { width: axisWidth, height: axisHeight } = DOMUtils.getSVGElementSize(invisibleAxisRef, { useBBox: true })
 
-			let offset: any
-			if (child.getTitleRef().empty()) {
-				offset = 0
-			} else {
-				offset = DOMUtils.getSVGElementSize(child.getTitleRef(), {
+			// Calculate title offset and account for positioning
+			let titleOffset = 0
+			if (!child.getTitleRef().empty()) {
+				const titleHeight = DOMUtils.getSVGElementSize(child.getTitleRef(), {
 					useBBox: true
 				}).height
 
 				if (axisPosition === AxisPositions.LEFT || axisPosition === AxisPositions.RIGHT) {
-					offset += 5
+					titleOffset = titleHeight + 5
+				} else if (axisPosition === AxisPositions.BOTTOM) {
+					// For bottom axis, account for both title height and positioning offset
+					titleOffset = titleHeight + AXIS_TITLE_POSITIONING_OFFSET
+				} else {
+					titleOffset = titleHeight
 				}
 			}
+
+			const width = axisWidth
+			const height = axisHeight
 			switch (axisPosition) {
 				case AxisPositions.TOP:
-					margins.top = height + offset
+					margins.top = height + titleOffset
 					break
 				case AxisPositions.BOTTOM:
-					margins.bottom = height + offset
+					margins.bottom = height + titleOffset
 					break
 				case AxisPositions.LEFT:
-					margins.left = width + offset
+					margins.left = width + titleOffset
 					break
 				case AxisPositions.RIGHT:
-					margins.right = width + offset
+					margins.right = width + titleOffset
 					break
 			}
 		})
@@ -128,7 +135,81 @@ export class TwoDimensionalAxes extends Component {
 				child.margins = this.margins
 			})
 
+			// Ensure the SVG container accounts for bottom margin (axis title space)
+			this.ensureContainerSpace()
+
 			this.render(true)
+		}
+	}
+
+	/**
+	 * Pre-calculate margins based on axis options to reserve space before rendering
+	 */
+	preCalculateMargins() {
+		const axesOptions = getProperty(this.getOptions(), 'axes')
+		const estimatedMargins = { top: 0, right: 0, bottom: 0, left: 0 }
+
+		// Estimate margins based on axis titles and typical axis sizes
+		Object.keys(AxisPositions).forEach((axisPositionKey: keyof typeof AxisPositions) => {
+			const axisPosition = AxisPositions[axisPositionKey]
+			const axisOptions = axesOptions[axisPosition]
+
+			if (axisOptions && axisOptions.title) {
+				// Estimate space needed for title - roughly 20px for text + spacing
+				const estimatedTitleSpace = 20
+
+				switch (axisPosition) {
+					case AxisPositions.BOTTOM:
+						estimatedMargins.bottom = estimatedTitleSpace + AXIS_TITLE_POSITIONING_OFFSET
+						break
+					case AxisPositions.TOP:
+						estimatedMargins.top = estimatedTitleSpace
+						break
+					case AxisPositions.LEFT:
+						estimatedMargins.left = estimatedTitleSpace + 5
+						break
+					case AxisPositions.RIGHT:
+						estimatedMargins.right = estimatedTitleSpace + 5
+						break
+				}
+			}
+		})
+
+		// Set the SVG container dimensions to include estimated margins
+		this.setContainerDimensions(estimatedMargins)
+	}
+
+	/**
+	 * Set SVG container dimensions to include margin space
+	 */
+	setContainerDimensions(margins: any) {
+		const svg = this.getComponentContainer()
+		const parent = svg.node()?.parentNode as HTMLElement
+
+		if (parent) {
+			const { width: parentWidth, height: parentHeight } = DOMUtils.getHTMLElementSize(parent)
+
+			// Set minimum height to include bottom margin space
+			const requiredHeight = Math.max(parentHeight, 50 + margins.bottom)
+			const requiredWidth = Math.max(parentWidth, 100 + margins.left + margins.right)
+
+			svg
+				.attr('height', requiredHeight)
+				.attr('width', requiredWidth)
+				.style('height', `${requiredHeight}px`)
+				.style('width', `${requiredWidth}px`)
+		}
+	}
+
+	/**
+	 * Ensure the SVG container has enough space for positioned axis titles
+	 */
+	ensureContainerSpace() {
+		const svg = this.getComponentContainer()
+
+		// Add a bottom margin to the SVG to ensure positioned titles are within bounds
+		if (this.margins.bottom > 0) {
+			svg.style('margin-bottom', `${this.margins.bottom}px`)
 		}
 	}
 }

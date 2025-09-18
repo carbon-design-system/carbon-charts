@@ -154,7 +154,7 @@ export class LayoutComponent extends Component {
 				const matchingElementDimensions =
 					renderType === RenderTypes.SVG
 						? DOMUtils.getSVGElementSize(select(this).select('svg.layout-svg-wrapper'), {
-								useBBox: true
+								useBoundingRect: true
 							})
 						: DOMUtils.getHTMLElementSize(this as any)
 
