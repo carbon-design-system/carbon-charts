@@ -3,6 +3,8 @@
 @use '../globals';
 
 .#{globals.$prefix}--#{globals.$charts-prefix}--scatter {
+	overflow: visible;
+	
 	circle.dot.hovered {
 		fill-opacity: 1;
 		transition: all 0.1s;

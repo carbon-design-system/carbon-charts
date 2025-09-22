@@ -2,6 +2,8 @@
 @use '../globals';
 
 .#{globals.$prefix}--#{globals.$charts-prefix}--scatter-stacked {
+	overflow: visible;
+	
 	circle.dot.unfilled {
 		fill: theme.$layer-01;
 		stroke-width: 1.5;
