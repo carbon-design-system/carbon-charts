@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.26.0 (2025-09-22)
+
+### Features
+
+- **bar-grouped:** add preserveSpaceForMissingBars flag
+  ([#2041](https://github.com/carbon-design-system/carbon-charts/issues/2041))
+  ([74d35f5](https://github.com/carbon-design-system/carbon-charts/commit/74d35f5e37d72eb0bfc4e1d87d0eb3fb180654a8))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.25.1 (2025-09-18)
 
 ### Bug Fixes

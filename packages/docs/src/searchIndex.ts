@@ -385,6 +385,7 @@ export default [
 			'Horizontal grouped bar (empty state)',
 			'Horizontal grouped bar (skeleton)',
 			'Horizontal grouped bar (discrete)',
+			'Grouped bar  (preserveSpaceForMissingBars=false)',
 			'Vertical stacked bar (discrete)',
 			'Stacked bar (tooltip.alwaysShowRulerTooltip=true)',
 			'Vertical stacked bar (divergent)',
