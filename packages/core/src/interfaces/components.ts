@@ -232,6 +232,12 @@ export interface BarOptions {
 	 * @default 0.25
 	 */
 	spacingFactor?: number
+	/*
+	 * For grouped bar charts, determines whether groups should reserve space for missing bars
+	 * When false, groups will only take up space needed for their actual bars
+	 * @default true
+	 */
+	preserveSpaceForMissingBars?: boolean
 }
 
 export interface StackedBarOptions extends BarOptions {

@@ -77,7 +77,7 @@ export class GroupedBar extends Bar {
 			)
 			.attr('transform', (label: string) => {
 				const scaleValue = this.services.cartesianScales.getDomainValue(label)
-				const translateBy = scaleValue - this.getGroupWidth() / 2
+				const translateBy = scaleValue - this.getGroupWidth(label) / 2
 
 				if (this.services.cartesianScales.getOrientation() === CartesianOrientations.VERTICAL) {
 					return `translate(${translateBy}, 0)`
@@ -128,7 +128,13 @@ export class GroupedBar extends Bar {
 				 * to draw the bars needed, and pass those coordinates down to
 				 * generateSVGPathString() to decide whether it needs to flip them
 				 */
-				const startX = this.groupScale(d[groupMapsTo])
+				const domainIdentifier = this.services.cartesianScales.getDomainIdentifier(d)
+				const label = d[domainIdentifier] && typeof d[domainIdentifier].toString === 'function'
+					? d[domainIdentifier].toString()
+					: d[domainIdentifier]
+
+				const groupScale = this.getGroupScaleForLabel(label)
+				const startX = groupScale(d[groupMapsTo])
 				const barWidth = this.getBarWidth()
 
 				const x0 = startX
@@ -289,7 +295,18 @@ export class GroupedBar extends Bar {
 		})
 	}
 
-	protected getGroupWidth() {
+	protected getGroupWidth(label?: string) {
+		const options = this.getOptions()
+		const preserveSpaceForMissingBars = getProperty(options, 'bars', 'preserveSpaceForMissingBars') !== false
+
+		if (!preserveSpaceForMissingBars && label) {
+			// Only count bars that actually exist for this label
+			const dataForLabel = this.getDataCorrespondingToLabel(label)
+			const totalGroupPadding = this.getTotalGroupPadding(dataForLabel.length)
+			return this.getBarWidth() * dataForLabel.length + totalGroupPadding
+		}
+
+		// Default behavior: use all active data groups
 		const activeData = this.model.getGroupedData(this.configs.groups)
 		const totalGroupPadding = this.getTotalGroupPadding()
 
@@ -317,16 +334,17 @@ export class GroupedBar extends Bar {
 		return step
 	}
 
-	protected getTotalGroupPadding() {
+	protected getTotalGroupPadding(numGroups?: number) {
 		const activeData = this.model.getGroupedData(this.configs.groups)
+		const groupCount = numGroups !== undefined ? numGroups : activeData.length
 
-		if (activeData.length === 1) {
+		if (groupCount === 1) {
 			return 0
 		}
 
 		const padding = Math.min(5, 5 * (this.getDomainScaleStep() / this.defaultStepFactor))
 
-		return padding * (activeData.length - 1)
+		return padding * (groupCount - 1)
 	}
 
 	// Gets the correct width for bars based on options & configurations
@@ -357,5 +375,22 @@ export class GroupedBar extends Bar {
 		const activeData = this.model.getActiveDataGroupNames(this.configs.groups)
 
 		this.groupScale = scaleBand().domain(activeData).rangeRound([0, this.getGroupWidth()])
+	}
+
+	protected getGroupScaleForLabel(label: string) {
+		const options = this.getOptions()
+		const preserveSpaceForMissingBars = getProperty(options, 'bars', 'preserveSpaceForMissingBars') !== false
+
+		if (!preserveSpaceForMissingBars) {
+			// Create a scale based only on the data groups that exist for this label
+			const dataForLabel = this.getDataCorrespondingToLabel(label)
+			const { groupMapsTo } = options.data
+			const availableGroups = dataForLabel.map((d: any) => d[groupMapsTo])
+
+			return scaleBand().domain(availableGroups).rangeRound([0, this.getGroupWidth(label)])
+		}
+
+		// Use the default group scale
+		return this.groupScale
 	}
 }
