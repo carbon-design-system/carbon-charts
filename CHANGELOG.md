@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.27.0 (2025-09-22)
+
+### Features
+
+- **Tooltip:** add customTotalCalculation function
+  ([#2043](https://github.com/carbon-design-system/carbon-charts/issues/2043))
+  ([a80744f](https://github.com/carbon-design-system/carbon-charts/commit/a80744ff40a58081bf175058de37f0e7ef76158a))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.26.1 (2025-09-22)
 
 ### Bug Fixes

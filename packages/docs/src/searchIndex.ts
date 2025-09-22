@@ -341,7 +341,8 @@ export default [
 			'Time Series',
 			'Time Series (Percentage)',
 			'Time Series (Uneven Data)',
-			'Vertical stacked area (time series) w/toolbar override'
+			'Vertical stacked area (time series) w/toolbar override',
+			'Area chart with Delta Tooltip'
 		]
 	},
 	{
