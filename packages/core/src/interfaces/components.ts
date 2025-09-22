@@ -176,6 +176,11 @@ export interface TooltipOptions {
 	 */
 	totalLabel?: string
 	/**
+	 * custom function for calculating the total value
+	 * receives all the data corresponding to the tooltip
+	 */
+	customTotalCalculation?: (data: any[]) => number
+	/**
 	 * when true, always shows ruler tooltip instead of individual point tooltips
 	 */
 	alwaysShowRulerTooltip?: boolean

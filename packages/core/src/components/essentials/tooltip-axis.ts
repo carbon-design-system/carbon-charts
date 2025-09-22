@@ -112,15 +112,24 @@ export class AxisChartsTooltip extends Tooltip {
 			if (!dualAxes && getProperty(options, 'tooltip', 'showTotal') === true) {
 				// use the primary/only range id
 				const rangeIdentifier = cartesianScales.getRangeIdentifier()
-				items.push({
-					label:
-						get(options, 'locale.translations.total') ||
-						get(options, 'tooltip.totalLabel') ||
-						'Total',
-					value: data.reduce(
+				const customTotalCalculation = getProperty(options, 'tooltip', 'customTotalCalculation')
+
+				let totalValue: number
+				if (customTotalCalculation) {
+					totalValue = customTotalCalculation(data)
+				} else {
+					totalValue = data.reduce(
 						(accumulator: number, datum: any) => accumulator + datum[rangeIdentifier],
 						0
-					),
+					)
+				}
+
+				items.push({
+					label:
+						get(options, 'tooltip.totalLabel') ||
+						get(options, 'locale.translations.total') ||
+						'Total',
+					value: totalValue,
 					bold: true
 				})
 			}
