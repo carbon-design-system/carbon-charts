@@ -82,7 +82,11 @@ export class Scatter extends Component {
 		}
 
 		// Grab container SVG
-		const svg = this.getComponentContainer({ ariaLabel: 'scatter points', withinChartClip: true })
+		const isZoomBarEnabled = this.services.zoom?.isZoomBarEnabled() || false
+		const svg = this.getComponentContainer({
+			ariaLabel: 'scatter points',
+			withinChartClip: isZoomBarEnabled
+		})
 
 		const options = this.getOptions()
 		const { groupMapsTo } = options.data
@@ -314,12 +318,16 @@ export class Scatter extends Component {
 	addEventListeners() {
 		const self = this
 		const { groupMapsTo } = self.getOptions().data
-		const alwaysShowRulerTooltip = getProperty(this.getOptions(), 'tooltip', 'alwaysShowRulerTooltip')
+		const alwaysShowRulerTooltip = getProperty(
+			this.getOptions(),
+			'tooltip',
+			'alwaysShowRulerTooltip'
+		)
 
 		if (!this.parent) throw new Error('Parent not defined')
-		
+
 		const circles = this.parent.selectAll('circle')
-		
+
 		// If alwaysShowRulerTooltip is enabled, disable pointer events so the backdrop can receive them
 		// but keep event listeners active for programmatic events from ruler
 		if (alwaysShowRulerTooltip) {
@@ -327,7 +335,7 @@ export class Scatter extends Component {
 		} else {
 			circles.style('pointer-events', null)
 		}
-		
+
 		circles
 			.on('mouseover', function (event: MouseEvent, datum: any) {
 				const hoveredElement = select(this)
