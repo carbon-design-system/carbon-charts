@@ -471,7 +471,8 @@ const axisChart: AxisChartOptions = merge({}, chart, {
 const baseBarChart: BarChartOptions = merge({}, axisChart, {
 	bars: {
 		maxWidth: 16,
-		spacingFactor: 0.25
+		spacingFactor: 0.25,
+		preserveSpaceForMissingBars: true
 	},
 	timeScale: merge(timeScale, {
 		addSpaceOnEdges: 1
