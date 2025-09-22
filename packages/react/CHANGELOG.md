@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.26.1 (2025-09-22)
+
+### Bug Fixes
+
+- **scatter,scatterStacked:** use withiChartClip only with zoombar
+  ([#2042](https://github.com/carbon-design-system/carbon-charts/issues/2042))
+  ([a71fba6](https://github.com/carbon-design-system/carbon-charts/commit/a71fba6f4df65fea07e8ddfd5d616f0c39868f75))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # 1.26.0 (2025-09-22)
 
 ### Features
