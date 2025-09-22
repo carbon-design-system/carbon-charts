@@ -268,7 +268,7 @@ const groupedBarCompactOptions: BarChartOptions = {
 		}
 	},
 	bars: {
-		preserveSpaceForMissingBars: true
+		preserveSpaceForMissingBars: false
 	},
 	height: '400px'
 }
