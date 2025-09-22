@@ -105,6 +105,32 @@ const areaStackedToolbarChanges: StackedAreaChartOptions = {
 	height: '400px'
 }
 
+const optionsDelta: StackedAreaChartOptions = {
+	title: 'Area chart with Delta Tooltip',
+	axes: {
+		left: {
+			stacked: true,
+			scaleType: ScaleTypes.LINEAR,
+			mapsTo: 'value'
+		},
+		bottom: {
+			scaleType: ScaleTypes.TIME,
+			mapsTo: 'date'
+		}
+	},
+	tooltip: {
+		showTotal: true,
+		totalLabel: 'Delta',
+		customTotalCalculation: data => {
+			const values = data.map(d => d.value).filter(v => v != null)
+			if (values.length === 0) return 0
+			return Math.max(...values) - Math.min(...values)
+		}
+	},
+	curve: 'curveMonotoneX',
+	height: '400px'
+}
+
 const areaStackedToolbarChangesData: ChartTabularData = [
 	{
 		group: 'Dataset 1',
@@ -226,6 +252,19 @@ const data: ChartTabularData = [
 	{ group: 'Dataset 3', date: '2023-01-17', value: 25213 }
 ]
 
+const dataDelta: ChartTabularData = [
+	{ group: 'Dataset 1', date: '2023-01-01', value: 10000 },
+	{ group: 'Dataset 1', date: '2023-01-05', value: 65000 },
+	{ group: 'Dataset 1', date: '2023-01-08', value: 10000 },
+	{ group: 'Dataset 1', date: '2023-01-13', value: 49213 },
+	{ group: 'Dataset 1', date: '2023-01-17', value: 51213 },
+	{ group: 'Dataset 2', date: '2023-01-01', value: 20000 },
+	{ group: 'Dataset 2', date: '2023-01-05', value: 25000 },
+	{ group: 'Dataset 2', date: '2023-01-08', value: 60000 },
+	{ group: 'Dataset 2', date: '2023-01-13', value: 30213 },
+	{ group: 'Dataset 2', date: '2023-01-17', value: 55213 }
+]
+
 const dataUneven: ChartTabularData = [
 	{ group: 'Dataset 1', date: '2023-01-01', value: 10000 },
 	{ group: 'Dataset 1', date: '2023-01-08', value: 10000 },
@@ -256,6 +295,11 @@ export const examplesStacked: Example[] = [
 		data: dataUneven,
 		options: optionsUneven,
 		tags: ['test']
+	},
+	{
+		data: dataDelta,
+		options: optionsDelta,
+		tags: ['test', 'tooltip', 'delta']
 	},
 	{
 		data: areaStackedToolbarChangesData,
