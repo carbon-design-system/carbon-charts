@@ -2,7 +2,21 @@ import { extent, scaleLinear, scaleQuantize } from 'd3'
 import { isEmpty } from 'lodash-es'
 import { getProperty } from '@/tools'
 
-export function getDomain(data: any) {
+/**
+ * Custom domain configuration for color scales
+ */
+export interface ColorDomainOptions {
+	min?: number
+	max?: number
+}
+
+/**
+ * Calculate the domain for a color scale from data values
+ * @param data - Array of data objects with value property
+ * @param customDomain - Optional explicit min/max values to override calculated domain
+ * @returns [min, max] domain array
+ */
+export function getDomain(data: any, customDomain?: ColorDomainOptions) {
 	const limits = extent(data, (d: any) => d.value)
 	const domain = scaleLinear()
 		.domain(limits as [number, number])
@@ -14,7 +28,8 @@ export function getDomain(data: any) {
 		domain[0] = 0
 	} else if (domain[0] === 0 && domain[1] === 0) {
 		// Range cannot be between 0 and 0 (itself)
-		return [0, 1]
+		domain[0] = 0
+		domain[1] = 1
 	}
 
 	// Ensure the median of the range is 0 if domain extends into both negative & positive
@@ -26,17 +41,27 @@ export function getDomain(data: any) {
 		}
 	}
 
+	// Apply custom domain overrides if provided
+	if (customDomain) {
+		if (typeof customDomain.min === 'number') {
+			domain[0] = customDomain.min
+		}
+		if (typeof customDomain.max === 'number') {
+			domain[1] = customDomain.max
+		}
+	}
+
 	return domain
 }
 
-export function getColorScale(displayData: any, colorOptions: any) {
+export function getColorScale(displayData: any, colorOptions: any, customDomain?: ColorDomainOptions) {
 	const customColors = getProperty(colorOptions, 'gradient', 'colors')
 	const customColorsEnabled = !isEmpty(customColors)
 
 	let colorPairingOption = getProperty(colorOptions, 'pairing', 'option')
 
 	// If domain consists of negative and positive values, use diverging palettes
-	const domain = getDomain(displayData)
+	const domain = getDomain(displayData, customDomain)
 	const colorScheme = domain[0] < 0 && domain[1] > 0 ? 'diverge' : 'mono'
 
 	// Use default color pairing options if not in defined range

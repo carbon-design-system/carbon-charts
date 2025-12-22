@@ -4,6 +4,7 @@ import { getProperty } from '@/tools'
 import { AxisFlavor, ScaleTypes } from '@/interfaces/enums'
 import { getColorScale } from '@/services'
 import { ChartModelCartesian } from './cartesian-charts'
+import type { ColorDomainOptions } from '@/services/color-scale-utils'
 
 /** The gauge chart model layer */
 export class HeatmapModel extends ChartModelCartesian {
@@ -38,8 +39,17 @@ export class HeatmapModel extends ChartModelCartesian {
 	}
 
 	/**
+	 * Get the custom color domain options from chart configuration
+	 * @returns ColorDomainOptions or undefined
+	 */
+	getColorDomainOptions(): ColorDomainOptions | undefined {
+		const options = this.getOptions()
+		return getProperty(options, 'heatmap', 'colorDomain')
+	}
+
+	/**
 	 * Get min and maximum value of the display data
-	 * @returns Array consisting of smallest and largest values in  data
+	 * @returns Array consisting of smallest and largest values in data
 	 */
 	getValueDomain() {
 		const limits = extent(this.getDisplayData(), (d: any) => d.value)
@@ -53,7 +63,8 @@ export class HeatmapModel extends ChartModelCartesian {
 			domain[0] = 0
 		} else if (domain[0] === 0 && domain[1] === 0) {
 			// Range cannot be between 0 and 0 (itself)
-			return [0, 1]
+			domain[0] = 0
+			domain[1] = 1
 		}
 
 		// Ensure the median of the range is 0 if domain extends into both negative & positive
@@ -62,6 +73,17 @@ export class HeatmapModel extends ChartModelCartesian {
 				domain[1] = Math.abs(domain[0])
 			} else {
 				domain[0] = -domain[1]
+			}
+		}
+
+		// Apply custom domain overrides from options if provided
+		const customDomain = this.getColorDomainOptions()
+		if (customDomain) {
+			if (typeof customDomain.min === 'number') {
+				domain[0] = customDomain.min
+			}
+			if (typeof customDomain.max === 'number') {
+				domain[1] = customDomain.max
 			}
 		}
 
@@ -299,11 +321,12 @@ export class HeatmapModel extends ChartModelCartesian {
 			}
 		}
 
-		// Save scale type
+		// Save scale type with custom domain support
 		this._colorScale = scaleQuantize()
 			.domain(domain as [number, number])
 			.range(colorPairing)
 		const colorOptions = getProperty(this.getOptions(), 'color')
-		this._colorScale = getColorScale(this.getDisplayData(), colorOptions)
+		const customDomain = this.getColorDomainOptions()
+		this._colorScale = getColorScale(this.getDisplayData(), colorOptions, customDomain)
 	}
 }
