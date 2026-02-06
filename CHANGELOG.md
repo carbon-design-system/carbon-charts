@@ -4788,4 +4788,4 @@ Log starts here...
 
 ### Security
 
-- Invite users to upgrade in case of vulnerabilities.
+- Bumped `lodash-es` to latest version to resolve security vulnerability (Fixes #2065)
