@@ -31,7 +31,7 @@ jobs:
           WS_WSS_URL: ${{ secrets.WS_WSS_URL }}
 
           # Project Configuration
-          WS_PRODUCTNAME: "PSIRT_PRD0015721"
+          WS_PRODUCTNAME: "PSIRT_PRD0016056"
           WS_PROJECTNAME: "GH_carbon-charts"
         run: |
           # Download the latest Mend Unified Agent
