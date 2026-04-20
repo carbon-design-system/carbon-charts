@@ -724,7 +724,8 @@ const radarChart: RadarChartOptions = merge({}, chart, {
 			angle: 'key',
 			value: 'value'
 		},
-		alignment: Alignments.LEFT
+		alignment: Alignments.LEFT,
+		maxValue: undefined // Optional custom max value, undefined means auto-calculate from data
 	},
 	tooltip: {
 		gridline: {

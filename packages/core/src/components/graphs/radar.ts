@@ -87,10 +87,16 @@ export class Radar extends Component {
 			.range([0, 2 * Math.PI].map((a: number) => a - Math.PI / 2) as [Angle, Angle])
 
 		const centerPointMinValue = min(this.fullDataNormalized.map((d: any) => d[value]) as number[])
+		
+		// Get custom max value from options if provided, otherwise calculate from data
+		const customMaxValue = getProperty(options, 'radar', 'maxValue')
+		const calculatedMaxValue = max(this.fullDataNormalized.map((d: any) => d[value]) as number[])
+		const maxValue = customMaxValue !== undefined ? customMaxValue : calculatedMaxValue
+		
 		const yScale = scaleLinear()
 			.domain([
 				centerPointMinValue >= 0 ? 0 : centerPointMinValue,
-				max(this.fullDataNormalized.map((d: any) => d[value]) as number[])
+				maxValue
 			])
 			.range([minRange, radius])
 			.nice(yTicksNumber)

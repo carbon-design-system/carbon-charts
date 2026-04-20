@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [Unreleased]
+
+### Features
+
+- **radar:** add custom `maxValue` option to allow setting a fixed maximum scale value instead of auto-calculated max from data
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.27.6 (2026-04-16)
 
 **Note:** Version bump only for package @carbon/charts-monorepo

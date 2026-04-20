@@ -62,6 +62,21 @@ const radarDenseOptions: RadarChartOptions = {
 	height: '400px'
 }
 
+const radarCustomMaxOptions: RadarChartOptions = {
+	title: 'Radar - Custom Max Score (100)',
+	radar: {
+		axes: {
+			angle: 'feature',
+			value: 'score'
+		},
+		maxValue: 100 // Custom maximum value instead of auto-calculated
+	},
+	data: {
+		groupMapsTo: 'product'
+	},
+	height: '400px'
+}
+
 const radarData: ChartTabularData = [
 	{ product: 'Product 1', feature: 'Price', score: 60 },
 	{ product: 'Product 1', feature: 'Usability', score: 92 },
@@ -73,6 +88,14 @@ const radarData: ChartTabularData = [
 	{ product: 'Product 2', feature: 'Availability', score: 78 },
 	{ product: 'Product 2', feature: 'Performance', score: 50 },
 	{ product: 'Product 2', feature: 'Quality', score: 30 }
+]
+
+const radarWithCustomMaxScore: ChartTabularData = [
+	{ product: 'Product 1', feature: 'Price', score: 50 },
+	{ product: 'Product 1', feature: 'Usability', score: 20 },
+	{ product: 'Product 1', feature: 'Availability', score: 5 },
+	{ product: 'Product 1', feature: 'Performance', score: 45 },
+	{ product: 'Product 1', feature: 'Quality', score: 60 }
 ]
 
 const radarWithMissingDataData: ChartTabularData = [
@@ -154,6 +177,11 @@ export const examples: Example[] = [
 	{
 		data: radarDenseData,
 		options: radarDenseOptions,
+		tags: ['test']
+	},
+	{
+		data: radarWithCustomMaxScore,
+		options: radarCustomMaxOptions,
 		tags: ['test']
 	}
 ]
