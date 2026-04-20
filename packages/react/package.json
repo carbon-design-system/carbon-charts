@@ -63,7 +63,8 @@
 		"vite-plugin-dts": "^4.5.4"
 	},
 	"publishConfig": {
-		"access": "public"
+		"access": "public",
+		"provenance": true
 	},
 	"homepage": "https://github.com/carbon-design-system/carbon-charts#readme",
 	"repository": {
