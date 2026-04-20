@@ -11,7 +11,10 @@ jobs:
       github.actor != 'carbon-bot' && !startsWith(github.event.head_commit.message, 'skip-release')
     name: Create release
     runs-on: ubuntu-latest
-
+    # Needed as recommended by npm docs on publishing with provenance https://docs.npmjs.com/generating-provenance-statements
+    permissions:
+      id-token: write
+      contents: write
     env:
       GH_TOKEN: ${{ secrets.GH_TOKEN }}
       NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

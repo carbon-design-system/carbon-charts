@@ -1,6 +1,6 @@
 {
 	"name": "@carbon/charts",
-	"version": "1.27.0",
+	"version": "1.27.4",
 	"description": "Carbon Charts component library",
 	"type": "module",
 	"module": "./dist/index.mjs",
@@ -81,9 +81,9 @@
 		"d3-cloud": "^1.2.7",
 		"d3-sankey": "^0.12.3",
 		"date-fns": "^4.1.0",
-		"dompurify": "^3.2.6",
+		"dompurify": "^3.3.2",
 		"html-to-image": "1.11.11",
-		"lodash-es": "^4.17.21",
+		"lodash-es": "^4.18.0",
 		"topojson-client": "^3.1.0",
 		"tslib": "^2.8.1"
 	},

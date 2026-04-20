@@ -251,7 +251,15 @@ export class DOMUtils extends Service {
 	}
 
 	private initializeID() {
-		this.chartID = Math.floor((1 + Math.random()) * 0x1000000000000).toString(16)
+		// Check if user provided a custom chartId in options
+		const customId = this.model.getOptions().chartId
+		
+		if (customId) {
+			this.chartID = customId
+		} else {
+			// Generate random ID as fallback
+			this.chartID = Math.floor((1 + Math.random()) * 0x1000000000000).toString(16)
+		}
 	}
 
 	addMainContainer() {

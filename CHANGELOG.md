@@ -3,6 +3,69 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.27.4 (2026-04-20)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.27.6 (2026-04-16)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.27.5 (2026-04-14)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.27.4 (2026-04-14)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.27.3 (2026-03-11)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.27.2 (2026-01-06)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.27.1 (2026-01-06)
+
+**Note:** Version bump only for package @carbon/charts-monorepo
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # 1.27.0 (2025-09-22)
 
 ### Features

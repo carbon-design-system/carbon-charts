@@ -34,6 +34,10 @@ import type {
  * Base chart options common to any chart
  */
 export interface BaseChartOptions {
+	/**
+	 * Optional custom chart ID
+	 */
+	chartId?: string
 	/*
 	 * aria-labels and other accessibility options
 	 */
