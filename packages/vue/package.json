@@ -51,7 +51,8 @@
 	},
 	"publishConfig": {
 		"access": "public",
-		"tag": "next"
+		"tag": "next",
+		"provenance": true
 	},
 	"homepage": "https://github.com/carbon-design-system/carbon-charts#readme",
 	"repository": {

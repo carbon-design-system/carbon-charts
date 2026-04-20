@@ -110,7 +110,8 @@
 		"vitest": "^3.2.4"
 	},
 	"publishConfig": {
-		"access": "public"
+		"access": "public",
+		"provenance": true
 	},
 	"keywords": [
 		"charts",
