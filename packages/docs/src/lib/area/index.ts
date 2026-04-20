@@ -30,6 +30,26 @@ const options: AreaChartOptions = {
 	height: '400px'
 }
 
+const optionsAlwaysRulerTooltip: AreaChartOptions = {
+	title: 'Area (tooltip.alwaysShowRulerTooltip=true)',
+	axes: {
+		bottom: {
+			title: '2023 Annual Sales Figures',
+			mapsTo: 'date',
+			scaleType: ScaleTypes.TIME
+		},
+		left: {
+			mapsTo: 'value',
+			title: 'Conversion rate',
+			scaleType: ScaleTypes.LINEAR
+		}
+	},
+	tooltip: {
+		alwaysShowRulerTooltip: true
+	},
+	height: '400px'
+}
+
 const optionsCurved: AreaChartOptions = {
 	title: 'Time Series (Natural Curve)',
 	axes: {
@@ -313,6 +333,11 @@ export const examples: Example[] = [
 	{
 		data,
 		options,
+		tags: ['test']
+	},
+	{
+		data,
+		options: optionsAlwaysRulerTooltip,
 		tags: ['test']
 	},
 	{

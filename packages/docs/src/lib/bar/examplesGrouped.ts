@@ -256,6 +256,52 @@ const groupedBarSelectedGroupsData: ChartTabularData = groupedBarData
 
 const groupedHorizontalBarData: ChartTabularData = groupedBarData
 
+const groupedBarCompactOptions: BarChartOptions = {
+	title: 'Grouped bar  (preserveSpaceForMissingBars=false)',
+	axes: {
+		left: {
+			mapsTo: 'value'
+		},
+		bottom: {
+			scaleType: ScaleTypes.LABELS,
+			mapsTo: 'key'
+		}
+	},
+	bars: {
+		preserveSpaceForMissingBars: false
+	},
+	height: '400px'
+}
+
+// Data with missing bars for some groups to demonstrate the compact feature
+const groupedBarCompactData: ChartTabularData = [
+	{ group: 'Dataset 1', key: 'Q1', value: 65000 },
+	{ group: 'Dataset 1', key: 'Q2', value: 29123 },
+	// Q3 missing for Dataset 1
+	{ group: 'Dataset 1', key: 'Q4', value: 51213 },
+
+	{ group: 'Dataset 2', key: 'Q1', value: 32432 },
+	// Q2 missing for Dataset 2
+	{ group: 'Dataset 2', key: 'Q3', value: 21312 },
+	// Q4 missing for Dataset 2
+
+	// Q1 missing for Dataset 3
+	{ group: 'Dataset 3', key: 'Q2', value: 23232 },
+	{ group: 'Dataset 3', key: 'Q3', value: 34232 },
+	{ group: 'Dataset 3', key: 'Q4', value: 12312 },
+
+	{ group: 'Dataset 4', key: 'Q1', value: 32423 },
+	// Q2 and Q3 missing for Dataset 4
+	{ group: 'Dataset 4', key: 'Q4', value: 24134 },
+
+	{ group: 'Dataset 5', key: 'Q2', value: 18500 },
+	{ group: 'Dataset 5', key: 'Q3', value: 42100 },
+	// Q1 and Q4 missing for Dataset 5
+
+	{ group: 'Dataset 6', key: 'Q1', value: 55600 }
+	// Q2, Q3, and Q4 missing for Dataset 6
+]
+
 const noData: ChartTabularData = []
 
 export const examplesGrouped: Example[] = [
@@ -268,6 +314,11 @@ export const examplesGrouped: Example[] = [
 		options: groupedBarOptions,
 		data: groupedBarData,
 		tags: ['test']
+	},
+	{
+		options: groupedBarCompactOptions,
+		data: groupedBarCompactData,
+		tags: ['test', 'compact']
 	},
 	{
 		options: groupedBarTimeSeriesOptions,

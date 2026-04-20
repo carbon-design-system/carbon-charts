@@ -175,6 +175,15 @@ export interface TooltipOptions {
 	 * customizes the `Total` label shown inside tooltips
 	 */
 	totalLabel?: string
+	/**
+	 * custom function for calculating the total value
+	 * receives all the data corresponding to the tooltip
+	 */
+	customTotalCalculation?: (data: any[]) => number
+	/**
+	 * when true, always shows ruler tooltip instead of individual point tooltips
+	 */
+	alwaysShowRulerTooltip?: boolean
 	truncation?: TruncationOptions
 }
 
@@ -228,6 +237,12 @@ export interface BarOptions {
 	 * @default 0.25
 	 */
 	spacingFactor?: number
+	/*
+	 * For grouped bar charts, determines whether groups should reserve space for missing bars
+	 * When false, groups will only take up space needed for their actual bars
+	 * @default true
+	 */
+	preserveSpaceForMissingBars?: boolean
 }
 
 export interface StackedBarOptions extends BarOptions {

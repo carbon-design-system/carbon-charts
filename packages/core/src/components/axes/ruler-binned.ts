@@ -99,14 +99,30 @@ export class BinnedRuler extends Ruler {
 							? [
 									{
 										label:
-											get(options, 'locale.translations.total') ||
 											get(options, 'tooltip.totalLabel') ||
+											get(options, 'locale.translations.total') ||
 											'Total',
-										value: activeDataGroupNames.reduce(
-											(accum: number, currentValue: any) =>
-												accum + parseFloat(get(sampleMatchData, `data.${currentValue}`)),
-											0
-										)
+										value: (() => {
+											const customTotalCalculation = getProperty(
+												options,
+												'tooltip',
+												'customTotalCalculation'
+											)
+											if (customTotalCalculation) {
+												const dataForCalculation = activeDataGroupNames.map(
+													(groupName: string) => ({
+														[groupName]: parseFloat(get(sampleMatchData, `data.${groupName}`))
+													})
+												)
+												return customTotalCalculation(dataForCalculation)
+											} else {
+												return activeDataGroupNames.reduce(
+													(accum: number, currentValue: string) =>
+														accum + parseFloat(get(sampleMatchData, `data.${currentValue}`)),
+													0
+												)
+											}
+										})()
 									}
 								]
 							: [])

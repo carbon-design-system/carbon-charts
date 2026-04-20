@@ -104,11 +104,16 @@ export class ChartBrush extends Component {
 				const xScale = scaleTime().range([0, width]).domain(zoomDomain)
 
 				let newDomain = [xScale.invert(startPoint), xScale.invert(endPoint)]
+				let zoomType: 'in' | 'out' | 'reset' | 'manual' = 'manual'
+
 				// if selected start time and end time are the same
 				// reset to default full range
 				if (newDomain[0].valueOf() === newDomain[1].valueOf()) {
 					// same as d3 behavior and zoom bar behavior: set to default full range
 					newDomain = this.services.zoom.getDefaultZoomBarDomain()
+					zoomType = 'reset'
+				} else {
+					zoomType = 'manual'
 				}
 
 				// only if zoomDomain needs update
@@ -116,7 +121,7 @@ export class ChartBrush extends Component {
 					zoomDomain[0].valueOf() !== newDomain[0].valueOf() ||
 					zoomDomain[1].valueOf() !== newDomain[1].valueOf()
 				) {
-					this.services.zoom.handleDomainChange(newDomain)
+					this.services.zoom.handleDomainChange(newDomain, { dispatchEvent: true, type: zoomType })
 				}
 			}
 

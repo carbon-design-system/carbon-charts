@@ -71,11 +71,15 @@ export class Zoom extends Service {
 		)
 	}
 
-	handleDomainChange(newDomain: any, configs = { dispatchEvent: true }) {
+	handleDomainChange(
+		newDomain: any,
+		configs = { dispatchEvent: true, type: 'manual' as 'in' | 'out' | 'reset' | 'manual' }
+	) {
 		this.model.set({ zoomDomain: newDomain }, { animate: false })
 		if (configs.dispatchEvent) {
 			this.services.events?.dispatchEvent(Events.ZoomDomain.CHANGE, {
-				newDomain
+				newDomain,
+				type: configs.type
 			})
 		}
 	}
@@ -148,7 +152,7 @@ export class Zoom extends Service {
 			currentZoomDomain[0].valueOf() !== newDomain[0].valueOf() ||
 			currentZoomDomain[1].valueOf() !== newDomain[1].valueOf()
 		) {
-			this.handleDomainChange(newDomain)
+			this.handleDomainChange(newDomain, { dispatchEvent: true, type: 'in' })
 		}
 	}
 
@@ -181,7 +185,7 @@ export class Zoom extends Service {
 			currentZoomDomain[0].valueOf() !== newDomain[0].valueOf() ||
 			currentZoomDomain[1].valueOf() !== newDomain[1].valueOf()
 		) {
-			this.handleDomainChange(newDomain)
+			this.handleDomainChange(newDomain, { dispatchEvent: true, type: 'out' })
 		}
 	}
 
@@ -195,7 +199,7 @@ export class Zoom extends Service {
 			currentZoomDomain[0].valueOf() !== newDomain[0].valueOf() ||
 			currentZoomDomain[1].valueOf() !== newDomain[1].valueOf()
 		) {
-			this.handleDomainChange(newDomain)
+			this.handleDomainChange(newDomain, { dispatchEvent: true, type: 'reset' })
 		}
 	}
 

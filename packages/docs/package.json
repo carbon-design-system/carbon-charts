@@ -1,7 +1,7 @@
 {
 	"name": "@carbon/charts-docs",
 	"private": true,
-	"version": "1.23.17",
+	"version": "1.27.4",
 	"description": "Carbon Charts Documentation",
 	"type": "module",
 	"files": [
@@ -29,7 +29,7 @@
 		"react": "^19.1.1",
 		"react-dom": "^19.1.1",
 		"react-is": "^19.1.1",
-		"react-router-dom": "^7.7.1",
+		"react-router-dom": "^7.12.0",
 		"styled-components": "^6.1.19"
 	},
 	"devDependencies": {

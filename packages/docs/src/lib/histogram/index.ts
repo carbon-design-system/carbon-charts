@@ -30,6 +30,28 @@ const histogramContinueOptions: HistogramChartOptions = {
 	height: '400px'
 }
 
+const histogramAlwaysRulerTooltipOptions: HistogramChartOptions = {
+	title: 'Histogram (tooltip.alwaysShowRulerTooltip=true)',
+	axes: {
+		bottom: {
+			title: 'Age',
+			mapsTo: 'age',
+			bins: 10,
+			limitDomainToBins: true
+		},
+		left: {
+			title: 'No. of participants',
+			scaleType: ScaleTypes.LINEAR,
+			stacked: true,
+			binned: true
+		}
+	},
+	tooltip: {
+		alwaysShowRulerTooltip: true
+	},
+	height: '400px'
+}
+
 const histogramContinueWithBinsNumberOptions: HistogramChartOptions = {
 	title: 'Histogram (defined bins number) (linear)',
 	axes: {
@@ -212,6 +234,11 @@ const histogramContinueWithBinsNumberData: ChartTabularData = [
 export const examples: Example[] = [
 	{
 		options: histogramContinueOptions,
+		data: histogramContinueData,
+		tags: ['test']
+	},
+	{
+		options: histogramAlwaysRulerTooltipOptions,
 		data: histogramContinueData,
 		tags: ['test']
 	},

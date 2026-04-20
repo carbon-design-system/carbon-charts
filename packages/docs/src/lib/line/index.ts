@@ -219,6 +219,26 @@ const lineLogAxisOptions: LineChartOptions = {
 	height: '400px'
 }
 
+const lineAlwaysRulerTooltipOptions: LineChartOptions = {
+	title: 'Line (tooltip.alwaysShowRulerTooltip=true)',
+	axes: {
+		bottom: {
+			title: '2023 Annual Sales Figures',
+			mapsTo: 'date',
+			scaleType: ScaleTypes.TIME
+		},
+		left: {
+			mapsTo: 'value',
+			title: 'Conversion rate',
+			scaleType: ScaleTypes.LINEAR
+		}
+	},
+	tooltip: {
+		alwaysShowRulerTooltip: true
+	},
+	height: '400px'
+}
+
 const lineEmptyStateOptions: LineChartOptions = {
 	title: 'Line (empty state)',
 	axes: {
@@ -1546,6 +1566,11 @@ export const examples: Example[] = [
 	{
 		options: lineOptions,
 		data: lineData,
+		tags: ['test']
+	},
+	{
+		options: lineAlwaysRulerTooltipOptions,
+		data: lineTimeSeriesData,
 		tags: ['test']
 	},
 	{

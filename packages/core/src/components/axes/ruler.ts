@@ -34,12 +34,14 @@ export class Ruler extends Component {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	render(animate = false) {
 		const isRulerEnabled = getProperty(this.getOptions(), 'ruler', 'enabled')
+		const alwaysShowRulerTooltip = getProperty(this.getOptions(), 'tooltip', 'alwaysShowRulerTooltip')
+		const shouldEnableRuler = isRulerEnabled || alwaysShowRulerTooltip
 
 		this.drawBackdrop()
 
-		if (isRulerEnabled && !this.isEventListenerAdded) {
+		if (shouldEnableRuler && !this.isEventListenerAdded) {
 			this.addBackdropEventListeners()
-		} else if (!isRulerEnabled && this.isEventListenerAdded) {
+		} else if (!shouldEnableRuler && this.isEventListenerAdded) {
 			this.removeBackdropEventListeners()
 		}
 	}

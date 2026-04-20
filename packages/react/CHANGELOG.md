@@ -3,6 +3,119 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.27.4 (2026-04-20)
+
+**Note:** Version bump only for package @carbon/charts-react
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.27.3 (2026-03-11)
+
+**Note:** Version bump only for package @carbon/charts-react
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.27.2 (2026-01-06)
+
+**Note:** Version bump only for package @carbon/charts-react
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.27.1 (2026-01-06)
+
+**Note:** Version bump only for package @carbon/charts-react
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# 1.27.0 (2025-09-22)
+
+### Features
+
+- **Tooltip:** add customTotalCalculation function
+  ([#2043](https://github.com/carbon-design-system/carbon-charts/issues/2043))
+  ([a80744f](https://github.com/carbon-design-system/carbon-charts/commit/a80744ff40a58081bf175058de37f0e7ef76158a))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.26.1 (2025-09-22)
+
+### Bug Fixes
+
+- **scatter,scatterStacked:** use withiChartClip only with zoombar
+  ([#2042](https://github.com/carbon-design-system/carbon-charts/issues/2042))
+  ([a71fba6](https://github.com/carbon-design-system/carbon-charts/commit/a71fba6f4df65fea07e8ddfd5d616f0c39868f75))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# 1.26.0 (2025-09-22)
+
+### Features
+
+- **bar-grouped:** add preserveSpaceForMissingBars flag
+  ([#2041](https://github.com/carbon-design-system/carbon-charts/issues/2041))
+  ([74d35f5](https://github.com/carbon-design-system/carbon-charts/commit/74d35f5e37d72eb0bfc4e1d87d0eb3fb180654a8))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.25.1 (2025-09-18)
+
+### Bug Fixes
+
+- **Layout:** elements sticking out of wrappers
+  ([#2036](https://github.com/carbon-design-system/carbon-charts/issues/2036))
+  ([55cbbbf](https://github.com/carbon-design-system/carbon-charts/commit/55cbbbfc61bd54733b01bfde1b729877a240380d))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# 1.25.0 (2025-09-18)
+
+### Features
+
+- **Events-ZoomDomain.CHANGE:** add type ('in' | 'out' | 'reset' | 'manual')
+  ([#2035](https://github.com/carbon-design-system/carbon-charts/issues/2035))
+  ([304fbf6](https://github.com/carbon-design-system/carbon-charts/commit/304fbf6508a4598432c3d6a1e3c7c0e1ed80e3d4))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# 1.24.0 (2025-09-18)
+
+### Features
+
+- **Tooltip:** add alwaysShowRulerTooltip flag
+  ([3cf35e3](https://github.com/carbon-design-system/carbon-charts/commit/3cf35e3eb04cedba883147b7b35f4031b0e50cef))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.23.17 (2025-08-13)
 
 ### Bug Fixes

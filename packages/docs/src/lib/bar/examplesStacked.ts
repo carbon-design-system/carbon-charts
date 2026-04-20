@@ -26,6 +26,24 @@ const stackedBarOptions: BarChartOptions = {
 	height: '400px'
 }
 
+const stackedBarAlwaysRulerTooltipOptions: BarChartOptions = {
+	title: 'Stacked bar (tooltip.alwaysShowRulerTooltip=true)',
+	axes: {
+		left: {
+			mapsTo: 'value',
+			stacked: true
+		},
+		bottom: {
+			mapsTo: 'key',
+			scaleType: ScaleTypes.LABELS
+		}
+	},
+	tooltip: {
+		alwaysShowRulerTooltip: true
+	},
+	height: '400px'
+}
+
 const stackedBarNegativeOptions: BarChartOptions = Object.assign({}, stackedBarOptions, {
 	title: 'Vertical stacked bar (divergent)'
 })
@@ -266,6 +284,11 @@ const stackedHorizontalBarTimeSeriesData = stackedBarTimeSeriesData
 export const examplesStacked: Example[] = [
 	{
 		options: stackedBarOptions,
+		data: stackedBarData,
+		tags: ['test']
+	},
+	{
+		options: stackedBarAlwaysRulerTooltipOptions,
 		data: stackedBarData,
 		tags: ['test']
 	},

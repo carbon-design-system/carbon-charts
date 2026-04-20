@@ -114,6 +114,26 @@ const scatterDualAxesOptions: ScatterChartOptions = {
 	height: '400px'
 }
 
+const scatterAlwaysRulerTooltipOptions: ScatterChartOptions = {
+	title: 'Scatter (tooltip.alwaysShowRulerTooltip=true)',
+	axes: {
+		bottom: {
+			title: 'No. of employees',
+			mapsTo: 'employees',
+			scaleType: ScaleTypes.LINEAR
+		},
+		left: {
+			title: 'Annual sales',
+			mapsTo: 'sales',
+			scaleType: ScaleTypes.LINEAR
+		}
+	},
+	tooltip: {
+		alwaysShowRulerTooltip: true
+	},
+	height: '400px'
+}
+
 const doubleLinearScatterData: ChartTabularData = [
 	{ group: 'Dataset 1', employees: 5000, sales: 32100 },
 	{ group: 'Dataset 1', employees: 3000, sales: 25100 },
@@ -183,6 +203,11 @@ export const examples: Example[] = [
 	{
 		options: scatterDualAxesOptions,
 		data: scatterDualAxesData,
+		tags: ['test']
+	},
+	{
+		options: scatterAlwaysRulerTooltipOptions,
+		data: doubleLinearScatterData,
 		tags: ['test']
 	},
 	{

@@ -1,5 +1,5 @@
 import { select } from 'd3'
-import { generateSVGPathString } from '@/tools'
+import { generateSVGPathString, getProperty } from '@/tools'
 import { Bar } from './bar'
 import { Events, RenderTypes, ColorClassNameTypes, CartesianOrientations } from '@/interfaces/enums'
 import { Roles } from '@/interfaces/a11y'
@@ -150,8 +150,19 @@ export class SimpleBar extends Bar {
 
 	addEventListeners() {
 		const self = this
-		this.parent
-			.selectAll('path.bar')
+		const alwaysShowRulerTooltip = getProperty(this.getOptions(), 'tooltip', 'alwaysShowRulerTooltip')
+		
+		const bars = this.parent.selectAll('path.bar')
+		
+		// If alwaysShowRulerTooltip is enabled, disable pointer events so the backdrop can receive them
+		// but keep event listeners active for programmatic events from ruler
+		if (alwaysShowRulerTooltip) {
+			bars.style('pointer-events', 'none')
+		} else {
+			bars.style('pointer-events', null)
+		}
+		
+		bars
 			.on('mouseover', function (event: MouseEvent, datum: any) {
 				const hoveredElement = select(this)
 				hoveredElement.classed('hovered', true)
@@ -163,11 +174,14 @@ export class SimpleBar extends Bar {
 					datum
 				})
 
-				self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
-					event,
-					hoveredElement,
-					data: [datum]
-				})
+				// Show tooltip only if alwaysShowRulerTooltip is not enabled
+				if (!alwaysShowRulerTooltip) {
+					self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
+						event,
+						hoveredElement,
+						data: [datum]
+					})
+				}
 			})
 			.on('mousemove', function (event: MouseEvent, datum: any) {
 				// Dispatch mouse event

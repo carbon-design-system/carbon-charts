@@ -79,6 +79,9 @@ const DocsSideNav: React.FC<Props> = ({ isSideNavExpanded }) => (
 				<SideNavMenuItem as={NavLink} to="/legends">
 					Legends
 				</SideNavMenuItem>
+				<SideNavMenuItem as={NavLink} to="/tooltips">
+					Tooltips
+				</SideNavMenuItem>
 			</SideNavMenu>
 			<SideNavDivider />
 			<SideNavMenu title="Chart types" defaultExpanded={true}>

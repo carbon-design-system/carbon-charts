@@ -8,7 +8,7 @@ import {
 	type Selection as D3Selection
 } from 'd3'
 import { clamp } from 'lodash-es'
-import { axis as axisConfigs } from '@/configuration'
+import { axis as axisConfigs, AXIS_TITLE_POSITIONING_OFFSET } from '@/configuration'
 import { getProperty, getTranslationValues, truncateLabel } from '@/tools'
 import { Component } from '@/components/component'
 import {
@@ -341,12 +341,15 @@ export class Axis extends Component {
 					}
 					break
 				case AxisPositions.BOTTOM:
-					axisTitleRef
-						.attr(
-							'transform',
-							`translate(${this.margins.left / 2 + scale.range()[1] / 2}, ${height + 4})`
-						)
-						.style('text-anchor', 'middle')
+					// Position title  WITHIN the SVG bounds by placing it at bottom of available space
+					// Reserve space at the bottom of the SVG for the title
+					const titleYPosition = height - AXIS_TITLE_POSITIONING_OFFSET
+
+					axisTitleRef.attr(
+						'transform',
+						`translate(${this.margins.left / 2 + scale.range()[1] / 2}, ${titleYPosition})`
+					)
+
 					break
 				case AxisPositions.RIGHT:
 					if (titleOrientation === AxisTitleOrientations.LEFT) {

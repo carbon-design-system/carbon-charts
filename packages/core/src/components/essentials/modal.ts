@@ -104,7 +104,7 @@ export class Modal extends Component {
 		<div class="cds--modal-container">
 			<div class="cds--modal-header">
 
-				<p class="cds--modal-header__label cds--type-delta" id="modal-title">${title}</p>
+				<p class="cds--modal-header__label cds--type-delta" id="${id}__modal-title">${title}</p>
 
 				<p class="cds--modal-header__heading cds--type-beta" id="${id}__modal-description">${sanitizeText(
 					options.title

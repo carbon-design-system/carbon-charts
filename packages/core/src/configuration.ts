@@ -73,6 +73,12 @@ const standardTruncationOptions = {
 }
 
 /**
+ * Axis title positioning offset from the axis line
+ * Used for bottom axis title positioning to prevent clipping in screenshots
+ */
+export const AXIS_TITLE_POSITIONING_OFFSET = 4
+
+/**
  * Locale options
  */
 const locale: Locale = {
@@ -465,7 +471,8 @@ const axisChart: AxisChartOptions = merge({}, chart, {
 const baseBarChart: BarChartOptions = merge({}, axisChart, {
 	bars: {
 		maxWidth: 16,
-		spacingFactor: 0.25
+		spacingFactor: 0.25,
+		preserveSpaceForMissingBars: true
 	},
 	timeScale: merge(timeScale, {
 		addSpaceOnEdges: 1

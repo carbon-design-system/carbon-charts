@@ -40,6 +40,27 @@ const bubbleDoubleLinearOptions: BubbleChartOptions = {
 	height: '400px'
 }
 
+const bubbleAlwaysRulerTooltipOptions: BubbleChartOptions = {
+	title: 'Bubble (tooltip.alwaysShowRulerTooltip=true)',
+	axes: {
+		bottom: {
+			title: '2023 Annual Sales Figures',
+			scaleType: ScaleTypes.TIME,
+			mapsTo: 'date'
+		},
+		left: {
+			mapsTo: 'value'
+		}
+	},
+	bubble: {
+		radiusMapsTo: 'surplus'
+	},
+	tooltip: {
+		alwaysShowRulerTooltip: true
+	},
+	height: '400px'
+}
+
 const bubbleDiscreteOptions: BubbleChartOptions = {
 	title: 'Bubble (discrete)',
 	axes: {
@@ -325,6 +346,11 @@ export const examples: Example[] = [
 	{
 		options: bubbleDoubleLinearOptions,
 		data: bubbleDoubleLinearData,
+		tags: ['test']
+	},
+	{
+		options: bubbleAlwaysRulerTooltipOptions,
+		data: bubbleTimeSeriesData,
 		tags: ['test']
 	},
 	{
