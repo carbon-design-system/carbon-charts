@@ -484,6 +484,10 @@ export interface RadarChartOptions extends BaseChartOptions {
 			value: string
 		}
 		alignment?: Alignments | string
+		/**
+		 * whether to show all axis labels or only min and max
+		 */
+		showAllLabels?: boolean
 	}
 }
 
