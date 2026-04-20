@@ -5,7 +5,7 @@ import { legend as legendConfigs } from '@/configuration'
 import { ColorLegendType, Events, RenderTypes } from '@/interfaces/enums'
 import { Legend } from './legend'
 import { DOMUtils } from '@/services/essentials/dom-utils'
-import { getDomain } from '@/services/color-scale-utils'
+import { getDomain, type ColorDomainOptions } from '@/services/color-scale-utils'
 import type { ChartModel } from '@/model'
 
 export class ColorScaleLegend extends Legend {
@@ -107,7 +107,14 @@ export class ColorScaleLegend extends Legend {
 		}
 
 		const customColorsEnabled = !isEmpty(customColors)
-		const domain = getDomain(this.model.getDisplayData())
+
+		// Get custom color domain options for heatmap charts
+		const customDomain: ColorDomainOptions | undefined = getProperty(
+			options,
+			this.chartType,
+			'colorDomain'
+		)
+		const domain = getDomain(this.model.getDisplayData(), customDomain)
 
 		const useDefaultBarWidth = !(width <= legendConfigs.color.barWidth)
 		const barWidth = useDefaultBarWidth ? legendConfigs.color.barWidth : width

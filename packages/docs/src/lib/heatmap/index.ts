@@ -112,6 +112,30 @@ const heatmapMissingDataOptions: HeatmapChartOptions = {
 	height: '400px'
 }
 
+const heatmapCustomColorDomainOptions: HeatmapChartOptions = {
+	title: 'Heatmap (Custom color domain)',
+	axes: {
+		bottom: {
+			title: 'Letters',
+			mapsTo: 'letter',
+			scaleType: ScaleTypes.LABELS
+		},
+		left: {
+			title: 'Months',
+			mapsTo: 'month',
+			scaleType: ScaleTypes.LABELS
+		}
+	},
+	heatmap: {
+		colorLegend: { title: 'Score (0, 150)' },
+		colorDomain: {
+			min: 0,
+			max: 150
+		}
+	},
+	height: '400px'
+}
+
 const heatmapData: ChartTabularData = [
 	{
 		letter: 'A',
@@ -1300,6 +1324,11 @@ export const examples: Example[] = [
 	{
 		options: heatmapMissingDataOptions,
 		data: heatmapMissingData,
+		tags: ['test']
+	},
+	{
+		options: heatmapCustomColorDomainOptions,
+		data: heatmapData,
 		tags: ['test']
 	},
 	{

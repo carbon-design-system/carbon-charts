@@ -552,7 +552,11 @@ export default [
 			'Heatmap (Missing data)',
 			'Letters',
 			'Months',
-			'Legend title'
+			'Legend title',
+			'Heatmap (Custom color domain)',
+			'Letters',
+			'Months',
+			'Score (0-150)'
 		]
 	},
 	{

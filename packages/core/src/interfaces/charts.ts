@@ -583,6 +583,22 @@ export interface HeatmapChartOptions extends AxisChartOptions {
 			title?: string
 			type?: ColorLegendType | string
 		}
+		/**
+		 * Optional explicit domain for the color scale.
+		 * When not specified, the domain is automatically calculated from the data values.
+		 */
+		colorDomain?: {
+			/**
+			 * Explicit minimum value for the color scale.
+			 * Values below this will use the minimum color.
+			 */
+			min?: number
+			/**
+			 * Explicit maximum value for the color scale.
+			 * Values above this will use the maximum color.
+			 */
+			max?: number
+		}
 	}
 }
 
