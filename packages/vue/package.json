@@ -1,6 +1,6 @@
 {
 	"name": "@carbon/charts-vue",
-	"version": "1.27.4",
+	"version": "1.27.7",
 	"description": "Carbon Charts component library for Vue",
 	"type": "module",
 	"module": "./dist/index.mjs",
@@ -51,7 +51,8 @@
 	},
 	"publishConfig": {
 		"access": "public",
-		"tag": "next"
+		"tag": "next",
+		"provenance": true
 	},
 	"homepage": "https://github.com/carbon-design-system/carbon-charts#readme",
 	"repository": {
