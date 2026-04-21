@@ -17,6 +17,7 @@ jobs:
       contents: write
     env:
       GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      NODE_AUTH_TOKEN: ${{ secrets.CARBON_BOT_NPM_TOKEN }}
 
     steps:
       - name: Checkout 🛎️
@@ -34,7 +35,6 @@ jobs:
         with:
           node-version: '22.x'
           cache: 'yarn'
-          registry-url: 'https://registry.npmjs.org'
 
       - name: Install dependencies 🔧
         run: yarn install --immutable --check-cache
@@ -54,7 +54,9 @@ jobs:
           node scripts/update-angular-dependency-version.mjs
 
       - name: Publish to npmjs registry and create Github release
-        run: npx lerna publish from-git --yes --force-publish
+        run: |
+          npm config set //registry.npmjs.org/:_authToken=${{ secrets.CARBON_BOT_NPM_TOKEN }} -q
+          npx lerna publish from-git --yes --force-publish
 
       - name: Deploy documentation to Github Pages 🚀
         uses: JamesIves/github-pages-deploy-action@v4
