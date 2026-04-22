@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## 1.27.6 (2026-04-16)
+## 1.27.8 (2026-04-21)
 
 **Note:** Version bump only for package @carbon/charts
 
@@ -12,7 +12,7 @@ All notable changes to this project will be documented in this file. See
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## 1.27.5 (2026-04-14)
+## 1.27.7 (2026-04-20)
 
 **Note:** Version bump only for package @carbon/charts
 
@@ -21,7 +21,34 @@ All notable changes to this project will be documented in this file. See
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## 1.27.4 (2026-04-14)
+## 1.27.6 (2026-04-20)
+
+**Note:** Version bump only for package @carbon/charts
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.27.5 (2026-04-20)
+
+**Note:** Version bump only for package @carbon/charts
+
+# Change Log
+
+## [Unreleased]
+
+Updated public api.
+
+- Exposed enums `LegendEvent` and `Roles`
+- Exposed helper functions from `/packages/core/src/tools.ts`.
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.27.4 (2026-04-20)
 
 **Note:** Version bump only for package @carbon/charts
 

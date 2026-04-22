@@ -1,6 +1,6 @@
 {
 	"name": "@carbon/charts",
-	"version": "1.27.6",
+	"version": "1.27.8",
 	"description": "Carbon Charts component library",
 	"type": "module",
 	"module": "./dist/index.mjs",
@@ -110,7 +110,8 @@
 		"vitest": "^3.2.4"
 	},
 	"publishConfig": {
-		"access": "public"
+		"access": "public",
+		"provenance": true
 	},
 	"keywords": [
 		"charts",

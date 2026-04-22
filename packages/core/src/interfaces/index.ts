@@ -129,6 +129,7 @@ export {
 	Chart as ChartEvent,
 	Gauge as GaugeEvent,
 	Line as LineEvent,
+	Legend as LegendEvent,
 	Modal as ModalEvent,
 	Model as ModelEvent,
 	Pie as PieEvent,
