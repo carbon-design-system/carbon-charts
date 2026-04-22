@@ -87,11 +87,26 @@ export class Radar extends Component {
 			.range([0, 2 * Math.PI].map((a: number) => a - Math.PI / 2) as [Angle, Angle])
 
 		const centerPointMinValue = min(this.fullDataNormalized.map((d: any) => d[value]) as number[])
+
+		// Get custom max value from options if provided, otherwise calculate from data
+		const customMaxValue = getProperty(options, 'radar', 'maxValue')
+		const calculatedMaxValue = max(this.fullDataNormalized.map((d: any) => d[value]) as number[])
+
+		// Use the larger of customMaxValue or calculatedMaxValue to prevent data clipping
+		// If customMaxValue is less than data max, use the calculated max and log a warning
+		let maxValue = calculatedMaxValue
+		if (customMaxValue !== undefined) {
+			if (customMaxValue >= calculatedMaxValue) {
+				maxValue = customMaxValue
+			} else {
+				console.warn(
+					`Carbon Charts - Radar: Custom maxValue (${customMaxValue}) is less than the maximum data value (${calculatedMaxValue}). Using data maximum to prevent clipping.`
+				)
+			}
+		}
+
 		const yScale = scaleLinear()
-			.domain([
-				centerPointMinValue >= 0 ? 0 : centerPointMinValue,
-				max(this.fullDataNormalized.map((d: any) => d[value]) as number[])
-			])
+			.domain([centerPointMinValue >= 0 ? 0 : centerPointMinValue, maxValue])
 			.range([minRange, radius])
 			.nice(yTicksNumber)
 		const yTicks = yScale.ticks(yTicksNumber)

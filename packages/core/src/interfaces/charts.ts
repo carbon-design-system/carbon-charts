@@ -484,6 +484,14 @@ export interface RadarChartOptions extends BaseChartOptions {
 			value: string
 		}
 		alignment?: Alignments | string
+		/**
+		 * Optional custom maximum value for the radar chart scale.
+		 * If not provided, the maximum will be calculated from the data.
+		 * Note: If the provided maxValue is less than the actual data maximum,
+		 * the actual data maximum will be used instead to prevent data clipping,
+		 * and a warning will be logged to the console.
+		 */
+		maxValue?: number
 	}
 }
 
