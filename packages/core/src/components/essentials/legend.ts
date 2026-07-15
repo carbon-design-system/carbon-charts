@@ -62,7 +62,9 @@ export class Legend extends Component {
 		})
 
 		const legendClickable = getProperty(this.getOptions(), 'legend', 'clickable')
+		const isSingleSeries = dataGroups.length === 1
 		svg.classed('clickable', legendClickable && dataGroups.length > 1)
+		svg.classed('single-series', isSingleSeries)
 
 		const checkboxRadius = legendConfigs.checkbox.radius
 
@@ -164,9 +166,7 @@ export class Legend extends Component {
 		// Remove old elements as needed.
 		legendItems.exit().on('mouseover', null).on('click', null).on('mouseout', null).remove()
 
-		if (legendClickable && addedLegendItems.size() > 1) {
-			this.addEventListeners()
-		}
+		this.addEventListeners()
 	}
 
 	sortDataGroups(dataGroups: any, legendOrder: any) {
@@ -342,17 +342,25 @@ export class Legend extends Component {
 		if (truncationType !== TruncationTypes.NONE) {
 			addedLegendItemsText.html(function (d: any) {
 				const _sanitizedLabel = sanitizeText(d.name)
-				if (
+				const isTruncated =
 					_sanitizedLabel.length > truncationThreshold &&
 					_sanitizedLabel.length !== truncationNumCharacter
-				) {
+
+				// Add class to parent legend-item to indicate truncation
+				select((this as any).parentNode).classed('has-truncated-label', isTruncated)
+
+				if (isTruncated) {
 					return truncateLabel(_sanitizedLabel, truncationType, truncationNumCharacter)
 				} else {
 					return _sanitizedLabel
 				}
 			})
 		} else {
-			addedLegendItemsText.html((d: any) => sanitizeText(d.name))
+			addedLegendItemsText.html(function (d: any) {
+				// Ensure no truncation class when truncation is disabled
+				select((this as any).parentNode).classed('has-truncated-label', false)
+				return sanitizeText(d.name)
+			})
 		}
 	}
 
@@ -362,6 +370,8 @@ export class Legend extends Component {
 		const options = this.getOptions()
 		const legendOptions = getProperty(options, 'legend')
 		const truncation = getProperty(legendOptions, 'truncation')
+		const dataGroups = this.model.getDataGroups()
+		const isSingleSeries = dataGroups.length === 1
 
 		svg
 			.selectAll('div.legend-item')
@@ -373,13 +383,14 @@ export class Legend extends Component {
 				const hoveredItem = select(this)
 				hoveredItem.select('div.checkbox').classed('hovered', true)
 
-				// Show tooltip if character length is greater than threshold & there is no truncation
+				// Show tooltip if character length is greater than threshold & there is truncation
 				const hoveredItemData = hoveredItem.datum() as any
-				if (
+				const isTruncated =
 					hoveredItemData.name.length > truncation.threshold &&
 					truncation.numCharacter < hoveredItemData.name.length &&
 					truncation.type !== TruncationTypes.NONE
-				) {
+
+				if (isTruncated) {
 					self.services.events.dispatchEvent(Events.Tooltip.SHOW, {
 						event,
 						hoveredElement: hoveredItem,
@@ -400,6 +411,11 @@ export class Legend extends Component {
 				}
 			})
 			.on('click', function () {
+				// Prevent toggling data visibility for single series charts
+				if (isSingleSeries) {
+					return
+				}
+
 				self.services.events.dispatchEvent(Events.Legend.ITEM_CLICK, {
 					clickedElement: select(this)
 				})
@@ -441,7 +457,10 @@ export class Legend extends Component {
 			.on('keydown', function (event: KeyboardEvent, d: any) {
 				if (event.key && event.key === ' ') {
 					event.preventDefault()
-					self.model.toggleDataLabel(d.name)
+					// Only allow toggling for multi-series charts
+					if (!isSingleSeries) {
+						self.model.toggleDataLabel(d.name)
+					}
 				} else if (event.key && event.key === 'Tab') {
 					// Unhiglight group
 					self.services.events.dispatchEvent(Events.Legend.ITEM_MOUSEOUT, {

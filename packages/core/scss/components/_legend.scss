@@ -102,4 +102,9 @@ div.#{globals.$prefix}--#{globals.$charts-prefix}--legend {
 			}
 		}
 	}
+
+	// Single-series: pointer cursor only for truncated labels (tooltip indicator)
+	&.single-series div.legend-item.has-truncated-label:hover {
+		cursor: pointer;
+	}
 }
