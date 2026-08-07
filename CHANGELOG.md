@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [Unreleased]
+
+### Fixed
+
+- **Ruler**: Removed tooltip lag on charts with more than 100 data points.
+
 ## 1.27.18 (2026-07-31)
 
 **Note:** Version bump only for package @carbon/charts-monorepo
