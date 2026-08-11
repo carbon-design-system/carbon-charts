@@ -1,5 +1,6 @@
 @use 'sass:color';
 @use 'sass:map';
+@use 'sass:meta';
 
 // Prefix of these used below for traceability
 @use 'globals';
@@ -23,18 +24,18 @@
 	$monochrome: color-property(null, palette.$monochrome-quantize-colors);
 	$divergent: color-property(null, palette.$divergent-quantize-colors);
 
-	@return map-merge($monochrome, $divergent);
+	@return map.merge($monochrome, $divergent);
 }
 
 @function color-property($name, $theme-colors) {
 	$color-items: ();
 
-	@if type-of($theme-colors) == map {
+	@if meta.type-of($theme-colors) == map {
 		@each $category, $value in $theme-colors {
 			@if $name == null {
-				$color-items: map-merge($color-items, color-property('#{$category}', $value));
+				$color-items: map.merge($color-items, color-property('#{$category}', $value));
 			} @else {
-				$color-items: map-merge($color-items, color-property('#{$name}-#{$category}', $value));
+				$color-items: map.merge($color-items, color-property('#{$name}-#{$category}', $value));
 			}
 		}
 		@return $color-items;
@@ -43,7 +44,7 @@
 	}
 }
 
-$color-map-light: map-merge(getThemeColors('light'), getGradientColors());
+$color-map-light: map.merge(getThemeColors('light'), getGradientColors());
 .#{globals.$prefix}--chart-holder {
 	@each $token, $color in $color-map-light {
 		--cds-charts-#{$token}: #{$color};
@@ -51,7 +52,7 @@ $color-map-light: map-merge(getThemeColors('light'), getGradientColors());
 	}
 }
 
-$color-map-dark: map-merge(getThemeColors('dark'), getGradientColors());
+$color-map-dark: map.merge(getThemeColors('dark'), getGradientColors());
 .#{globals.$prefix}--chart-holder[data-carbon-theme='g90'],
 .#{globals.$prefix}--chart-holder[data-carbon-theme='g100'] {
 	@each $token, $color in $color-map-dark {
@@ -60,7 +61,7 @@ $color-map-dark: map-merge(getThemeColors('dark'), getGradientColors());
 	}
 }
 
-$color-map: map-merge(getThemeColors('light'), getGradientColors());
+$color-map: map.merge(getThemeColors('light'), getGradientColors());
 .#{globals.$prefix}--#{globals.$charts-prefix}--chart-wrapper {
 	@each $token, $color in $color-map {
 		.fill-#{$token} {
