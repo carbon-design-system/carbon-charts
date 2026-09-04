@@ -20,7 +20,8 @@
 	},
 	"packageManager": "yarn@4.9.2",
 	"resolutions": {
-		"postcss": "^8.5.10",
+		"postcss": "^8.5.19",
+		"nanoid": "^3.3.12",
 		"react-router": "^7.18.0"
 	},
 	"devDependencies": {
