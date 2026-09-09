@@ -166,7 +166,11 @@ export class Legend extends Component {
 		// Remove old elements as needed.
 		legendItems.exit().on('mouseover', null).on('click', null).on('mouseout', null).remove()
 
-		this.addEventListeners()
+		if (legendClickable && dataGroups.length > 1) {
+			this.addEventListeners()
+		} else {
+			this.addTooltipListeners()
+		}
 	}
 
 	sortDataGroups(dataGroups: any, legendOrder: any) {
@@ -364,14 +368,12 @@ export class Legend extends Component {
 		}
 	}
 
-	addEventListeners() {
+	addTooltipListeners() {
 		const self = this
 		const svg = this.getComponentContainer()
 		const options = this.getOptions()
 		const legendOptions = getProperty(options, 'legend')
 		const truncation = getProperty(legendOptions, 'truncation')
-		const dataGroups = this.model.getDataGroups()
-		const isSingleSeries = dataGroups.length === 1
 
 		svg
 			.selectAll('div.legend-item')
@@ -410,21 +412,6 @@ export class Legend extends Component {
 					})
 				}
 			})
-			.on('click', function () {
-				// Prevent toggling data visibility for single series charts
-				if (isSingleSeries) {
-					return
-				}
-
-				self.services.events.dispatchEvent(Events.Legend.ITEM_CLICK, {
-					clickedElement: select(this)
-				})
-
-				const clickedItem = select(this)
-				const clickedItemData = clickedItem.datum() as any
-
-				self.model.toggleDataLabel(clickedItemData.name)
-			})
 			.on('mouseout', function () {
 				const hoveredItem = select(this)
 				hoveredItem.select('div.checkbox').classed('hovered', false)
@@ -451,16 +438,36 @@ export class Legend extends Component {
 				})
 			}
 		})
+	}
+
+	addEventListeners() {
+		const self = this
+		const svg = this.getComponentContainer()
+		const options = this.getOptions()
+		const legendOptions = getProperty(options, 'legend')
+		const truncation = getProperty(legendOptions, 'truncation')
+
+		this.addTooltipListeners()
+
+		svg
+			.selectAll('div.legend-item')
+			.on('click', function () {
+				self.services.events.dispatchEvent(Events.Legend.ITEM_CLICK, {
+					clickedElement: select(this)
+				})
+
+				const clickedItem = select(this)
+				const clickedItemData = clickedItem.datum() as any
+
+				self.model.toggleDataLabel(clickedItemData.name)
+			})
 
 		svg
 			.selectAll('div.legend-item div.checkbox')
 			.on('keydown', function (event: KeyboardEvent, d: any) {
 				if (event.key && event.key === ' ') {
 					event.preventDefault()
-					// Only allow toggling for multi-series charts
-					if (!isSingleSeries) {
-						self.model.toggleDataLabel(d.name)
-					}
+					self.model.toggleDataLabel(d.name)
 				} else if (event.key && event.key === 'Tab') {
 					// Unhiglight group
 					self.services.events.dispatchEvent(Events.Legend.ITEM_MOUSEOUT, {
