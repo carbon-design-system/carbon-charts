@@ -3,32 +3,15 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## 1.27.19 (2026-09-08)
+## [Unreleased]
 
-**Note:** Version bump only for package @carbon/charts-monorepo
+### Fixed
+- **Legend**: Fixed tooltip not showing for truncated labels in single-series charts
 
-# Change Log
-
-All notable changes to this project will be documented in this file. See
-[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
-
-## 1.27.18 (2026-07-31)
-
-**Note:** Version bump only for package @carbon/charts-monorepo
-
-# Change Log
-
-All notable changes to this project will be documented in this file. See
-[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
-
-## 1.27.17 (2026-07-23)
-
-**Note:** Version bump only for package @carbon/charts-monorepo
-
-# Change Log
-
-All notable changes to this project will be documented in this file. See
-[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+### Changed
+- **Legend**: Added `.single-series` CSS class to legend container for single-series charts
+- **Legend**: Added `.has-truncated-label` CSS class to legend items with truncated text
+- **Legend**: Pointer cursor now shows only for truncated labels in single-series charts (tooltip indicator)
 
 ## 1.27.16 (2026-06-25)
 
