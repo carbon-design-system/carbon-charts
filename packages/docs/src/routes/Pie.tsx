@@ -8,7 +8,7 @@ import '@carbon/charts-react/styles.css'
 export default function Pie() {
 	return (
 		<>
-			<PageHeader title="Donut Charts" />
+			<PageHeader title="Pie Charts" />
 
 			<p>
 				Pie Charts are a classic form of circular statistical visualization, where data is presented
