@@ -431,11 +431,8 @@ export class DOMUtils extends Service {
 
 	handleFullscreenChange() {
 		this.fullscreenChangeListener = () => {
-			const holderSelection = select(this.getHolder())
-			const isFullScreen = holderSelection.classed('fullscreen')
-
-			// Toggle the `fullscreen` classname
-			holderSelection.classed('fullscreen', !isFullScreen)
+			const holder = this.getHolder()
+			select(holder).classed('fullscreen', document.fullscreenElement === holder)
 		}
 		document.addEventListener('fullscreenchange', this.fullscreenChangeListener)
 	}
