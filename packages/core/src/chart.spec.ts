@@ -37,6 +37,7 @@ describe('chart destruction', () => {
 	afterEach(() => {
 		chart.destroy()
 		holder.remove()
+		Reflect.deleteProperty(document, 'fullscreenElement')
 		vi.unstubAllGlobals()
 		vi.restoreAllMocks()
 		vi.clearAllMocks()
@@ -44,10 +45,12 @@ describe('chart destruction', () => {
 	})
 
 	it('removes the holder and stops responding to fullscreen changes', () => {
+		Object.defineProperty(document, 'fullscreenElement', { configurable: true, value: holder })
 		document.dispatchEvent(new Event('fullscreenchange'))
 		expect(holder.classList.contains('fullscreen')).toBe(true)
 
 		chart.destroy()
+		Object.defineProperty(document, 'fullscreenElement', { configurable: true, value: null })
 		document.dispatchEvent(new Event('fullscreenchange'))
 
 		expect(holder.isConnected).toBe(false)
