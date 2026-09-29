@@ -15,22 +15,40 @@ export class Toolbar extends Component {
 	// div options list element
 	overflowMenu: any
 
+	bodyOnClickHandler = () => this.updateOverflowMenu(false)
+
+	handleShowOverflowMenu = () => {
+		this.renderOverflowMenu()
+
+		// hide overflow menu if user clicks on somewhere in web page
+		document.body.addEventListener('click', this.bodyOnClickHandler)
+	}
+
+	handleHideOverflowMenu = () => {
+		document.body.removeEventListener('click', this.bodyOnClickHandler)
+	}
+
 	init() {
-		const bodyOnClickHandler = () => this.updateOverflowMenu(false)
+		this.services.events.addEventListener(
+			Events.Toolbar.SHOW_OVERFLOW_MENU,
+			this.handleShowOverflowMenu
+		)
+		this.services.events.addEventListener(
+			Events.Toolbar.HIDE_OVERFLOW_MENU,
+			this.handleHideOverflowMenu
+		)
+	}
 
-		// Grab the tooltip element
-		this.services.events.addEventListener(Events.Toolbar.SHOW_OVERFLOW_MENU, () => {
-			this.renderOverflowMenu()
-
-			// hide overflow menu if user clicks on somewhere in web page
-			document.body.addEventListener('click', bodyOnClickHandler)
-		})
-
-		// listen to hide overflow menu event to hide the overflow menu
-		this.services.events.addEventListener(Events.Toolbar.HIDE_OVERFLOW_MENU, () => {
-			// // hide overflow menu if user clicks on somewhere in web page
-			document.body.removeEventListener('click', bodyOnClickHandler)
-		})
+	destroy() {
+		this.services.events.removeEventListener(
+			Events.Toolbar.SHOW_OVERFLOW_MENU,
+			this.handleShowOverflowMenu
+		)
+		this.services.events.removeEventListener(
+			Events.Toolbar.HIDE_OVERFLOW_MENU,
+			this.handleHideOverflowMenu
+		)
+		document.body.removeEventListener('click', this.bodyOnClickHandler)
 	}
 
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
