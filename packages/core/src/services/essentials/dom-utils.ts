@@ -24,6 +24,9 @@ export interface getSVGElementSizeOptions {
 
 export class DOMUtils extends Service {
 	private chartID!: string // initialized in initializeID() called by init()
+	declare private fullscreenChangeListener: (() => void) | undefined
+	declare private resizeObserver: ResizeObserver | undefined
+	declare private resizeCallback: ReturnType<typeof debounce> | undefined
 
 	constructor(model: ChartModel, services: any) {
 		super(model, services)
@@ -253,7 +256,7 @@ export class DOMUtils extends Service {
 	private initializeID() {
 		// Check if user provided a custom chartId in options
 		const customId = this.model.getOptions().chartId
-		
+
 		if (customId) {
 			this.chartID = customId
 		} else {
@@ -427,13 +430,26 @@ export class DOMUtils extends Service {
 	}
 
 	handleFullscreenChange() {
-		document.addEventListener('fullscreenchange', () => {
+		this.fullscreenChangeListener = () => {
 			const holderSelection = select(this.getHolder())
 			const isFullScreen = holderSelection.classed('fullscreen')
 
 			// Toggle the `fullscreen` classname
 			holderSelection.classed('fullscreen', !isFullScreen)
-		})
+		}
+		document.addEventListener('fullscreenchange', this.fullscreenChangeListener)
+	}
+
+	destroy() {
+		if (this.fullscreenChangeListener) {
+			document.removeEventListener('fullscreenchange', this.fullscreenChangeListener)
+			this.fullscreenChangeListener = undefined
+		}
+		this.resizeObserver?.disconnect()
+		this.resizeObserver = undefined
+		this.resizeCallback?.cancel()
+		this.resizeCallback = undefined
+		select(this.getHolder()).on('mouseover', null).on('mouseout', null)
 	}
 
 	setSVGMaxHeight() {
@@ -460,9 +476,10 @@ export class DOMUtils extends Service {
 
 			// set the chart svg height to the children height
 			// forcing the chart not to take up any more space than it requires
-			childrenHeight <= chartHeight
-				? select(this.mainContainer).attr('height', childrenHeight)
-				: select(this.mainContainer).attr('height', '100%')
+			select(this.mainContainer).attr(
+				'height',
+				childrenHeight <= chartHeight ? childrenHeight : '100%'
+			)
 		}
 	}
 
@@ -517,7 +534,8 @@ export class DOMUtils extends Service {
 		}, 12.5)
 
 		// Observe the behaviour of resizing on the holder
-		const resizeObserver = new ResizeObserver(resizeCallback)
-		resizeObserver.observe(holder)
+		this.resizeCallback = resizeCallback
+		this.resizeObserver = new ResizeObserver(resizeCallback)
+		this.resizeObserver.observe(holder)
 	}
 }
