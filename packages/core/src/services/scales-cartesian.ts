@@ -604,6 +604,10 @@ export class CartesianScales extends Service {
 		}
 
 		domain = extent(allDataValues)
+		// A degenerate linear domain maps zero to the middle of the range.
+		if (scaleType === ScaleTypes.LINEAR && domain[0] === 0 && domain[1] === 0) {
+			domain = [0, 1]
+		}
 		domain = this.extendsDomain(axisPosition, domain)
 
 		return domain
