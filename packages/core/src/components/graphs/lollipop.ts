@@ -77,13 +77,17 @@ export class Lollipop extends Scatter {
 				.attr('y1', getYValue)
 				.attr('y2', getYValue)
 				.attr('x1', mainXScale.range()[0])
-				.attr('x2', (d: any) => (getXValue(d) as any) - options.points.radius)
+				.attr('x2', (d: any) =>
+					Math.max(mainXScale.range()[0], (getXValue(d) as number) - options.points.radius)
+				)
 		} else {
 			allLines
 				.attr('x1', getXValue)
 				.attr('x2', getXValue)
 				.attr('y1', mainYScale.range()[0])
-				.attr('y2', (d: any) => getYValue(d) + options.points.radius)
+				.attr('y2', (d: any) =>
+					Math.min(mainYScale.range()[0], getYValue(d) + options.points.radius)
+				)
 		}
 
 		this.addScatterPointEventListeners()
