@@ -83,9 +83,6 @@ export class Toolbar extends Component {
 			enteringToolbarControls
 				.merge(toolbarControls as any)
 				.classed('disabled', (d: any) => d.shouldBeDisabled())
-				.attr('role', 'button')
-				.attr('aria-disabled', (d: any) => d.shouldBeDisabled())
-				.attr('aria-label', (d: any) => d.title)
 				.html((d: any) => {
 					return `
 			<button
@@ -93,7 +90,7 @@ export class Toolbar extends Component {
 				class="cds--overflow-menu__trigger cds--overflow-menu__trigger"
 				aria-haspopup="true" aria-expanded="false" id="${this.services.domUtils.generateElementIDString(
 					`control-${sanitizeText(d.id)}`
-				)}" aria-label="${sanitizeText(d.title)}">
+				)}" aria-disabled="${d.shouldBeDisabled()}" aria-label="${sanitizeText(d.title)}">
 				<svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" class="cds--overflow-menu__icon cds--overflow-menu__icon" viewBox="0 0 32 32" aria-hidden="true">
 					${sanitizeSVG(d.iconSVG.content)}
 				</svg>
