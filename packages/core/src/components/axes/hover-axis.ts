@@ -23,7 +23,6 @@ export class HoverAxis extends Axis {
 		})
 		const container = DOMUtils.appendOrSelect(svg, `g.axis.${axisPosition}`)
 
-		const self = this
 		container.selectAll('g.tick').each(function (_: any, index: number) {
 			const g = select(this) as Selection<SVGElement, any, Element, any>
 			g.classed('tick-hover', true)
@@ -34,7 +33,8 @@ export class HoverAxis extends Axis {
 				useBBox: true
 			})
 
-			const rectangle = DOMUtils.appendOrSelect(g, 'rect.axis-holder')
+			const rotation = textNode.attr('transform')
+			const rectangle = DOMUtils.appendOrSelect(g, 'rect.axis-holder').attr('transform', rotation)
 
 			let x = 0,
 				y = 0
@@ -54,18 +54,16 @@ export class HoverAxis extends Axis {
 					x = -(width / 2)
 					y = -height + Number(textNode.attr('y')) / 2
 
-					if (self.truncation[axisPosition]) {
+					if (rotation) {
 						x = 0
-						rectangle.attr('transform', `rotate(-45)`)
 					}
 					break
 				case AxisPositions.BOTTOM:
 					x = -(width / 2)
 					y = height / 2 - 2
 
-					if (self.truncation[axisPosition]) {
+					if (rotation) {
 						x = -width
-						rectangle.attr('transform', `rotate(-45)`)
 					}
 					break
 			}
