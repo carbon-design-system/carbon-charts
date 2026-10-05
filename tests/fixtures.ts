@@ -42,7 +42,9 @@ export async function checkForDOMChanges(page: Page): Promise<void> {
 			/\slayout-child-([a-z0-9]+)\s/g,
 			/["#]zoomBarClip-([a-z0-9]+)[\)"]/g,
 			/id="chart-0\.([a-z0-9]+)"/g, // svelte ids for chart holder
-			/gradientTransform="translate\(([-\.0-9]+),/g // for skeleton charts, values change unpredictably and cannot be rounded
+			/gradientTransform="translate\(([-\.0-9]+),/g, // for skeleton charts, values change unpredictably and cannot be rounded
+			/data-uid="([0-9]+)"/g, // treemap ids come from a counter shared by all charts on the page
+			/["#]cc-(?:leaf|clip)-([0-9]+)["\)]/g // ditto
 		]
 
 		// D3 causes many properties to change on a per-browser basis for each run

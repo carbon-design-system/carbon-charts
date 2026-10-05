@@ -36,9 +36,8 @@
 
 	onDestroy(() => {
 		if (chart) {
-			// Like core's Chart.destroy() but keeps div chart holder bound to ref as it's part of this template
-			chart.components.forEach(component => component.destroy())
-			chart.model.set({ destroyed: true }, { skipUpdate: true })
+			// Keep the holder div, it belongs to this component's template
+			chart.destroy({ removeHolder: false })
 			chart = undefined
 			ondestroy?.()
 		}

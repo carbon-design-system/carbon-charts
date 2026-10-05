@@ -175,6 +175,9 @@ export class Modal extends Component {
 	destroy() {
 		// remove tooltip eventListener
 		this.removeEventListeners()
+		if (typeof window !== 'undefined') {
+			window.removeEventListener('keydown', this.handleEscapeKey)
+		}
 		this.isEventListenerAdded = false
 	}
 }

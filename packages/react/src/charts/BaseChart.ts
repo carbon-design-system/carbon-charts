@@ -37,6 +37,11 @@ export default class BaseChart<
 		}
 	}
 
+	componentWillUnmount() {
+		this.chart?.destroy({ removeHolder: false })
+		this.chart = undefined
+	}
+
 	render() {
 		return React.createElement('div', { ref: this.chartRef, className: 'chart-holder' })
 	}
