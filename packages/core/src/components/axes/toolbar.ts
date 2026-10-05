@@ -343,6 +343,7 @@ export class Toolbar extends Component {
 							self.focusOnNextEnabledMenuItem(index)
 						} else if (keyEvent && keyEvent.key === 'Escape') {
 							self.updateOverflowMenu(false)
+							self.overflowButton.node()?.focus()
 						}
 
 						// Not hide overflow menu by keyboard arrow up/down event
