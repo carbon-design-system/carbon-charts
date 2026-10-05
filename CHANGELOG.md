@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [Unreleased]
+
+### Bug Fixes
+
+- Truncate axis titles that exceed the available axis length and expose the full title on hover.
+
 ## 1.27.21 (2026-10-05)
 
 **Note:** Version bump only for package @carbon/charts-monorepo
