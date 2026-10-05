@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [Unreleased]
+
+### Bug Fixes
+
+- Preserve formatted dates, delimiters and quotes when exporting CSV data.
+
 ## 1.27.21 (2026-10-05)
 
 **Note:** Version bump only for package @carbon/charts-monorepo
