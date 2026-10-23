@@ -86,7 +86,7 @@ export class Lollipop extends Scatter {
 				.attr('x2', getXValue)
 				.attr('y1', mainYScale.range()[0])
 				.attr('y2', (d: any) =>
-					Math.min(mainYScale.range()[0], getYValue(d) + options.points.radius)
+					Math.min(mainYScale.range()[0], (getYValue(d) as number) + options.points.radius)
 				)
 		}
 

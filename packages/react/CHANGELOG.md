@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.27.23 (2026-10-23)
+
+**Note:** Version bump only for package @carbon/charts-react
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.27.22 (2026-10-21)
+
+**Note:** Version bump only for package @carbon/charts-react
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 1.27.21 (2026-10-05)
+
+**Note:** Version bump only for package @carbon/charts-react
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.27.20 (2026-09-16)
 
 **Note:** Version bump only for package @carbon/charts-react
