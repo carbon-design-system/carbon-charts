@@ -319,6 +319,17 @@ export class Axis extends Component {
 				isDataEmpty || isDataLoading ? '' : sanitizeText(axisOptions.title)
 			)
 
+			const availableTitleLength = Math.max(
+				0,
+				isVerticalAxis ? startPosition - endPosition : endPosition - startPosition
+			)
+			const isTitleTruncated = this.truncateTitle(axisTitleRef, availableTitleLength)
+			axisTitleRef
+				.attr('x', null)
+				.attr('y', null)
+				.attr('dy', null)
+				.style('text-anchor', isTitleTruncated ? 'start' : 'middle')
+
 			// vertical axes can have override for title orientation
 			const titleOrientation = getProperty(axisOptions, 'titleOrientation')
 			let titleHeight // avoid lexical declaration in case block
@@ -328,16 +339,14 @@ export class Axis extends Component {
 						axisTitleRef
 							.attr('transform', 'rotate(90)')
 							.attr('y', 0)
-							.attr('x', scale.range()[0] / 2)
+							.attr('x', isTitleTruncated ? endPosition : scale.range()[0] / 2)
 							.attr('dy', '-0.5em')
-							.style('text-anchor', 'middle')
 					} else {
 						axisTitleRef
 							.attr('transform', 'rotate(-90)')
 							.attr('y', 0)
-							.attr('x', -(scale.range()[0] / 2))
+							.attr('x', isTitleTruncated ? -startPosition : -(scale.range()[0] / 2))
 							.attr('dy', '0.75em')
-							.style('text-anchor', 'middle')
 					}
 					break
 				case AxisPositions.BOTTOM:
@@ -347,7 +356,7 @@ export class Axis extends Component {
 
 					axisTitleRef.attr(
 						'transform',
-						`translate(${this.margins.left / 2 + scale.range()[1] / 2}, ${titleYPosition})`
+						`translate(${isTitleTruncated ? startPosition : this.margins.left / 2 + scale.range()[1] / 2}, ${titleYPosition})`
 					)
 
 					break
@@ -356,15 +365,13 @@ export class Axis extends Component {
 						axisTitleRef
 							.attr('transform', 'rotate(-90)')
 							.attr('y', width)
-							.attr('x', -(scale.range()[0] / 2))
-							.style('text-anchor', 'middle')
+							.attr('x', isTitleTruncated ? -startPosition : -(scale.range()[0] / 2))
 					} else {
 						axisTitleRef
 							.attr('transform', 'rotate(90)')
 							.attr('y', -width)
-							.attr('x', scale.range()[0] / 2)
+							.attr('x', isTitleTruncated ? endPosition : scale.range()[0] / 2)
 							.attr('dy', '0.75em')
-							.style('text-anchor', 'middle')
 					}
 					break
 				case AxisPositions.TOP:
@@ -372,12 +379,10 @@ export class Axis extends Component {
 						useBBox: true
 					}).height
 
-					axisTitleRef
-						.attr(
-							'transform',
-							`translate(${this.margins.left / 2 + scale.range()[1] / 2}, ${titleHeight / 2})`
-						)
-						.style('text-anchor', 'middle')
+					axisTitleRef.attr(
+						'transform',
+						`translate(${isTitleTruncated ? startPosition : this.margins.left / 2 + scale.range()[1] / 2}, ${titleHeight / 2})`
+					)
 					break
 			}
 		}
@@ -565,6 +570,40 @@ export class Axis extends Component {
 		}
 		// Add event listeners to elements drawn
 		this.addEventListeners()
+	}
+
+	/** Fit the title to its axis while preserving its full accessible name and hover text. */
+	private truncateTitle(
+		title: D3Selection<SVGTextElement, any, any, any>,
+		availableLength: number
+	) {
+		const fullTitle = title.text()
+		title.attr('aria-label', null)
+		if (DOMUtils.getSVGElementSize(title, { useBBox: true }).width <= availableLength) {
+			return false
+		}
+
+		const characters = Array.from(fullTitle)
+		const ellipsis = '...'
+		title.text(ellipsis)
+		if (DOMUtils.getSVGElementSize(title, { useBBox: true }).width > availableLength) {
+			title.text('')
+		} else {
+			let start = 0
+			let end = characters.length
+			while (start < end) {
+				const middle = Math.ceil((start + end) / 2)
+				title.text(`${characters.slice(0, middle).join('')}${ellipsis}`)
+				if (DOMUtils.getSVGElementSize(title, { useBBox: true }).width <= availableLength) {
+					start = middle
+				} else {
+					end = middle - 1
+				}
+			}
+			title.text(`${characters.slice(0, start).join('')}${ellipsis}`)
+		}
+		title.attr('aria-label', fullTitle).append('title').text(fullTitle)
+		return true
 	}
 
 	addEventListeners() {
