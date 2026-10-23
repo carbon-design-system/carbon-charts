@@ -604,6 +604,11 @@ export class CartesianScales extends Service {
 		}
 
 		domain = extent(allDataValues)
+		// Use a unit domain so zero stays at the baseline; d3 maps a degenerate
+		// [0, 0] domain to the midpoint of the output range.
+		if (scaleType === ScaleTypes.LINEAR && domain[0] === 0 && domain[1] === 0) {
+			domain = [0, 1]
+		}
 		domain = this.extendsDomain(axisPosition, domain)
 
 		return domain
