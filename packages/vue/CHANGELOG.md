@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.27.24 (2026-10-28)
+
+**Note:** Version bump only for package @carbon/charts-vue
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## 1.27.23 (2026-10-23)
 
 **Note:** Version bump only for package @carbon/charts-vue
