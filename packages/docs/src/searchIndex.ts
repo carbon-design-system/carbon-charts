@@ -676,7 +676,7 @@ export default [
 	},
 	{
 		path: 'pie',
-		title: 'Donut Charts',
+		title: 'Pie Charts',
 		text: "Pie Charts are a classic form of circular statistical visualization, where data is presented in a circular shape, divided into slices to represent different categories or proportions. Each slice's size corresponds to the proportion of the whole it represents, making it easy to compare relative values at a glance. Unlike donut charts, pie charts do not have a central hole and utilize the entire circle to display data. They are commonly used to illustrate the composition of a whole and highlight the distribution of various categories within it. Pie charts are favored for their simplicity and effectiveness in conveying information, making them a popular choice for presentations, reports, and visualizations across various fields such as business, finance, and academia. Details on Pie Chart options can be found here.",
 		charts: [
 			'Pie',
