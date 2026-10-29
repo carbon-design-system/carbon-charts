@@ -87,9 +87,9 @@ export class Title extends Component {
 				maxWidth - tspanLength
 			)
 
-			// use the substring as the title
+			// use the substring as the title (sanitize before writing as HTML to prevent XSS)
 			title
-				.html(titleString.substring(0, substringIndex - 1))
+				.html(sanitizeText(titleString.substring(0, substringIndex - 1)))
 				.append('tspan')
 				.text('...')
 
