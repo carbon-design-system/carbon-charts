@@ -15,17 +15,12 @@ export type StackKeysParams = {
 }
 
 function _sanitizeCsvCell(cellContent: string): string {
-	const _trimmedCell = cellContent.trim()
+	let _trimmedCell = cellContent.trim()
 	if (['=', '+', '-', '@', '\t', '\r'].includes(_trimmedCell.charAt(0))) {
-		return `\xA0${_trimmedCell}`
+		_trimmedCell = `\xA0${_trimmedCell}`
 	}
 
-	// Only add quotes if cell contains commas, newlines, or quotes
-	if (/[,\"\n]/.test(_trimmedCell)) {
-		return `"${_trimmedCell}"`
-	}
-
-	return _trimmedCell
+	return `"${_trimmedCell.replace(/"/g, '""')}"`
 }
 
 /** The charting model layer which includes mainly the chart data and options,
@@ -77,17 +72,17 @@ export class ChartModel {
 			...(typeof tableCellFormatter === 'function'
 				? tableCellFormatter(cells)
 				: cells.map((data: (string | number)[]) => {
-					if (domainValueFormatter) {
-						data[1] = domainValueFormatter(data[1]) as string
-					}
-					for (const i in data) {
-						const val = data[i]
-						if (typeof val === 'number') {
-							data[i] = numberFormatter(val, localeCode)
+						if (domainValueFormatter) {
+							data[1] = domainValueFormatter(data[1]) as string
 						}
-					}
-					return data
-				}))
+						for (const i in data) {
+							const val = data[i]
+							if (typeof val === 'number') {
+								data[i] = numberFormatter(val, localeCode)
+							}
+						}
+						return data
+					}))
 		]
 		return result
 	}
@@ -581,7 +576,8 @@ export class ChartModel {
 		const hasUpdatedDeactivatedItems = dataGroups.some((group: any) => group.status === DISABLED)
 
 		// Detect the "reset all" case: the only active item was re-clicked → all items restored.
-		const wasReset = isInFilteredState && activeItems.length === 1 && activeItems[0].name === changedLabel
+		const wasReset =
+			isInFilteredState && activeItems.length === 1 && activeItems[0].name === changedLabel
 
 		if (hasUpdatedDeactivatedItems || (isInFilteredState && !wasReset)) {
 			// Still in a filtered state — keep selectedGroups up to date
@@ -663,9 +659,9 @@ export class ChartModel {
 		let className = configs.originalClassName
 		configs.classNameTypes.forEach(
 			type =>
-			(className = configs.originalClassName
-				? `${className} ${type}-${colorPairingTag}`
-				: `${type}-${colorPairingTag}`)
+				(className = configs.originalClassName
+					? `${className} ${type}-${colorPairingTag}`
+					: `${type}-${colorPairingTag}`)
 		)
 
 		return className || ''
@@ -740,9 +736,7 @@ export class ChartModel {
 			row.map((column: any) => {
 				const columnValue = column === '&ndash;' ? '–' : column
 
-				// Split by separators and quotes, then sanitize each part individually
-				const sanitizedParts = columnValue.split(/[,;'"`]/).map(part => _sanitizeCsvCell(part))
-				return `"${sanitizedParts.join('')}"`
+				return _sanitizeCsvCell(columnValue)
 			})
 		)
 
