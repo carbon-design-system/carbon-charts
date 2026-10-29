@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, AfterViewInit, ElementRef } from '@angular/core'
+import { Component, Input, OnInit, AfterViewInit, ElementRef, OnDestroy } from '@angular/core'
 import type { BaseChartOptions, ChartTabularData, Charts } from '@carbon/charts'
 
 /**
@@ -10,7 +10,7 @@ import type { BaseChartOptions, ChartTabularData, Charts } from '@carbon/charts'
 	selector: 'ibm-base-chart, cc-base',
 	template: ``
 })
-export class BaseChartComponent implements AfterViewInit, OnInit {
+export class BaseChartComponent implements AfterViewInit, OnInit, OnDestroy {
 	/**
 	 * Data passed to charts library for displaying
 	 */
@@ -87,5 +87,12 @@ export class BaseChartComponent implements AfterViewInit, OnInit {
 	 */
 	ngAfterViewInit() {
 		console.log('Class that extended BaseChartComponent did not implement ngAfterViewInit().')
+	}
+
+	/**
+	 * Destroys the chart but keeps the host element, which Angular owns.
+	 */
+	ngOnDestroy() {
+		this.chart?.destroy({ removeHolder: false })
 	}
 }

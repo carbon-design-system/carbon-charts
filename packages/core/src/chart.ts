@@ -88,7 +88,7 @@ export class Chart {
 
 	update(animate = true) {
 		// Called 4 times whenever a chart is displayed
-		if (!this.components) {
+		if (!this.components || this.model.get('destroyed')) {
 			return
 		}
 
@@ -111,19 +111,33 @@ export class Chart {
 			return transition.end().catch((e: any) => e) // Skip rejects since we don't care about those;
 		})
 
-		Promise.all(promises).then(() =>
-			this.services.events.dispatchEvent(ChartEvents.Chart.RENDER_FINISHED)
-		)
+		Promise.all(promises).then(() => {
+			if (!this.model.get('destroyed')) {
+				this.services.events.dispatchEvent(ChartEvents.Chart.RENDER_FINISHED)
+			}
+		})
 	}
 
-	destroy() {
+	/** Set `removeHolder: false` to empty rather than remove a holder owned by a UI framework. */
+	destroy(options: { removeHolder?: boolean } = {}) {
+		if (this.model.get('destroyed')) {
+			return
+		}
+		this.model.set({ destroyed: true }, { skipUpdate: true })
+
 		// Call the destroy() method on all components
 		this.components.forEach(component => component.destroy())
 
-		// Remove the chart holder
-		this.services.domUtils.getHolder().remove()
+		Object.keys(this.services).forEach((serviceName: string) => {
+			this.services[serviceName].destroy()
+		})
 
-		this.model.set({ destroyed: true }, { skipUpdate: true })
+		const holder = this.services.domUtils.getHolder()
+		if (options.removeHolder === false) {
+			holder.replaceChildren()
+		} else {
+			holder.remove()
+		}
 	}
 
 	protected getChartComponents(graphFrameComponents: any[], configs?: object) {

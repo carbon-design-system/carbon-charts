@@ -21,6 +21,22 @@ export class Threshold extends Component {
 		super(model, services)
 	}
 
+	handleShowThreshold = (e: any) => {
+		this.setThresholdLabelPosition(e.detail)
+
+		this.label.classed('hidden', false)
+	}
+
+	handleHideThreshold = () => {
+		this.label.classed('hidden', true)
+	}
+
+	init() {
+		// Add event listeners for showing and hiding the threshold tooltip
+		this.services.events.addEventListener(Events.Threshold.SHOW, this.handleShowThreshold)
+		this.services.events.addEventListener(Events.Threshold.HIDE, this.handleHideThreshold)
+	}
+
 	render(animate = false) {
 		const axesOptions = getProperty(this.getOptions(), 'axes')
 
@@ -183,18 +199,6 @@ export class Threshold extends Component {
 			}
 		})
 
-		// Add event listener for showing the threshold tooltip
-		this.services.events.addEventListener(Events.Threshold.SHOW, (e: any) => {
-			this.setThresholdLabelPosition(e.detail)
-
-			this.label.classed('hidden', false)
-		})
-
-		// Add event listener for hiding the threshold tooltip
-		this.services.events.addEventListener(Events.Threshold.HIDE, () => {
-			this.label.classed('hidden', true)
-		})
-
 		this.appendThresholdLabel()
 
 		this.addEventListeners()
@@ -324,5 +328,10 @@ export class Threshold extends Component {
 					datum: select(this).datum()
 				})
 			})
+	}
+
+	destroy() {
+		this.services.events.removeEventListener(Events.Threshold.SHOW, this.handleShowThreshold)
+		this.services.events.removeEventListener(Events.Threshold.HIDE, this.handleHideThreshold)
 	}
 }

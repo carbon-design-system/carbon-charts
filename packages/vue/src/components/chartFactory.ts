@@ -1,4 +1,4 @@
-import { defineComponent, onMounted, ref, watch, toRefs } from 'vue'
+import { defineComponent, onMounted, onBeforeUnmount, ref, watch, toRefs } from 'vue'
 import type { Chart, ChartTabularData, ChartOptions } from '@carbon/charts'
 
 /**
@@ -36,6 +36,11 @@ export function chartFactory<T extends ChartOptions>(
 						options: options.value as T
 					})
 				}
+			})
+
+			onBeforeUnmount(() => {
+				chart.value?.destroy({ removeHolder: false })
+				chart.value = null
 			})
 
 			watch(
