@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [Unreleased]
+
+### Bug Fixes
+
+- **radar:** update axis label text when chart data changes
+  ([#2152](https://github.com/carbon-design-system/carbon-charts/issues/2152)).
+
 ## 1.27.25 (2026-10-29)
 
 **Note:** Version bump only for package @carbon/charts-monorepo
