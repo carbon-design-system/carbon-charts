@@ -31,8 +31,18 @@ div.#{globals.$prefix}--#{globals.$charts-prefix}--legend {
 			border: solid 1px theme.$background;
 			box-shadow: 0 0 0 2px transparent;
 
+			&:focus-visible {
+				outline: 2px solid theme.$focus;
+				outline-offset: 2px;
+			}
+
 			@media (forced-colors: active) {
 				forced-color-adjust: none;
+
+				// Keep the outline visible when checkbox colors opt out of forced colors.
+				&:focus-visible {
+					outline-color: CanvasText;
+				}
 			}
 
 			&:not(.active) {
