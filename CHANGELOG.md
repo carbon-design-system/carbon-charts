@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## Unreleased
+
+### Bug Fixes
+
+- **gauge:** reuse the delta arrow when no status is configured so updates do not leave stale arrow
+  shapes.
+
 ## 1.27.25 (2026-10-29)
 
 **Note:** Version bump only for package @carbon/charts-monorepo
