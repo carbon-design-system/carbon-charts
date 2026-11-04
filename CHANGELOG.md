@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## Unreleased
+
+### Fixes
+
+- Preserve fractional donut center values and numeric animation state across locale formatting.
+
 ## 1.27.25 (2026-10-29)
 
 **Note:** Version bump only for package @carbon/charts-monorepo
