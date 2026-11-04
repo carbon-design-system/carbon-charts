@@ -82,7 +82,9 @@ export class Gauge extends Component {
 	render(animate = true) {
 		const svg = this.getComponentContainer({
 			ariaLabel: 'gauge graph'
-		}).attr('width', '100%').attr('height', '100%')
+		})
+			.attr('width', '100%')
+			.attr('height', '100%')
 		const options = this.getOptions()
 
 		const value = this.getValue()
@@ -354,7 +356,10 @@ export class Gauge extends Component {
 					// Draw the arrow with status
 					const status = getProperty(options, 'gauge', 'status')
 					DOMUtils.appendOrSelect(deltaArrowSelection, 'polygon.gauge-delta-arrow')
-						.attr('class', status !== null ? `gauge-delta-arrow status--${status}` : '')
+						.attr(
+							'class',
+							status !== null ? `gauge-delta-arrow status--${status}` : 'gauge-delta-arrow'
+						)
 						.attr('points', self.getArrow(delta))
 				})
 
