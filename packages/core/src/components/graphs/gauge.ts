@@ -82,7 +82,9 @@ export class Gauge extends Component {
 	render(animate = true) {
 		const svg = this.getComponentContainer({
 			ariaLabel: 'gauge graph'
-		}).attr('width', '100%').attr('height', '100%')
+		})
+			.attr('width', '100%')
+			.attr('height', '100%')
 		const options = this.getOptions()
 
 		const value = this.getValue()
@@ -220,7 +222,7 @@ export class Gauge extends Component {
 					numericValue = 0
 				}
 				if (numberFormatter) {
-					return numberFormatter(numericValue)
+					return numberFormatter(Number(numericValue))
 				} else {
 					return localeNumberFormatter(Number(numericValue), localeCode)
 				}
@@ -309,7 +311,7 @@ export class Gauge extends Component {
 						value = 0
 					}
 					if (numberFormatter) {
-						return `${numberFormatter(value)}${gaugeSymbol}`
+						return `${numberFormatter(Number(value))}${gaugeSymbol}`
 					} else {
 						return `${localeNumberFormatter(Number(value), localeCode)}${gaugeSymbol}`
 					}
