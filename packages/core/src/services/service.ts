@@ -20,6 +20,10 @@ export class Service {
 		// do nothing.
 	}
 
+	destroy() {
+		// do nothing.
+	}
+
 	// Used to pass down information to the components
 	setModel(newObj: ChartModel) {
 		this.model = newObj
