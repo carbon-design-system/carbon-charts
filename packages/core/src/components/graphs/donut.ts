@@ -4,6 +4,9 @@ import { Pie } from './pie'
 import { DOMUtils } from '@/services/essentials/dom-utils'
 import { RenderTypes } from '@/interfaces/enums'
 
+// Keep animation state independent of locale-formatted or customized text.
+const centerValues = new WeakMap<SVGTextElement, number>()
+
 export class Donut extends Pie {
 	type = 'donut'
 	renderType = RenderTypes.SVG
@@ -89,8 +92,9 @@ export class Donut extends Pie {
 			}, 0)
 		}
 
-		// Remove commas from the current value string, and convert to an int
-		const currentValue = parseInt(d3Ref.text().replace(/[, ]+/g, ''), 10) || 0
+		const element = d3Ref.node()
+		const previousValue = centerValues.get(element) ?? 0
+		const currentValue = Number.isFinite(previousValue) ? previousValue : 0
 
 		let interpolateFunction
 		if (currentValue % 1 === 0 && donutCenterFigure % 1 === 0) {
@@ -102,12 +106,14 @@ export class Donut extends Pie {
 		const i = interpolateFunction(currentValue, donutCenterFigure)
 
 		return (t: any) => {
+			const value = i(t)
+			centerValues.set(element, value)
 			const { numberFormatter } = options.donut.center
 			if (numberFormatter) {
-				d3Ref.text(numberFormatter(i(t)))
+				d3Ref.text(numberFormatter(value))
 			} else {
 				const { code: localeCode, number: localeNumberFormatter } = getProperty(options, 'locale')
-				d3Ref.text(localeNumberFormatter(Math.floor(i(t)), localeCode))
+				d3Ref.text(localeNumberFormatter(value, localeCode))
 			}
 		}
 	}
