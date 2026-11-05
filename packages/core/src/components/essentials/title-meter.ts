@@ -128,7 +128,7 @@ export class MeterTitle extends Title {
 		const totalString =
 			totalFormatter !== null
 				? totalFormatter(totalValue)
-				: `${numberFormatter(total, localeCode)} ${unit} total`
+				: `${numberFormatter(total ?? totalValue, localeCode)} ${unit} total`
 
 		const containerWidth = DOMUtils.getHTMLElementSize(this.parent.node() as HTMLElement).width
 
