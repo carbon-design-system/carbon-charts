@@ -314,6 +314,7 @@ export class Radar extends Component {
 			(update: any) =>
 				update.call((selection: any) =>
 					selection
+						.text((key: string) => key)
 						.transition()
 						.call((t: any) =>
 							this.services.transitions.setupTransition({
