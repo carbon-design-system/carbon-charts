@@ -57,3 +57,41 @@ describe('inferred zero-only linear domains', () => {
 		).toThrow()
 	})
 })
+
+describe('inferred logarithmic domains', () => {
+	const log = { scaleType: ScaleTypes.LOG }
+
+	it('starts below the smallest value so its bar has a height', () => {
+		const domain = createScales([65000, 29123, 35213, 51213, 169], log).getScaleDomain(
+			AxisPositions.LEFT
+		)
+		expect(domain[0]).toBe(100)
+		expect(domain[1]).toBeGreaterThan(65000)
+	})
+
+	it('starts below a single value', () => {
+		expect(createScales([65000], log).getScaleDomain(AxisPositions.LEFT)).toEqual([10000, 65000])
+	})
+
+	it('moves a power of the base down by one step', () => {
+		expect(createScales([100, 100], log).getScaleDomain(AxisPositions.LEFT)).toEqual([10, 100])
+	})
+
+	it('uses the configured base', () => {
+		expect(createScales([5], { ...log, base: 2 }).getScaleDomain(AxisPositions.LEFT)).toEqual([
+			4, 5
+		])
+	})
+
+	it('keeps a lower bound that padding already moved', () => {
+		expect(createScales([1000, 1100], log).getScaleDomain(AxisPositions.LEFT)).toEqual([990, 1110])
+	})
+
+	it('leaves an explicitly supplied domain unchanged', () => {
+		expect(
+			createScales([169, 65000], { ...log, domain: [169, 65000] }).getScaleDomain(
+				AxisPositions.LEFT
+			)[0]
+		).toBe(169)
+	})
+})
