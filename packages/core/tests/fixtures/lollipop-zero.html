@@ -1,0 +1,41 @@
+<!doctype html>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<!-- Copyright (c) 2026 Minwook Shin -->
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>Zero-value lollipops</title>
+	</head>
+	<body>
+		<script type="module">
+			import { LollipopChart } from '/src/charts/lollipop.ts'
+			import '/scss/index.scss'
+
+			for (const horizontal of [false, true]) {
+				for (const small of [false, true]) {
+					const holder = document.createElement('div')
+					holder.id = `${horizontal ? 'horizontal' : 'vertical'}-${small ? 'small' : 'zero'}`
+					holder.style.width = '600px'
+					document.body.appendChild(holder)
+					const values = small ? [0, 0.001, 10] : [0, 0, 0, null]
+					new LollipopChart(holder, {
+						data: values.map((value, i) => ({ group: 'Data', key: `Key ${i}`, value })),
+						options: {
+							height: '300px',
+							animations: false,
+							axes: horizontal
+								? {
+										left: { mapsTo: 'key', scaleType: 'labels' },
+										bottom: { mapsTo: 'value', scaleType: 'linear' }
+									}
+								: {
+										bottom: { mapsTo: 'key', scaleType: 'labels' },
+										left: { mapsTo: 'value', scaleType: 'linear' }
+									}
+						}
+					})
+				}
+			}
+		</script>
+	</body>
+</html>
