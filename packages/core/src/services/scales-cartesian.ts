@@ -609,7 +609,15 @@ export class CartesianScales extends Service {
 		if (scaleType === ScaleTypes.LINEAR && domain[0] === 0 && domain[1] === 0) {
 			domain = [0, 1]
 		}
+		const lowestValue = domain[0]
 		domain = this.extendsDomain(axisPosition, domain)
+
+		// A log axis cannot be padded down to 0, so its lower bound stays on the
+		// smallest value and a bar for that value has no height. Start the axis
+		// at the next lower power of the base instead.
+		if (scaleType === ScaleTypes.LOG && domain[0] === lowestValue) {
+			domain = [lowerPowerOf(lowestValue, axisOptions.base || 10), domain[1]]
+		}
 
 		return domain
 	}
@@ -762,6 +770,12 @@ function addSpacingToTimeDomain(domain: any, spaceToAddToEdges: number) {
 	}
 
 	return [startDate, endDate]
+}
+
+// Largest power of `base` that is strictly below `value` (value > 0)
+function lowerPowerOf(value: number, base: number) {
+	const power = Math.pow(base, Math.floor(Math.log(value) / Math.log(base)))
+	return power < value ? power : power / base
 }
 
 function addSpacingToContinuousDomain(
